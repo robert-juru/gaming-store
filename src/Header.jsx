@@ -4,7 +4,7 @@ import { IconContext } from "react-icons";
 const Header = () => {
     return (
   <header className="col-span-2 flex items-center justify-between gap-8">
-    <div className="flex cursor-pointer items-center hover:scale-105">
+    <div className="transition-all flex cursor-pointer items-center hover:scale-105">
       <img
         className="h-16"
         src="/gameverse-logo-no-text.png"

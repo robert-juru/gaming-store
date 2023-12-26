@@ -21,7 +21,7 @@ export default function App() {
       <GameFiltersSidebar />
       <div className="grid-row-[50px] grid gap-8">
         <GameSortingSection />
-        <main className=" grid grid-cols-[repeat(auto-fit,minmax(350px,1fr))] gap-x-8 gap-y-6">
+        <main className=" grid grid-cols-[repeat(auto-fit,minmax(375px,1fr))] gap-x-8 gap-y-6">
           {gamesQuery.data.map((game) => (
             <GameCard key={game.id} game={game} />
           ))}
