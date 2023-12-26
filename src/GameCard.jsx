@@ -2,7 +2,7 @@ import {StarRatingGame} from "./StarRating";
 
 const GameCard = ({ game }) => {
   return (
-    <div className="transition-all relative hover:scale-105">
+    <div className="transition duration-300 relative hover:scale-105">
       <img
         className="block lg:h-72 w-full rounded-lg border-2 border-solid border-black"
         src={game.background_image}
