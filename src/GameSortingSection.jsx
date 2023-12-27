@@ -10,7 +10,7 @@ import { SiOrigin, SiEpicgames, SiGogdotcom } from "react-icons/si";
 
 const GameSortingSection = () => {
   return (
-    <section className="flex-column col-span-full flex items-center  justify-between  rounded-md bg-gray-900 p-4 text-slate-200">
+    <section className="col-span-full flex items-center  justify-between  rounded-md bg-gray-900 p-4 text-slate-200">
       <div className="flex flex-row gap-4">
         <ul className="flex items-center justify-center gap-2">
           <h3 className=" pr-4 text-xs font-bold tracking-wide">SYSTEM</h3>
