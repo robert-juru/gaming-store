@@ -12,17 +12,13 @@ export default function App() {
     queryFn: () => fetchData("games"),
   });
   const [cartGames, setCartGames] = useState([]);
-  let cartGamesCount=cartGames.length;
 
   const handleCart = (gameId) => {
     if (!cartGames.includes(gameId)) {
       setCartGames([...cartGames, gameId]);
     }
+    console.log(cartGames);
   };
-
-  useEffect(() => {
-    console.log(`nr jocuri in cart: ${cartGamesCount}`);
-  }, [cartGames])
 
   console.log(gamesQuery.data);
   if (gamesQuery.isLoading) return <h1>Loading....</h1>;
@@ -30,18 +26,21 @@ export default function App() {
 
   return (
     <div className="m-0 grid grid-cols-1 gap-4 p-4 md:grid-cols-[200px_1fr]">
-      <Header cartGamesCount={cartGamesCount} />
+      <Header
+        cartGames={cartGames}
+        setCartGames={setCartGames}
+        fetchedGames={gamesQuery.data}
+      />
       <GameFiltersSidebar />
       <div className="grid-row-[50px] grid gap-8">
         <GameSortingSection />
         <main className=" grid grid-cols-[repeat(auto-fit,minmax(375px,1fr))] gap-x-8 gap-y-6">
           {gamesQuery.data.map((game) => (
             <GameCard
+              cartGames={cartGames}
               key={game.id}
               game={game}
-              handleCart={()=>handleCart(game.id)}
-              // handleAddToCart={()=>handleAddToCart}
-              // cartStatus={() => handleAddToCart(game.id)}
+              handleCart={() => handleCart(game)}
             />
           ))}
         </main>

@@ -1,8 +1,8 @@
 import { CiSearch } from "react-icons/ci";
 import { IconContext } from "react-icons";
-import { MdOutlineExpandMore } from "react-icons/md";
-import { FaCartShopping } from "react-icons/fa6";
-const Header = ( {cartGamesCount}) => {
+import Cart from "./Cart";
+
+const Header = ({ cartGames, fetchedGames, setCartGames }) => {
   return (
     <header className="col-span-2 flex items-center justify-between gap-8">
       <div className="flex cursor-pointer items-center transition-all hover:scale-105">
@@ -31,29 +31,11 @@ const Header = ( {cartGamesCount}) => {
           </IconContext.Provider>
         </div>
       </div>
-      <div className="flex cursor-pointer items-center gap-1">
-        <div className="relative flex items-center">
-          <span className="absolute  -left-2 -top-2 box-content w-4 rounded-full border-2 border-green-600 bg-green-700 text-center text-xs font-bold text-white">
-            {cartGamesCount}
-          </span>
-          <IconContext.Provider
-            value={{
-              color: "white",
-              size: "24px",
-              title: "shopping cart",
-              className: "mr-2",
-            }}
-          >
-            <FaCartShopping />
-          </IconContext.Provider>
-          <h3 className="text-lg text-white ">Cart</h3>
-          <IconContext.Provider
-            value={{ color: "white", size: "18px", title: "expand more" }}
-          >
-            <MdOutlineExpandMore />
-          </IconContext.Provider>
-        </div>
-      </div>
+      <Cart
+        cartGames={cartGames}
+        fetchedGames={fetchedGames}
+        setCartGames={setCartGames}
+      />
     </header>
   );
 };

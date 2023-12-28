@@ -2,14 +2,9 @@ import { StarRatingGame } from "./StarRating";
 import { FaCartShopping } from "react-icons/fa6";
 import { IconContext } from "react-icons";
 import { useState } from "react";
-const GameCard = ({ game, handleCart }) => {
-  const [inCart, setInCart] = useState(false);
-
-  const handleAddToCart = () => {
-    if (!inCart) {
-      setInCart(true);
-      handleCart(game.id)
-    }
+const GameCard = ({ game, handleCart, cartGames }) => {
+  const isInCart = (gameId) => {
+    return cartGames.some((cartGame) => cartGame.id === gameId);
   };
 
   return (
@@ -37,11 +32,11 @@ const GameCard = ({ game, handleCart }) => {
         <div className="flex items-center justify-between">
           <p className="text-md font-bold">$25.99</p>
           <button
-            onClick={handleAddToCart}
+            onClick={handleCart}
             className={`mr-2 flex items-center gap-1 self-start rounded-md ${
-              inCart ? "bg-gray-500" : "bg-gray-700"
+              isInCart(game.id) ? "bg-gray-500" : "bg-gray-700"
             } px-2 py-1 text-sm hover:bg-gray-500`}
-            disabled={inCart}
+            disabled={isInCart(game.id)}
           >
             <IconContext.Provider
               value={{
@@ -53,7 +48,7 @@ const GameCard = ({ game, handleCart }) => {
             >
               <FaCartShopping />
             </IconContext.Provider>
-            {inCart ? "In cart" : "Add to cart"}
+            {isInCart(game.id) ? "In cart" : "Add to cart"}
           </button>
         </div>
       </div>
