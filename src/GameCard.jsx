@@ -34,13 +34,13 @@ const GameCard = ({ game, handleCart, cartGames }) => {
           <button
             onClick={handleCart}
             className={`mr-2 flex items-center gap-1 self-start rounded-md ${
-              isInCart(game.id) ? "bg-gray-500" : "bg-gray-700"
-            } px-2 py-1 text-sm hover:bg-gray-500`}
+              isInCart(game.id) ? "bg-white" : "bg-gray-700 hover:bg-gray-500"
+            } px-2 py-1 text-sm `}
             disabled={isInCart(game.id)}
           >
             <IconContext.Provider
               value={{
-                color: "white",
+                color: `${isInCart(game.id) ? "black" : "white"}`,
                 size: "20px",
                 title: "shopping cart",
                 className: "mr-2",
@@ -48,7 +48,7 @@ const GameCard = ({ game, handleCart, cartGames }) => {
             >
               <FaCartShopping />
             </IconContext.Provider>
-            {isInCart(game.id) ? "In cart" : "Add to cart"}
+            {isInCart(game.id) ? <span className="text-black font-bold">In cart </span> : <span className="text-white font-bold">Add to cart </span>}
           </button>
         </div>
       </div>

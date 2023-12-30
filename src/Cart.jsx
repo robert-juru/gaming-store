@@ -69,7 +69,7 @@ const Cart = ({ cartGames, fetchedGames, setCartGames }) => {
                         value={{
                           size: "24px",
                           title: "delete game",
-                          className: "",
+                          className: "cursor-pointer",
                         }}
                       >
                         <IoIosClose
@@ -93,7 +93,7 @@ const Cart = ({ cartGames, fetchedGames, setCartGames }) => {
               </div>
             )}
             <button
-              className={`m-2 mr-2 flex items-center gap-1  self-center 
+              className={`m-2 mr-2 flex items-center gap-1 font-bold self-center 
              rounded-md
              bg-gray-100 px-2 py-1 text-lg hover:bg-gray-300`}
             >
