@@ -1,16 +1,18 @@
 import { IconContext } from "react-icons";
-import { IoMdStar } from "react-icons/io";
+import { IoMdStar, IoMdStarHalf } from "react-icons/io";
 import { useState } from "react";
 
 const GameFiltersSidebar = ({
   filterGamesByGenre,
   filterGamesByReleaseYear,
+  filterGamesByMinimumRating,
 }) => {
   const [genreSelected, setGenreSelected] = useState(null);
   const handleGenreSelect = (genreId, genreName) => {
     setGenreSelected(genreId);
     filterGamesByGenre(genreName);
-    setReleaseYearSelected(null)
+    setReleaseYearSelected(null);
+    setMinimumRatingSelected(null);
   };
   const [releaseYearSelected, setReleaseYearSelected] = useState(null);
   const handleReleaseYearSelect = (
@@ -20,6 +22,14 @@ const GameFiltersSidebar = ({
   ) => {
     setReleaseYearSelected(releaseYearId);
     filterGamesByReleaseYear(minReleaseYear, maxReleaseYear);
+    setGenreSelected(null);
+    setMinimumRatingSelected(null);
+  };
+  const [minimumRatingSelected, setMinimumRatingSelected] = useState(null);
+  const handleRatingSelection = (minimumRating) => {
+    setMinimumRatingSelected(minimumRating);
+    filterGamesByMinimumRating(minimumRating);
+    setReleaseYearSelected(null);
     setGenreSelected(null);
   };
 
@@ -106,7 +116,7 @@ const GameFiltersSidebar = ({
     },
   ];
 
-  console.log("isReleaseYearSelected" + releaseYearSelected)
+  console.log("isReleaseYearSelected" + releaseYearSelected);
 
   return (
     <aside className="hidden md:block">
@@ -123,9 +133,7 @@ const GameFiltersSidebar = ({
             >
               <img
                 className="my-1 ml-1 size-7 rounded-lg"
-                src={
-                  genreSelected === genre.id ? genre.iconfocus : genre.icon
-                }
+                src={genreSelected === genre.id ? genre.iconfocus : genre.icon}
                 alt={genre.name}
               />
               {genre.name}
@@ -168,9 +176,14 @@ const GameFiltersSidebar = ({
         </ul>
         <ul>
           <h3 className="pb-4 pl-2 text-xs font-bold tracking-wide">
-            MINIMUM RATING
+            MIN AVG RATING
           </h3>
-          <li className="mx-2 flex items-center rounded-lg px-2 pb-1 transition-all hover:scale-105 hover:bg-gray-800">
+          <li
+            onClick={() => handleRatingSelection(4.5)}
+            className={`${
+              minimumRatingSelected === 4.5 && "scale-105 bg-gray-800"
+            } "mx-2 flex items-center rounded-lg px-2 pb-1 transition-all  hover:bg-gray-800`}
+          >
             <IconContext.Provider
               value={{ color: "gold", title: "star rating", size: "24px" }}
             >
@@ -178,10 +191,15 @@ const GameFiltersSidebar = ({
               <IoMdStar />
               <IoMdStar />
               <IoMdStar />
-              <IoMdStar />
+              <IoMdStarHalf />
             </IconContext.Provider>
           </li>
-          <li className="mx-2 flex items-center rounded-lg px-2 pb-1 transition-all hover:scale-105 hover:bg-gray-800">
+          <li
+            onClick={() => handleRatingSelection(4)}
+            className={`${
+              minimumRatingSelected === 4 && "scale-105 bg-gray-800"
+            } "mx-2 flex items-center rounded-lg px-2 pb-1 transition-all  hover:bg-gray-800`}
+          >
             <IconContext.Provider
               value={{ color: "gold", title: "star rating", size: "24px" }}
             >
@@ -196,7 +214,12 @@ const GameFiltersSidebar = ({
               <IoMdStar />
             </IconContext.Provider>
           </li>
-          <li className="mx-2 flex items-center rounded-lg px-2 pb-1 transition-all hover:scale-105 hover:bg-gray-800">
+          <li
+            onClick={() => handleRatingSelection(3)}
+            className={`${
+              minimumRatingSelected === 3 && "scale-105 bg-gray-800"
+            } "mx-2 flex items-center rounded-lg px-2 pb-1 transition-all  hover:bg-gray-800`}
+          >
             <IconContext.Provider
               value={{ color: "gold", title: "star rating", size: "24px" }}
             >
@@ -211,7 +234,12 @@ const GameFiltersSidebar = ({
               <IoMdStar />
             </IconContext.Provider>
           </li>
-          <li className="mx-2 flex items-center rounded-lg px-2 pb-1 transition-all hover:scale-105 hover:bg-gray-800">
+          <li
+            onClick={() => handleRatingSelection(2)}
+            className={`${
+              minimumRatingSelected === 2 && "scale-105 bg-gray-800"
+            } "mx-2 flex items-center rounded-lg px-2 pb-1 transition-all  hover:bg-gray-800`}
+          >
             <IconContext.Provider
               value={{ color: "gold", title: "star rating", size: "24px" }}
             >
@@ -226,7 +254,12 @@ const GameFiltersSidebar = ({
               <IoMdStar />
             </IconContext.Provider>
           </li>
-          <li className="mx-2 flex items-center rounded-lg px-2 pb-1 transition-all hover:scale-105 hover:bg-gray-800">
+          <li
+            onClick={() => handleRatingSelection(1)}
+            className={`${
+              minimumRatingSelected === 1 && "scale-105 bg-gray-800"
+            } "mx-2 flex items-center rounded-lg px-2 pb-1 transition-all  hover:bg-gray-800`}
+          >
             <IconContext.Provider
               value={{ color: "gold", title: "star rating", size: "24px" }}
             >

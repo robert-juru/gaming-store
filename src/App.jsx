@@ -48,15 +48,21 @@ export default function App() {
   };
 
   const filterGamesByReleaseYear = (minReleaseYear, maxReleaseYear) => {
-    console.time('filteringTime');
     const filteredGames = gamesQuery.data.filter(
       (game) =>
         minReleaseYear <= new Date(game.released).getFullYear() &&
-        maxReleaseYear > new Date(game.released).getFullYear()
+        maxReleaseYear > new Date(game.released).getFullYear(),
     );
     const limitedGames = filteredGames.slice(0, 50);
     setDisplayedGames(limitedGames);
-    console.timeEnd('filteringTime');
+  };
+
+  const filterGamesByMinimumRating = (minimumRating) => {
+    const filteredGames = gamesQuery.data.filter(
+      (game) => Math.floor(game.rating * 2) / 2 >= minimumRating,
+    );
+    const limitedGames = filteredGames.slice(0, 50);
+    setDisplayedGames(limitedGames);
   };
   // console.log(gamesQuery.data);
   if (gamesQuery.isLoading) return <h1>Loading....</h1>;
@@ -71,7 +77,12 @@ export default function App() {
       />
       <GameFiltersSidebar
         filterGamesByGenre={(genre) => filterGamesByGenre(genre)}
-        filterGamesByReleaseYear={(minReleaseYear,maxReleaseYear) =>filterGamesByReleaseYear(minReleaseYear,maxReleaseYear)}
+        filterGamesByReleaseYear={(minReleaseYear, maxReleaseYear) =>
+          filterGamesByReleaseYear(minReleaseYear, maxReleaseYear)
+        }
+        filterGamesByMinimumRating={(minRating) =>
+          filterGamesByMinimumRating(minRating)
+        }
       />
       <div className="grid-row-[50px] grid gap-8">
         <GameSortingSection />
