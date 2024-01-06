@@ -47,7 +47,18 @@ export default function App() {
     setDisplayedGames(limitedGames);
   };
 
-  console.log(gamesQuery.data);
+  const filterGamesByReleaseYear = (minReleaseYear, maxReleaseYear) => {
+    console.time('filteringTime');
+    const filteredGames = gamesQuery.data.filter(
+      (game) =>
+        minReleaseYear <= new Date(game.released).getFullYear() &&
+        maxReleaseYear > new Date(game.released).getFullYear()
+    );
+    const limitedGames = filteredGames.slice(0, 50);
+    setDisplayedGames(limitedGames);
+    console.timeEnd('filteringTime');
+  };
+  // console.log(gamesQuery.data);
   if (gamesQuery.isLoading) return <h1>Loading....</h1>;
   if (gamesQuery.isError) return <h1>Error loading data!!!</h1>;
 
@@ -60,6 +71,7 @@ export default function App() {
       />
       <GameFiltersSidebar
         filterGamesByGenre={(genre) => filterGamesByGenre(genre)}
+        filterGamesByReleaseYear={(minReleaseYear,maxReleaseYear) =>filterGamesByReleaseYear(minReleaseYear,maxReleaseYear)}
       />
       <div className="grid-row-[50px] grid gap-8">
         <GameSortingSection />
