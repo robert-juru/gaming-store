@@ -6,28 +6,72 @@ import {
   FaSteam,
 } from "react-icons/fa";
 import { IoLogoAndroid } from "react-icons/io";
-import { SiOrigin, SiEpicgames, SiGogdotcom } from "react-icons/si";
+import {
+  SiOrigin,
+  SiEpicgames,
+  SiGogdotcom,
+  SiNintendoswitch,
+} from "react-icons/si";
+import { useState } from "react";
 
-const GameSortingSection = () => {
+const GameSortingSection = ({ filterGamesByPlatform }) => {
+  const [platformSelected, setPlatformSelected] = useState(null);
+  const handlePlatformSelected = (platformSelected) => {
+    setPlatformSelected(platformSelected);
+    filterGamesByPlatform(platformSelected);
+  };
   return (
     <section className="col-span-full flex items-center  justify-between  rounded-md bg-gray-900 p-4 text-slate-200">
       <div className="flex flex-row gap-4">
         <ul className="flex items-center justify-center gap-2">
-          <h3 className=" pr-4 text-xs font-bold tracking-wide">SYSTEM</h3>
-          <li className="mr-2 flex size-9 items-center justify-center rounded-md bg-slate-950 transition duration-300 hover:bg-white  hover:text-black">
+          <h3 className=" pr-4 text-xs font-bold tracking-wide">PLATFORM</h3>
+          <li
+            onClick={() => handlePlatformSelected("PC")}
+            className={`${
+              platformSelected === "PC" && "bg-white text-black"
+            } mr-2 flex size-9 items-center justify-center rounded-md bg-slate-950 transition duration-300 hover:bg-white  hover:text-black`}
+          >
             <FaWindows className="size-6" />
           </li>
-          <li className="mr-2 flex size-9 items-center justify-center rounded-md bg-slate-950 transition duration-300 hover:bg-white  hover:text-black">
+          <li
+            onClick={() => handlePlatformSelected("PlayStation")}
+            className={`${
+              platformSelected === "PlayStation" && "bg-white text-black"
+            } mr-2 flex size-9 items-center justify-center rounded-md bg-slate-950 transition duration-300 hover:bg-white  hover:text-black`}
+          >
             <FaPlaystation className="size-6" />
           </li>
-          <li className="mr-2 flex size-9 items-center justify-center rounded-md bg-slate-950 transition duration-300 hover:bg-white  hover:text-black">
+          <li
+            onClick={() => handlePlatformSelected("Xbox")}
+            className={`${
+              platformSelected === "Xbox" && "bg-white text-black"
+            } mr-2 flex size-9 items-center justify-center rounded-md bg-slate-950 transition duration-300 hover:bg-white  hover:text-black`}
+          >
             <FaXbox className="size-6" />
           </li>
-          <li className="mr-2 flex size-9 items-center justify-center rounded-md bg-slate-950 transition duration-300 hover:bg-white  hover:text-black">
+          <li
+            onClick={() => handlePlatformSelected("iOS")}
+            className={`${
+              platformSelected === "iOS" && "bg-white text-black"
+            } mr-2 flex size-9 items-center justify-center rounded-md bg-slate-950 transition duration-300 hover:bg-white  hover:text-black`}
+          >
             <FaApple className="size-6" />
           </li>
-          <li className="mr-4 flex size-9 items-center justify-center rounded-md bg-slate-950 transition duration-300 hover:bg-white  hover:text-black">
+          <li
+            onClick={() => handlePlatformSelected("Android")}
+            className={`${
+              platformSelected === "Android" && "bg-white text-black"
+            } mr-2 flex size-9 items-center justify-center rounded-md bg-slate-950 transition duration-300 hover:bg-white  hover:text-black`}
+          >
             <IoLogoAndroid className="size-7" />
+          </li>
+          <li
+            onClick={() => handlePlatformSelected("Nintendo")}
+            className={`${
+              platformSelected === "Nintendo" && "bg-white text-black"
+            } mr-2 flex size-9 items-center justify-center rounded-md bg-slate-950 transition duration-300 hover:bg-white  hover:text-black`}
+          >
+            <SiNintendoswitch className="size-7" />
           </li>
         </ul>
         <ul className="flex flex-row items-center gap-2">

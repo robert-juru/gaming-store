@@ -64,6 +64,17 @@ export default function App() {
     const limitedGames = filteredGames.slice(0, 50);
     setDisplayedGames(limitedGames);
   };
+
+  const filterGamesByPlatform = (gamePlatform) => {
+    const filteredGames = gamesQuery.data.filter((game) =>
+      game.parent_platforms.some(
+        (parent_platform) => parent_platform.platform.name === gamePlatform,
+      ),
+    );
+    const limitedGames = filteredGames.slice(0, 50);
+    setDisplayedGames(limitedGames);
+  };
+  
   // console.log(gamesQuery.data);
   if (gamesQuery.isLoading) return <h1>Loading....</h1>;
   if (gamesQuery.isError) return <h1>Error loading data!!!</h1>;
@@ -85,7 +96,9 @@ export default function App() {
         }
       />
       <div className="grid-row-[50px] grid gap-8">
-        <GameSortingSection />
+        <GameSortingSection
+          filterGamesByPlatform={(platform) => filterGamesByPlatform(platform)}
+        />
         <main className=" grid grid-cols-[repeat(auto-fit,minmax(375px,1fr))] gap-x-8 gap-y-6">
           {displayedGames.map((game) => (
             <GameCard
