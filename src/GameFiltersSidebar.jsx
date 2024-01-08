@@ -13,7 +13,7 @@ const GameFiltersSidebar = ({
   handleReleaseYearSelection,
   genreSelected,
   minimumRatingSelected,
-  releaseYearSelected
+  releaseYearSelected,
 }) => {
   
 

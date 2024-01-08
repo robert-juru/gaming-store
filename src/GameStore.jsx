@@ -134,6 +134,16 @@ export default function GameStore() {
     setPlatformSelected(null);
   };
 
+  const sortGamesByRatingAsc = () => {
+    const gamesByRating=[...displayedGames].sort((a,b)=>a.rating-b.rating);
+    setDisplayedGames(gamesByRating);
+  }
+
+  const sortGamesByRatingDesc = () => {
+    const gamesByRating=[...displayedGames].sort((a,b)=>b.rating-a.rating);
+    setDisplayedGames(gamesByRating);
+  }
+
   if (gamesQuery.isLoading) return <h1>Loading....</h1>;
   if (gamesQuery.isError) return <h1>Error loading data!!!</h1>;
 
@@ -145,13 +155,6 @@ export default function GameStore() {
         fetchedGames={gamesQuery.data}
       />
       <GameFiltersSidebar
-        // filterGamesByGenre={(genre) => filterGamesByGenre(genre)}
-        // filterGamesByReleaseYear={(minReleaseYear, maxReleaseYear) =>
-          // filterGamesByReleaseYear(minReleaseYear, maxReleaseYear)
-        // }
-        // filterGamesByMinimumRating={(minRating) =>
-          // filterGamesByMinimumRating(minRating)
-        // }
         handleGenreSelection={handleGenreSelection}
         handleReleaseYearSelection={handleReleaseYearSelection}
         handleRatingSelection={handleRatingSelection}
@@ -161,12 +164,12 @@ export default function GameStore() {
       />
       <div className="grid-row-[50px] grid gap-8">
         <GameSortingSection
-          // filterGamesByPlatform={(platform) => filterGamesByPlatform(platform)}
-          // filterGamesByLauncher={(launcher) => filterGamesByLauncher(launcher)}
           handleLauncherSelection={handleLauncherSelection}
           handlePlatformSelection={handlePlatformSelection}
           platformSelected={platformSelected}
           launcherSelected={launcherSelected}
+          sortGamesByRatingAsc={sortGamesByRatingAsc}
+          sortGamesByRatingDesc={sortGamesByRatingDesc}
         />
         <main className=" grid grid-cols-[repeat(auto-fit,minmax(375px,1fr))] gap-x-8 gap-y-6">
           {displayedGames.map((game) => (

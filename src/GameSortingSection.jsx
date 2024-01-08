@@ -6,18 +6,43 @@ import {
   FaSteam,
   FaItchIo,
   FaGooglePlay,
+  FaArrowDown,
+  FaArrowUp,
 } from "react-icons/fa";
 import { IoLogoAndroid } from "react-icons/io";
 import { IoLogoAppleAppstore } from "react-icons/io5";
 import { SiEpicgames, SiGogdotcom, SiNintendoswitch } from "react-icons/si";
-import { useState } from "react";
 
 const GameSortingSection = ({
   handleLauncherSelection,
   handlePlatformSelection,
   platformSelected,
   launcherSelected,
+  sortGamesByRatingAsc,
+  sortGamesByRatingDesc
 }) => {
+  const handleSortChange = (selectedValue) => {
+    switch (selectedValue) {
+      case "popularity":
+        sortGamesByPopularity();
+        break;
+      case "latest":
+        sortGamesByLatest();
+        break;
+      case "rating-asc":
+        sortGamesByRatingAsc();
+        break;
+      case "rating-desc":
+        sortGamesByRatingDesc();
+        break;
+      case "price-asc":
+        sortGamesByPriceAsc();
+        break;
+      case "price-desc":
+        sortGamesByPriceDesc();
+        break;
+    }
+  };
   return (
     <section className="col-span-full flex items-center  justify-between  rounded-md bg-gray-900 p-4 text-slate-200">
       <div className="flex flex-row gap-4">
@@ -132,21 +157,25 @@ const GameSortingSection = ({
           className="bg-gray-900 pb-1 font-bold"
           name="sort"
           id="sort-select"
+          onChange={(event) => handleSortChange(event.target.value)}
         >
           <option className="font-normal text-slate-300" value="popularity">
             Popularity
           </option>
-          <option className="font-normal text-slate-300" value="release-date">
-            Release Date
+          <option className="font-normal text-slate-300" value="latest">
+            Latest
           </option>
-          <option className="font-normal text-slate-300" value="rating">
-            Rating
+          <option className="font-normal text-slate-300" value="rating-asc">
+            Rating ↑
           </option>
-          <option className="font-normal text-slate-300" value="name-a-to-z">
-            Name: A to Z
+          <option className="font-normal text-slate-300" value="rating-desc">
+            Rating ↓
           </option>
-          <option className="font-normal text-slate-300" value="name-z-to-a">
-            Name: Z to A
+          <option className="font-normal text-slate-300" value="price-asc">
+            Price ↑
+          </option>
+          <option className="font-normal text-slate-300" value="rating-desc">
+            Price ↓
           </option>
         </select>
       </div>
