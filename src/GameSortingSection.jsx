@@ -4,22 +4,20 @@ import {
   FaXbox,
   FaPlaystation,
   FaSteam,
+  FaItchIo,
+  FaGooglePlay,
 } from "react-icons/fa";
 import { IoLogoAndroid } from "react-icons/io";
-import {
-  SiOrigin,
-  SiEpicgames,
-  SiGogdotcom,
-  SiNintendoswitch,
-} from "react-icons/si";
+import { IoLogoAppleAppstore } from "react-icons/io5";
+import { SiEpicgames, SiGogdotcom, SiNintendoswitch } from "react-icons/si";
 import { useState } from "react";
 
-const GameSortingSection = ({ filterGamesByPlatform }) => {
-  const [platformSelected, setPlatformSelected] = useState(null);
-  const handlePlatformSelected = (platformSelected) => {
-    setPlatformSelected(platformSelected);
-    filterGamesByPlatform(platformSelected);
-  };
+const GameSortingSection = ({
+  handleLauncherSelected,
+  handlePlatformSelected,
+  platformSelected,
+  launcherSelected,
+}) => {
   return (
     <section className="col-span-full flex items-center  justify-between  rounded-md bg-gray-900 p-4 text-slate-200">
       <div className="flex flex-row gap-4">
@@ -76,17 +74,53 @@ const GameSortingSection = ({ filterGamesByPlatform }) => {
         </ul>
         <ul className="flex flex-row items-center gap-2">
           <h3 className="pr-4 text-xs font-bold tracking-wide">LAUNCHER</h3>
-          <li className="mr-2 flex size-9 items-center justify-center rounded-md bg-slate-950 transition duration-300 hover:bg-white  hover:text-black">
+          <li
+            onClick={() => handleLauncherSelected("Steam")}
+            className={`${
+              launcherSelected === "Steam" && "bg-white text-black"
+            } mr-2 flex size-9 items-center justify-center rounded-md bg-slate-950 transition duration-300 hover:bg-white  hover:text-black`}
+          >
             <FaSteam className="size-6" />
           </li>
-          <li className="mr-2 flex size-9 items-center justify-center rounded-md bg-slate-950 transition duration-300 hover:bg-white  hover:text-black">
-            <SiOrigin className="size-6" />
+          <li
+            onClick={() => handleLauncherSelected("itch.io")}
+            className={`${
+              launcherSelected === "itch.io" && "bg-white text-black"
+            } mr-2 flex size-9 items-center justify-center rounded-md bg-slate-950 transition duration-300 hover:bg-white  hover:text-black`}
+          >
+            <FaItchIo className="size-6" />
           </li>
-          <li className="mr-2 flex size-9 items-center justify-center rounded-md bg-slate-950 transition duration-300 hover:bg-white  hover:text-black">
+          <li
+            onClick={() => handleLauncherSelected("Epic Games")}
+            className={`${
+              launcherSelected === "Epic Games" && "bg-white text-black"
+            } mr-2 flex size-9 items-center justify-center rounded-md bg-slate-950 transition duration-300 hover:bg-white  hover:text-black`}
+          >
             <SiEpicgames className="size-6" />
           </li>
-          <li className="mr-2 flex size-9 items-center justify-center rounded-md bg-slate-950 transition duration-300 hover:bg-white  hover:text-black">
+          <li
+            onClick={() => handleLauncherSelected("GOG")}
+            className={`${
+              launcherSelected === "GOG" && "bg-white text-black"
+            } mr-2 flex size-9 items-center justify-center rounded-md bg-slate-950 transition duration-300 hover:bg-white  hover:text-black`}
+          >
             <SiGogdotcom className="size-6" />
+          </li>
+          <li
+            onClick={() => handleLauncherSelected("Google Play")}
+            className={`${
+              launcherSelected === "Google Play" && "bg-white text-black"
+            } mr-2 flex size-9 items-center justify-center rounded-md bg-slate-950 transition duration-300 hover:bg-white  hover:text-black`}
+          >
+            <FaGooglePlay className="size-6" />
+          </li>
+          <li
+            onClick={() => handleLauncherSelected("App Store")}
+            className={`${
+              launcherSelected === "App Store" && "bg-white text-black"
+            } mr-2 flex size-9 items-center justify-center rounded-md bg-slate-950 transition duration-300 hover:bg-white  hover:text-black`}
+          >
+            <IoLogoAppleAppstore className="size-6" />
           </li>
         </ul>
       </div>

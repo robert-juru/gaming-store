@@ -6,6 +6,8 @@ const GameFiltersSidebar = ({
   filterGamesByGenre,
   filterGamesByReleaseYear,
   filterGamesByMinimumRating,
+  setLauncherSelected,
+  setPlatformSelected
 }) => {
   const [genreSelected, setGenreSelected] = useState(null);
   const handleGenreSelect = (genreId, genreName) => {
@@ -13,6 +15,8 @@ const GameFiltersSidebar = ({
     filterGamesByGenre(genreName);
     setReleaseYearSelected(null);
     setMinimumRatingSelected(null);
+    setLauncherSelected(null);
+    setPlatformSelected(null);
   };
   const [releaseYearSelected, setReleaseYearSelected] = useState(null);
   const handleReleaseYearSelect = (
@@ -24,6 +28,8 @@ const GameFiltersSidebar = ({
     filterGamesByReleaseYear(minReleaseYear, maxReleaseYear);
     setGenreSelected(null);
     setMinimumRatingSelected(null);
+    setLauncherSelected(null);
+    setPlatformSelected(null);
   };
   const [minimumRatingSelected, setMinimumRatingSelected] = useState(null);
   const handleRatingSelection = (minimumRating) => {
@@ -31,6 +37,8 @@ const GameFiltersSidebar = ({
     filterGamesByMinimumRating(minimumRating);
     setReleaseYearSelected(null);
     setGenreSelected(null);
+    setLauncherSelected(null);
+    setPlatformSelected(null);
   };
 
   const gameGenres = [

@@ -6,7 +6,7 @@ import GameFiltersSidebar from "./GameFiltersSidebar";
 import GameSortingSection from "./GameSortingSection";
 import { useState, useEffect } from "react";
 
-export default function App() {
+export default function GameStore() {
   const useMultiplePagesQuery = (endpoint, pageSize, limit) => {
     return useQuery({
       queryKey: [endpoint],
@@ -74,8 +74,29 @@ export default function App() {
     const limitedGames = filteredGames.slice(0, 50);
     setDisplayedGames(limitedGames);
   };
-  
-  // console.log(gamesQuery.data);
+  const filterGamesByLauncher = (gameLauncher) => {
+    const filteredGames = gamesQuery.data.filter((game) =>
+      game.stores.some(
+        (launcher) => launcher.store.name === gameLauncher,
+      ),
+    );
+    const limitedGames = filteredGames.slice(0, 50);
+    setDisplayedGames(limitedGames);
+  };
+
+  const [platformSelected, setPlatformSelected] = useState(null);
+  const handlePlatformSelected = (platformSelected) => {
+    setPlatformSelected(platformSelected);
+    setLauncherSelected(null);
+    filterGamesByPlatform(platformSelected);
+  };
+  const [launcherSelected, setLauncherSelected] = useState(null);
+  const handleLauncherSelected = (launcherSelected) => {
+    setLauncherSelected(launcherSelected);
+    setPlatformSelected(null);
+    filterGamesByLauncher(launcherSelected);
+  };
+
   if (gamesQuery.isLoading) return <h1>Loading....</h1>;
   if (gamesQuery.isError) return <h1>Error loading data!!!</h1>;
 
@@ -94,10 +115,17 @@ export default function App() {
         filterGamesByMinimumRating={(minRating) =>
           filterGamesByMinimumRating(minRating)
         }
+        setLauncherSelected={setLauncherSelected}
+        setPlatformSelected={setPlatformSelected}
       />
       <div className="grid-row-[50px] grid gap-8">
         <GameSortingSection
-          filterGamesByPlatform={(platform) => filterGamesByPlatform(platform)}
+          // filterGamesByPlatform={(platform) => filterGamesByPlatform(platform)}
+          // filterGamesByLauncher={(launcher) => filterGamesByLauncher(launcher)}
+          handleLauncherSelected={handleLauncherSelected}
+          handlePlatformSelected={handlePlatformSelected}
+          platformSelected={platformSelected}
+          launcherSelected={launcherSelected}
         />
         <main className=" grid grid-cols-[repeat(auto-fit,minmax(375px,1fr))] gap-x-8 gap-y-6">
           {displayedGames.map((game) => (
