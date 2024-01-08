@@ -3,43 +3,19 @@ import { IoMdStar, IoMdStarHalf } from "react-icons/io";
 import { useState } from "react";
 
 const GameFiltersSidebar = ({
-  filterGamesByGenre,
-  filterGamesByReleaseYear,
-  filterGamesByMinimumRating,
-  setLauncherSelected,
-  setPlatformSelected
+  // filterGamesByGenre,
+  // filterGamesByReleaseYear,
+  // filterGamesByMinimumRating,
+  // setLauncherSelected,
+  // setPlatformSelected,
+  handleGenreSelection,
+  handleRatingSelection,
+  handleReleaseYearSelection,
+  genreSelected,
+  minimumRatingSelected,
+  releaseYearSelected
 }) => {
-  const [genreSelected, setGenreSelected] = useState(null);
-  const handleGenreSelect = (genreId, genreName) => {
-    setGenreSelected(genreId);
-    filterGamesByGenre(genreName);
-    setReleaseYearSelected(null);
-    setMinimumRatingSelected(null);
-    setLauncherSelected(null);
-    setPlatformSelected(null);
-  };
-  const [releaseYearSelected, setReleaseYearSelected] = useState(null);
-  const handleReleaseYearSelect = (
-    releaseYearId,
-    minReleaseYear,
-    maxReleaseYear,
-  ) => {
-    setReleaseYearSelected(releaseYearId);
-    filterGamesByReleaseYear(minReleaseYear, maxReleaseYear);
-    setGenreSelected(null);
-    setMinimumRatingSelected(null);
-    setLauncherSelected(null);
-    setPlatformSelected(null);
-  };
-  const [minimumRatingSelected, setMinimumRatingSelected] = useState(null);
-  const handleRatingSelection = (minimumRating) => {
-    setMinimumRatingSelected(minimumRating);
-    filterGamesByMinimumRating(minimumRating);
-    setReleaseYearSelected(null);
-    setGenreSelected(null);
-    setLauncherSelected(null);
-    setPlatformSelected(null);
-  };
+  
 
   const gameGenres = [
     {
@@ -134,7 +110,7 @@ const GameFiltersSidebar = ({
           {gameGenres.map((genre) => (
             <li
               key={genre.id}
-              onClick={() => handleGenreSelect(genre.id, genre.name)}
+              onClick={() => handleGenreSelection(genre.id, genre.name)}
               className={`${
                 genreSelected === genre.id ? "bg-gray-800 font-bold" : ""
               } flex cursor-pointer items-center gap-3 rounded-lg pb-1 hover:bg-gray-800`}
@@ -155,7 +131,7 @@ const GameFiltersSidebar = ({
             <li
               key={release.id}
               onClick={() =>
-                handleReleaseYearSelect(
+                handleReleaseYearSelection(
                   release.id,
                   release.minReleaseYear,
                   release.maxReleaseYear,

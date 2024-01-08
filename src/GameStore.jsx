@@ -85,16 +85,53 @@ export default function GameStore() {
   };
 
   const [platformSelected, setPlatformSelected] = useState(null);
-  const handlePlatformSelected = (platformSelected) => {
+  const handlePlatformSelection = (platformSelected) => {
     setPlatformSelected(platformSelected);
     setLauncherSelected(null);
+    setGenreSelected(null);
+    setReleaseYearSelected(null);
+    setMinimumRatingSelected(null);
     filterGamesByPlatform(platformSelected);
   };
   const [launcherSelected, setLauncherSelected] = useState(null);
-  const handleLauncherSelected = (launcherSelected) => {
+  const handleLauncherSelection = (launcherSelected) => {
     setLauncherSelected(launcherSelected);
     setPlatformSelected(null);
+    setGenreSelected(null);
+    setReleaseYearSelected(null);
+    setMinimumRatingSelected(null);
     filterGamesByLauncher(launcherSelected);
+  };
+  const [genreSelected, setGenreSelected] = useState(null);
+  const handleGenreSelection = (genreId, genreName) => {
+    setGenreSelected(genreId);
+    filterGamesByGenre(genreName);
+    setReleaseYearSelected(null);
+    setMinimumRatingSelected(null);
+    setLauncherSelected(null);
+    setPlatformSelected(null);
+  };
+  const [releaseYearSelected, setReleaseYearSelected] = useState(null);
+  const handleReleaseYearSelection = (
+    releaseYearId,
+    minReleaseYear,
+    maxReleaseYear,
+  ) => {
+    setReleaseYearSelected(releaseYearId);
+    filterGamesByReleaseYear(minReleaseYear, maxReleaseYear);
+    setGenreSelected(null);
+    setMinimumRatingSelected(null);
+    setLauncherSelected(null);
+    setPlatformSelected(null);
+  };
+  const [minimumRatingSelected, setMinimumRatingSelected] = useState(null);
+  const handleRatingSelection = (minimumRating) => {
+    setMinimumRatingSelected(minimumRating);
+    filterGamesByMinimumRating(minimumRating);
+    setReleaseYearSelected(null);
+    setGenreSelected(null);
+    setLauncherSelected(null);
+    setPlatformSelected(null);
   };
 
   if (gamesQuery.isLoading) return <h1>Loading....</h1>;
@@ -108,22 +145,26 @@ export default function GameStore() {
         fetchedGames={gamesQuery.data}
       />
       <GameFiltersSidebar
-        filterGamesByGenre={(genre) => filterGamesByGenre(genre)}
-        filterGamesByReleaseYear={(minReleaseYear, maxReleaseYear) =>
-          filterGamesByReleaseYear(minReleaseYear, maxReleaseYear)
-        }
-        filterGamesByMinimumRating={(minRating) =>
-          filterGamesByMinimumRating(minRating)
-        }
-        setLauncherSelected={setLauncherSelected}
-        setPlatformSelected={setPlatformSelected}
+        // filterGamesByGenre={(genre) => filterGamesByGenre(genre)}
+        // filterGamesByReleaseYear={(minReleaseYear, maxReleaseYear) =>
+          // filterGamesByReleaseYear(minReleaseYear, maxReleaseYear)
+        // }
+        // filterGamesByMinimumRating={(minRating) =>
+          // filterGamesByMinimumRating(minRating)
+        // }
+        handleGenreSelection={handleGenreSelection}
+        handleReleaseYearSelection={handleReleaseYearSelection}
+        handleRatingSelection={handleRatingSelection}
+        genreSelected={genreSelected}
+        releaseYearSelected={releaseYearSelected}
+        minimumRatingSelected={minimumRatingSelected}
       />
       <div className="grid-row-[50px] grid gap-8">
         <GameSortingSection
           // filterGamesByPlatform={(platform) => filterGamesByPlatform(platform)}
           // filterGamesByLauncher={(launcher) => filterGamesByLauncher(launcher)}
-          handleLauncherSelected={handleLauncherSelected}
-          handlePlatformSelected={handlePlatformSelected}
+          handleLauncherSelection={handleLauncherSelection}
+          handlePlatformSelection={handlePlatformSelection}
           platformSelected={platformSelected}
           launcherSelected={launcherSelected}
         />

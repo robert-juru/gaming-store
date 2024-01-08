@@ -13,8 +13,8 @@ import { SiEpicgames, SiGogdotcom, SiNintendoswitch } from "react-icons/si";
 import { useState } from "react";
 
 const GameSortingSection = ({
-  handleLauncherSelected,
-  handlePlatformSelected,
+  handleLauncherSelection,
+  handlePlatformSelection,
   platformSelected,
   launcherSelected,
 }) => {
@@ -24,7 +24,7 @@ const GameSortingSection = ({
         <ul className="flex items-center justify-center gap-2">
           <h3 className=" pr-4 text-xs font-bold tracking-wide">PLATFORM</h3>
           <li
-            onClick={() => handlePlatformSelected("PC")}
+            onClick={() => handlePlatformSelection("PC")}
             className={`${
               platformSelected === "PC" && "bg-white text-black"
             } mr-2 flex size-9 items-center justify-center rounded-md bg-slate-950 transition duration-300 hover:bg-white  hover:text-black`}
@@ -32,7 +32,7 @@ const GameSortingSection = ({
             <FaWindows className="size-6" />
           </li>
           <li
-            onClick={() => handlePlatformSelected("PlayStation")}
+            onClick={() => handlePlatformSelection("PlayStation")}
             className={`${
               platformSelected === "PlayStation" && "bg-white text-black"
             } mr-2 flex size-9 items-center justify-center rounded-md bg-slate-950 transition duration-300 hover:bg-white  hover:text-black`}
@@ -40,7 +40,7 @@ const GameSortingSection = ({
             <FaPlaystation className="size-6" />
           </li>
           <li
-            onClick={() => handlePlatformSelected("Xbox")}
+            onClick={() => handlePlatformSelection("Xbox")}
             className={`${
               platformSelected === "Xbox" && "bg-white text-black"
             } mr-2 flex size-9 items-center justify-center rounded-md bg-slate-950 transition duration-300 hover:bg-white  hover:text-black`}
@@ -48,7 +48,7 @@ const GameSortingSection = ({
             <FaXbox className="size-6" />
           </li>
           <li
-            onClick={() => handlePlatformSelected("iOS")}
+            onClick={() => handlePlatformSelection("iOS")}
             className={`${
               platformSelected === "iOS" && "bg-white text-black"
             } mr-2 flex size-9 items-center justify-center rounded-md bg-slate-950 transition duration-300 hover:bg-white  hover:text-black`}
@@ -56,7 +56,7 @@ const GameSortingSection = ({
             <FaApple className="size-6" />
           </li>
           <li
-            onClick={() => handlePlatformSelected("Android")}
+            onClick={() => handlePlatformSelection("Android")}
             className={`${
               platformSelected === "Android" && "bg-white text-black"
             } mr-2 flex size-9 items-center justify-center rounded-md bg-slate-950 transition duration-300 hover:bg-white  hover:text-black`}
@@ -64,7 +64,7 @@ const GameSortingSection = ({
             <IoLogoAndroid className="size-7" />
           </li>
           <li
-            onClick={() => handlePlatformSelected("Nintendo")}
+            onClick={() => handlePlatformSelection("Nintendo")}
             className={`${
               platformSelected === "Nintendo" && "bg-white text-black"
             } mr-2 flex size-9 items-center justify-center rounded-md bg-slate-950 transition duration-300 hover:bg-white  hover:text-black`}
@@ -75,7 +75,7 @@ const GameSortingSection = ({
         <ul className="flex flex-row items-center gap-2">
           <h3 className="pr-4 text-xs font-bold tracking-wide">LAUNCHER</h3>
           <li
-            onClick={() => handleLauncherSelected("Steam")}
+            onClick={() => handleLauncherSelection("Steam")}
             className={`${
               launcherSelected === "Steam" && "bg-white text-black"
             } mr-2 flex size-9 items-center justify-center rounded-md bg-slate-950 transition duration-300 hover:bg-white  hover:text-black`}
@@ -83,7 +83,7 @@ const GameSortingSection = ({
             <FaSteam className="size-6" />
           </li>
           <li
-            onClick={() => handleLauncherSelected("itch.io")}
+            onClick={() => handleLauncherSelection("itch.io")}
             className={`${
               launcherSelected === "itch.io" && "bg-white text-black"
             } mr-2 flex size-9 items-center justify-center rounded-md bg-slate-950 transition duration-300 hover:bg-white  hover:text-black`}
@@ -91,7 +91,7 @@ const GameSortingSection = ({
             <FaItchIo className="size-6" />
           </li>
           <li
-            onClick={() => handleLauncherSelected("Epic Games")}
+            onClick={() => handleLauncherSelection("Epic Games")}
             className={`${
               launcherSelected === "Epic Games" && "bg-white text-black"
             } mr-2 flex size-9 items-center justify-center rounded-md bg-slate-950 transition duration-300 hover:bg-white  hover:text-black`}
@@ -99,7 +99,7 @@ const GameSortingSection = ({
             <SiEpicgames className="size-6" />
           </li>
           <li
-            onClick={() => handleLauncherSelected("GOG")}
+            onClick={() => handleLauncherSelection("GOG")}
             className={`${
               launcherSelected === "GOG" && "bg-white text-black"
             } mr-2 flex size-9 items-center justify-center rounded-md bg-slate-950 transition duration-300 hover:bg-white  hover:text-black`}
@@ -107,7 +107,7 @@ const GameSortingSection = ({
             <SiGogdotcom className="size-6" />
           </li>
           <li
-            onClick={() => handleLauncherSelected("Google Play")}
+            onClick={() => handleLauncherSelection("Google Play")}
             className={`${
               launcherSelected === "Google Play" && "bg-white text-black"
             } mr-2 flex size-9 items-center justify-center rounded-md bg-slate-950 transition duration-300 hover:bg-white  hover:text-black`}
@@ -115,7 +115,7 @@ const GameSortingSection = ({
             <FaGooglePlay className="size-6" />
           </li>
           <li
-            onClick={() => handleLauncherSelected("App Store")}
+            onClick={() => handleLauncherSelection("App Store")}
             className={`${
               launcherSelected === "App Store" && "bg-white text-black"
             } mr-2 flex size-9 items-center justify-center rounded-md bg-slate-950 transition duration-300 hover:bg-white  hover:text-black`}
