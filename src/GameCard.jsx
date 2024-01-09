@@ -1,11 +1,16 @@
 import { StarRatingGame } from "./StarRating";
 import { FaCartShopping } from "react-icons/fa6";
 import { IconContext } from "react-icons";
-import { useState } from "react";
+import { generatePrice } from "./PriceGenerator";
 const GameCard = ({ game, handleCart, cartGames }) => {
   const isInCart = (gameId) => {
     return cartGames.some((cartGame) => cartGame.id === gameId);
   };
+  const price = generatePrice(
+    new Date(game.released).getFullYear(),
+    game.ratings_count,
+    game.rating,
+  );
 
   return (
     <div className="relative transition duration-300 hover:scale-105">
@@ -30,7 +35,7 @@ const GameCard = ({ game, handleCart, cartGames }) => {
           {game.genres.map((genre) => genre.name).join(", ")}
         </p>
         <div className="flex items-center justify-between">
-          <p className="text-md font-bold">$25.99</p>
+          <p className="text-md font-bold">${price}</p>
           <button
             onClick={handleCart}
             className={`mr-2 flex items-center gap-1 self-start rounded-md ${
@@ -48,7 +53,11 @@ const GameCard = ({ game, handleCart, cartGames }) => {
             >
               <FaCartShopping />
             </IconContext.Provider>
-            {isInCart(game.id) ? <span className="text-black font-bold">In cart </span> : <span className="text-white font-bold">Add to cart </span>}
+            {isInCart(game.id) ? (
+              <span className="font-bold text-black">In cart </span>
+            ) : (
+              <span className="font-bold text-white">Add to cart </span>
+            )}
           </button>
         </div>
       </div>

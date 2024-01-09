@@ -2,6 +2,7 @@ import { MdOutlineExpandMore } from "react-icons/md";
 import { FaCartShopping } from "react-icons/fa6";
 import { IoIosClose } from "react-icons/io";
 import { IconContext } from "react-icons";
+import { generatePrice } from "./PriceGenerator";
 
 const Cart = ({ cartGames, fetchedGames, setCartGames }) => {
   const removeFromCart = (gameIdToRemove) => {
@@ -52,6 +53,7 @@ const Cart = ({ cartGames, fetchedGames, setCartGames }) => {
                 (fetchedGame) => fetchedGame.id === cartGame.id,
               );
               if (matchedGame) {
+                const price=generatePrice(new Date(matchedGame.released).getFullYear(), matchedGame.ratings_count, matchedGame.rating)
                 return (
                   <>
                     <li
@@ -64,7 +66,7 @@ const Cart = ({ cartGames, fetchedGames, setCartGames }) => {
                         className="size-14"
                       />
                       <span className="w-[26ch]">{matchedGame.name}</span>
-                      <span>$25.99</span>
+                      <span>${price}</span>
                       <IconContext.Provider
                         value={{
                           size: "24px",
