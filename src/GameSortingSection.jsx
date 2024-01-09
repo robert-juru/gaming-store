@@ -6,8 +6,6 @@ import {
   FaSteam,
   FaItchIo,
   FaGooglePlay,
-  FaArrowDown,
-  FaArrowUp,
 } from "react-icons/fa";
 import { IoLogoAndroid } from "react-icons/io";
 import { IoLogoAppleAppstore } from "react-icons/io5";
@@ -19,27 +17,38 @@ const GameSortingSection = ({
   platformSelected,
   launcherSelected,
   sortGamesByRatingAsc,
-  sortGamesByRatingDesc
+  sortGamesByRatingDesc,
+  sortGamesByPopularity,
+  sortingOption,
+  setSortingOption,
+  displayedGames
 }) => {
+  
   const handleSortChange = (selectedValue) => {
     switch (selectedValue) {
       case "popularity":
-        sortGamesByPopularity();
+        sortGamesByPopularity(displayedGames);
+        setSortingOption(selectedValue)
         break;
       case "latest":
         sortGamesByLatest();
+        setSortingOption(selectedValue)
         break;
       case "rating-asc":
         sortGamesByRatingAsc();
+        setSortingOption(selectedValue)
         break;
       case "rating-desc":
         sortGamesByRatingDesc();
+        setSortingOption(selectedValue)
         break;
       case "price-asc":
         sortGamesByPriceAsc();
+        setSortingOption(selectedValue)
         break;
       case "price-desc":
         sortGamesByPriceDesc();
+        setSortingOption(selectedValue)
         break;
     }
   };
@@ -157,6 +166,7 @@ const GameSortingSection = ({
           className="bg-gray-900 pb-1 font-bold"
           name="sort"
           id="sort-select"
+          value={sortingOption}
           onChange={(event) => handleSortChange(event.target.value)}
         >
           <option className="font-normal text-slate-300" value="popularity">

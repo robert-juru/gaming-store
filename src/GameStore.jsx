@@ -28,7 +28,7 @@ export default function GameStore() {
   useEffect(() => {
     if (gamesQuery.isSuccess) {
       const limitedGames = gamesQuery.data.slice(0, 100); // maximum display of 100
-      setDisplayedGames(limitedGames);
+      sortGamesByPopularity(limitedGames);
     }
   }, [gamesQuery.isSuccess, gamesQuery.data]);
 
@@ -44,7 +44,7 @@ export default function GameStore() {
       game.genres.some((genre) => genre.name === gameGenre),
     );
     const limitedGames = filteredGames.slice(0, 50);
-    setDisplayedGames(limitedGames);
+    sortGamesByPopularity(limitedGames);
   };
 
   const filterGamesByReleaseYear = (minReleaseYear, maxReleaseYear) => {
@@ -54,7 +54,7 @@ export default function GameStore() {
         maxReleaseYear > new Date(game.released).getFullYear(),
     );
     const limitedGames = filteredGames.slice(0, 50);
-    setDisplayedGames(limitedGames);
+    sortGamesByPopularity(limitedGames);
   };
 
   const filterGamesByMinimumRating = (minimumRating) => {
@@ -62,7 +62,7 @@ export default function GameStore() {
       (game) => Math.floor(game.rating * 2) / 2 >= minimumRating,
     );
     const limitedGames = filteredGames.slice(0, 50);
-    setDisplayedGames(limitedGames);
+    sortGamesByPopularity(limitedGames);
   };
 
   const filterGamesByPlatform = (gamePlatform) => {
@@ -72,7 +72,7 @@ export default function GameStore() {
       ),
     );
     const limitedGames = filteredGames.slice(0, 50);
-    setDisplayedGames(limitedGames);
+    sortGamesByPopularity(limitedGames);
   };
   const filterGamesByLauncher = (gameLauncher) => {
     const filteredGames = gamesQuery.data.filter((game) =>
@@ -81,7 +81,7 @@ export default function GameStore() {
       ),
     );
     const limitedGames = filteredGames.slice(0, 50);
-    setDisplayedGames(limitedGames);
+    sortGamesByPopularity(limitedGames);
   };
 
   const [platformSelected, setPlatformSelected] = useState(null);
@@ -92,6 +92,7 @@ export default function GameStore() {
     setReleaseYearSelected(null);
     setMinimumRatingSelected(null);
     filterGamesByPlatform(platformSelected);
+    setSortingOption("popularity");
   };
   const [launcherSelected, setLauncherSelected] = useState(null);
   const handleLauncherSelection = (launcherSelected) => {
@@ -101,6 +102,7 @@ export default function GameStore() {
     setReleaseYearSelected(null);
     setMinimumRatingSelected(null);
     filterGamesByLauncher(launcherSelected);
+    setSortingOption("popularity");
   };
   const [genreSelected, setGenreSelected] = useState(null);
   const handleGenreSelection = (genreId, genreName) => {
@@ -110,6 +112,7 @@ export default function GameStore() {
     setMinimumRatingSelected(null);
     setLauncherSelected(null);
     setPlatformSelected(null);
+    setSortingOption("popularity");
   };
   const [releaseYearSelected, setReleaseYearSelected] = useState(null);
   const handleReleaseYearSelection = (
@@ -123,6 +126,7 @@ export default function GameStore() {
     setMinimumRatingSelected(null);
     setLauncherSelected(null);
     setPlatformSelected(null);
+    setSortingOption("popularity");
   };
   const [minimumRatingSelected, setMinimumRatingSelected] = useState(null);
   const handleRatingSelection = (minimumRating) => {
@@ -132,16 +136,26 @@ export default function GameStore() {
     setGenreSelected(null);
     setLauncherSelected(null);
     setPlatformSelected(null);
+    setSortingOption("popularity");
   };
 
+  const [sortingOption, setSortingOption] =
+    useState("popularity");
+  
+
   const sortGamesByRatingAsc = () => {
-    const gamesByRating=[...displayedGames].sort((a,b)=>a.rating-b.rating);
-    setDisplayedGames(gamesByRating);
+    const gamesByRatingAsc=[...displayedGames].sort((a,b)=>a.rating-b.rating);
+    setDisplayedGames(gamesByRatingAsc);
   }
 
   const sortGamesByRatingDesc = () => {
-    const gamesByRating=[...displayedGames].sort((a,b)=>b.rating-a.rating);
-    setDisplayedGames(gamesByRating);
+    const gamesByRatingDesc=[...displayedGames].sort((a,b)=>b.rating-a.rating);
+    setDisplayedGames(gamesByRatingDesc);
+  }
+
+  const sortGamesByPopularity = (games) => {
+    const gamesByPopularity=[...games].sort((a,b)=>b.ratings_count-a.ratings_count);
+    setDisplayedGames(gamesByPopularity);
   }
 
   if (gamesQuery.isLoading) return <h1>Loading....</h1>;
@@ -170,6 +184,10 @@ export default function GameStore() {
           launcherSelected={launcherSelected}
           sortGamesByRatingAsc={sortGamesByRatingAsc}
           sortGamesByRatingDesc={sortGamesByRatingDesc}
+          sortGamesByPopularity={sortGamesByPopularity}
+          sortingOption={sortingOption}
+          setSortingOption={setSortingOption}
+          displayedGames={displayedGames}
         />
         <main className=" grid grid-cols-[repeat(auto-fit,minmax(375px,1fr))] gap-x-8 gap-y-6">
           {displayedGames.map((game) => (
