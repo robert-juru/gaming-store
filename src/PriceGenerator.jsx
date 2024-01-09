@@ -9,7 +9,7 @@ export const generatePrice = (releaseYear, popularity, avgRating) => {
   let price =
     basePrice - ageOfGame * 2 - popularityAdjustment - ratingAdjustment;
   price = Math.max(price, 5);
-  const roundedPrice = Math.round(price / 5) * 5 + ".99";
+  const roundedPrice = Math.round(price / 5) * 5 + 0.99;
 
   return roundedPrice;
 };

@@ -5,6 +5,7 @@ import Header from "./Header";
 import GameFiltersSidebar from "./GameFiltersSidebar";
 import GameSortingSection from "./GameSortingSection";
 import { useState, useEffect } from "react";
+import { generatePrice } from "./PriceGenerator";
 
 export default function GameStore() {
   const useMultiplePagesQuery = (endpoint, pageSize, limit) => {
@@ -76,9 +77,7 @@ export default function GameStore() {
   };
   const filterGamesByLauncher = (gameLauncher) => {
     const filteredGames = gamesQuery.data.filter((game) =>
-      game.stores.some(
-        (launcher) => launcher.store.name === gameLauncher,
-      ),
+      game.stores.some((launcher) => launcher.store.name === gameLauncher),
     );
     const limitedGames = filteredGames.slice(0, 50);
     sortGamesByPopularity(limitedGames);
@@ -139,29 +138,58 @@ export default function GameStore() {
     setSortingOption("popularity");
   };
 
-  const [sortingOption, setSortingOption] =
-    useState("popularity");
-  
+  const [sortingOption, setSortingOption] = useState("popularity");
 
   const sortGamesByRatingAsc = () => {
-    const gamesByRatingAsc=[...displayedGames].sort((a,b)=>a.rating-b.rating);
+    const gamesByRatingAsc = [...displayedGames].sort(
+      (a, b) => a.rating - b.rating,
+    );
     setDisplayedGames(gamesByRatingAsc);
-  }
+  };
 
   const sortGamesByRatingDesc = () => {
-    const gamesByRatingDesc=[...displayedGames].sort((a,b)=>b.rating-a.rating);
+    const gamesByRatingDesc = [...displayedGames].sort(
+      (a, b) => b.rating - a.rating,
+    );
     setDisplayedGames(gamesByRatingDesc);
-  }
+  };
 
   const sortGamesByPopularity = (games) => {
-    const gamesByPopularity=[...games].sort((a,b)=>b.ratings_count-a.ratings_count);
+    const gamesByPopularity = [...games].sort(
+      (a, b) => b.ratings_count - a.ratings_count,
+    );
     setDisplayedGames(gamesByPopularity);
-  }
+  };
 
   const sortGamesByLatest = () => {
-    const gamesByLatest=[...displayedGames].sort((a,b)=>new Date(b.released)-new Date(a.released));
+    const gamesByLatest = [...displayedGames].sort(
+      (a, b) => new Date(b.released) - new Date(a.released),
+    );
     setDisplayedGames(gamesByLatest);
-  }
+  };
+
+  const gamesWithPrices = displayedGames.map((game) => {
+    const price = generatePrice(
+      new Date(game.released).getFullYear(),
+      game.ratings_count,
+      game.rating,
+    );
+    return { ...game, price };
+  });
+
+  const sortGamesByPriceAsc = () => {
+    const gamesByPriceAsc = [...gamesWithPrices].sort(
+      (a, b) => a.price - b.price,
+    );
+    setDisplayedGames(gamesByPriceAsc);
+  };
+
+  const sortGamesByPriceDesc = () => {
+    const gamesByPriceDesc = [...gamesWithPrices].sort(
+      (a, b) => b.price - a.price,
+    );
+    setDisplayedGames(gamesByPriceDesc);
+  };
 
   if (gamesQuery.isLoading) return <h1>Loading....</h1>;
   if (gamesQuery.isError) return <h1>Error loading data!!!</h1>;
@@ -191,12 +219,14 @@ export default function GameStore() {
           sortGamesByRatingDesc={sortGamesByRatingDesc}
           sortGamesByPopularity={sortGamesByPopularity}
           sortGamesByLatest={sortGamesByLatest}
+          sortGamesByPriceAsc={sortGamesByPriceAsc}
+          sortGamesByPriceDesc={sortGamesByPriceDesc}
           sortingOption={sortingOption}
           setSortingOption={setSortingOption}
           displayedGames={displayedGames}
         />
         <main className=" grid grid-cols-[repeat(auto-fit,minmax(375px,1fr))] gap-x-8 gap-y-6">
-          {displayedGames.map((game) => (
+          {gamesWithPrices.map((game) => (
             <GameCard
               cartGames={cartGames}
               key={game.id}

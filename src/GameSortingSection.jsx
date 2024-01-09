@@ -20,6 +20,8 @@ const GameSortingSection = ({
   sortGamesByRatingDesc,
   sortGamesByPopularity,
   sortGamesByLatest,
+  sortGamesByPriceAsc,
+  sortGamesByPriceDesc,
   sortingOption,
   setSortingOption,
   displayedGames
@@ -185,7 +187,7 @@ const GameSortingSection = ({
           <option className="font-normal text-slate-300" value="price-asc">
             Price ↑
           </option>
-          <option className="font-normal text-slate-300" value="rating-desc">
+          <option className="font-normal text-slate-300" value="price-desc">
             Price ↓
           </option>
         </select>
