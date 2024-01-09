@@ -158,6 +158,11 @@ export default function GameStore() {
     setDisplayedGames(gamesByPopularity);
   }
 
+  const sortGamesByLatest = () => {
+    const gamesByLatest=[...displayedGames].sort((a,b)=>new Date(b.released)-new Date(a.released));
+    setDisplayedGames(gamesByLatest);
+  }
+
   if (gamesQuery.isLoading) return <h1>Loading....</h1>;
   if (gamesQuery.isError) return <h1>Error loading data!!!</h1>;
 
@@ -185,6 +190,7 @@ export default function GameStore() {
           sortGamesByRatingAsc={sortGamesByRatingAsc}
           sortGamesByRatingDesc={sortGamesByRatingDesc}
           sortGamesByPopularity={sortGamesByPopularity}
+          sortGamesByLatest={sortGamesByLatest}
           sortingOption={sortingOption}
           setSortingOption={setSortingOption}
           displayedGames={displayedGames}

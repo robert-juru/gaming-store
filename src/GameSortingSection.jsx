@@ -19,6 +19,7 @@ const GameSortingSection = ({
   sortGamesByRatingAsc,
   sortGamesByRatingDesc,
   sortGamesByPopularity,
+  sortGamesByLatest,
   sortingOption,
   setSortingOption,
   displayedGames
