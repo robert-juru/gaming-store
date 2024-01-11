@@ -1,5 +1,3 @@
-import { useQuery } from "@tanstack/react-query";
-import { fetchData } from "./Api";
 import GameCard from "./GameCard";
 import Header from "./Header";
 import GameFiltersSidebar from "./GameFiltersSidebar";
@@ -7,23 +5,7 @@ import GameSortingSection from "./GameSortingSection";
 import { useState, useEffect } from "react";
 import { generatePrice } from "./PriceGenerator";
 
-export default function GameStore() {
-  const useMultiplePagesQuery = (endpoint, pageSize, limit) => {
-    return useQuery({
-      queryKey: [endpoint],
-      queryFn: async () => {
-        const allResults = [];
-        for (let page = 1; page <= limit; page++) {
-          const results = await fetchData(endpoint, page, pageSize);
-          allResults.push(...results);
-        }
-        return allResults;
-      },
-    });
-  };
-
-  const gamesQuery = useMultiplePagesQuery("games", 40, 5);
-  const [cartGames, setCartGames] = useState([]);
+export default function GameStore({ cartGames, setCartGames, gamesQuery }) {
   const [displayedGames, setDisplayedGames] = useState([]);
 
   useEffect(() => {

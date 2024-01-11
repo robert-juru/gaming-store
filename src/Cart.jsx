@@ -3,15 +3,17 @@ import { FaCartShopping } from "react-icons/fa6";
 import { IoIosClose } from "react-icons/io";
 import { IconContext } from "react-icons";
 import { generatePrice } from "./PriceGenerator";
+import { Link } from "react-router-dom";
 
 const Cart = ({ cartGames, fetchedGames, setCartGames }) => {
   const removeFromCart = (gameIdToRemove) => {
     const updatedCart = cartGames.filter((game) => game.id !== gameIdToRemove);
     setCartGames(updatedCart);
   };
-
+  let totalPrice = cartGames.reduce((acc, game) => acc + game.price, 0).toFixed(2);
+  console.log("pret total" + totalPrice);
   return (
-    <div className="flex  items-center gap-1">
+    <div className="flexitems-center gap-1">
       <div className="group  relative flex items-center">
         <span className="absolute -left-2  -top-2 box-content w-4 cursor-pointer rounded-full border-2 border-green-600 bg-green-700 text-center text-xs font-bold text-white">
           {cartGames.length}
@@ -26,7 +28,9 @@ const Cart = ({ cartGames, fetchedGames, setCartGames }) => {
         >
           <FaCartShopping />
         </IconContext.Provider>
-        <h3 className="cursor-pointer text-lg text-white ">Cart</h3>
+        <Link to="shopping-cart" className="cursor-pointer text-lg text-white ">
+          Cart
+        </Link>
         <IconContext.Provider
           value={{
             color: "white",
@@ -53,7 +57,11 @@ const Cart = ({ cartGames, fetchedGames, setCartGames }) => {
                 (fetchedGame) => fetchedGame.id === cartGame.id,
               );
               if (matchedGame) {
-                const price=generatePrice(new Date(matchedGame.released).getFullYear(), matchedGame.ratings_count, matchedGame.rating)
+                const price = generatePrice(
+                  new Date(matchedGame.released).getFullYear(),
+                  matchedGame.ratings_count,
+                  matchedGame.rating,
+                );
                 return (
                   <>
                     <li
@@ -91,13 +99,13 @@ const Cart = ({ cartGames, fetchedGames, setCartGames }) => {
                   TOTAL: {cartGames.length}{" "}
                   {cartGames.length > 1 ? "games" : "game"}
                 </span>
-                <span>$124.95</span>
+                <span>${totalPrice}</span>
               </div>
             )}
             <button
-              className={`m-2 mr-2 flex items-center gap-1 font-bold self-center 
-             rounded-md
-             bg-gray-100 px-2 py-1 text-lg hover:bg-gray-300`}
+              className={`m-2 mr-2 flex items-center gap-1 self-center rounded-md 
+             bg-gray-100
+             px-2 py-1 text-lg font-bold hover:bg-gray-300`}
             >
               <IconContext.Provider
                 value={{
