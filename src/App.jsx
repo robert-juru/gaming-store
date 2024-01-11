@@ -22,6 +22,10 @@ const App = () => {
 
   const gamesQuery = useMultiplePagesQuery("games", 40, 5);
   const [cartGames, setCartGames] = useState([]);
+  const removeFromCart = (gameIdToRemove) => {
+    const updatedCart = cartGames.filter((game) => game.id !== gameIdToRemove);
+    setCartGames(updatedCart);
+  };
 
   return (
     <Routes>
@@ -32,6 +36,7 @@ const App = () => {
             gamesQuery={gamesQuery}
             cartGames={cartGames}
             setCartGames={setCartGames}
+            removeFromCart={removeFromCart}
           />
         }
       />
@@ -41,7 +46,7 @@ const App = () => {
           <ShoppingCartPage
             fetchedGames={gamesQuery.data}
             cartGames={cartGames}
-            setCartGames={setCartGames}
+            removeFromCart={removeFromCart}
           />
         }
       />

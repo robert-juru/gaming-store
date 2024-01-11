@@ -5,13 +5,10 @@ import { IconContext } from "react-icons";
 import { generatePrice } from "./PriceGenerator";
 import { Link } from "react-router-dom";
 
-const Cart = ({ cartGames, fetchedGames, setCartGames }) => {
-  const removeFromCart = (gameIdToRemove) => {
-    const updatedCart = cartGames.filter((game) => game.id !== gameIdToRemove);
-    setCartGames(updatedCart);
-  };
-  let totalPrice = cartGames.reduce((acc, game) => acc + game.price, 0).toFixed(2);
-  console.log("pret total" + totalPrice);
+const Cart = ({ cartGames, fetchedGames, removeFromCart }) => {
+  let totalPrice = cartGames
+    .reduce((acc, game) => acc + game.price, 0)
+    .toFixed(2);
   return (
     <div className="flexitems-center gap-1">
       <div className="group  relative flex items-center">
@@ -102,8 +99,9 @@ const Cart = ({ cartGames, fetchedGames, setCartGames }) => {
                 <span>${totalPrice}</span>
               </div>
             )}
+            <Link to="/shopping-cart" className="self-center">
             <button
-              className={`m-2 mr-2 flex items-center gap-1 self-center rounded-md 
+              className={`m-2 mr-2 flex items-center gap-1 rounded-md 
              bg-gray-100
              px-2 py-1 text-lg font-bold hover:bg-gray-300`}
             >
@@ -119,6 +117,7 @@ const Cart = ({ cartGames, fetchedGames, setCartGames }) => {
               </IconContext.Provider>
               Go to Cart
             </button>
+            </Link>
           </div>
         </div>
       </div>

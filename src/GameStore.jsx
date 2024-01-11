@@ -22,6 +22,11 @@ export default function GameStore({ cartGames, setCartGames, gamesQuery }) {
     console.log(cartGames);
   };
 
+  const removeFromCart = (gameIdToRemove) => {
+    const updatedCart = cartGames.filter((game) => game.id !== gameIdToRemove);
+    setCartGames(updatedCart);
+  };
+
   const filterGamesByGenre = (gameGenre) => {
     const filteredGames = gamesQuery.data.filter((game) =>
       game.genres.some((genre) => genre.name === gameGenre),
@@ -179,8 +184,8 @@ export default function GameStore({ cartGames, setCartGames, gamesQuery }) {
   return (
     <div className="m-0 grid grid-cols-1 gap-4 p-4 md:grid-cols-[200px_1fr]">
       <Header
+        removeFromCart={removeFromCart}
         cartGames={cartGames}
-        setCartGames={setCartGames}
         fetchedGames={gamesQuery.data}
       />
       <GameFiltersSidebar

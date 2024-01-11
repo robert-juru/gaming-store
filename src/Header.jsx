@@ -3,7 +3,7 @@ import { IconContext } from "react-icons";
 import Cart from "./Cart";
 import { Link } from "react-router-dom";
 
-const Header = ({ cartGames, fetchedGames, setCartGames }) => {
+const Header = ({ cartGames, fetchedGames, removeFromCart }) => {
   return (
     <header className="col-span-2 flex items-center justify-between gap-8">
       <Link to="/">
@@ -37,7 +37,7 @@ const Header = ({ cartGames, fetchedGames, setCartGames }) => {
       <Cart
         cartGames={cartGames}
         fetchedGames={fetchedGames}
-        setCartGames={setCartGames}
+        removeFromCart={removeFromCart}
       />
     </header>
   );
