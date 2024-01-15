@@ -16,7 +16,6 @@ const ShoppingCartPage = ({ cartGames, removeFromCart, fetchedGames }) => {
         fetchedGames={fetchedGames}
       />
       <hr className="border-slate-800 pb-12 font-bold" />
-      {/* <h1 className="text-white text-4xl px-8 mb-8">Shopping Cart</h1> */}
       {cartGames.length == 0 && (
         <div className="mx-16 flex flex-col items-center justify-center border border-solid border-slate-800 pb-12 pt-4 text-gray-300">
           <img

@@ -1,7 +1,7 @@
 import { IoMdStar, IoMdStarHalf, IoMdStarOutline } from "react-icons/io";
 import { IconContext } from "react-icons";
 
-export const StarRatingGame = ({ rating }) => {
+export const StarRatingGame = ({ rating, size }) => {
   const stars = [];
   let remainingStars = Math.floor(rating);
   let hasHalfStar = false;
@@ -9,7 +9,9 @@ export const StarRatingGame = ({ rating }) => {
   for (let i = 0; i < 5; i++) {
     if (remainingStars >= 1) {
       stars.push(
-        <IconContext.Provider value={{ color: "gold", title: "star rating" }}>
+        <IconContext.Provider
+          value={{ color: "gold", title: "star rating", size: `${size}px` }}
+        >
           <IoMdStar key={i} />
         </IconContext.Provider>,
       );
@@ -18,7 +20,7 @@ export const StarRatingGame = ({ rating }) => {
       if (rating % 1 !== 0 && !hasHalfStar) {
         stars.push(
           <IconContext.Provider
-            value={{ color: "gold", title: "half-star rating" }}
+            value={{ color: "gold", title: "half-star rating", size: `${size}px` }}
           >
             <IoMdStarHalf key={i} />
           </IconContext.Provider>,
@@ -27,7 +29,11 @@ export const StarRatingGame = ({ rating }) => {
       } else {
         stars.push(
           <IconContext.Provider
-            value={{ color: "gray", title: "empty star rating" }}
+            value={{
+              color: "gray",
+              title: "empty star rating",
+              size: `${size}px`
+            }}
           >
             <IoMdStarOutline key={i} />
           </IconContext.Provider>,
@@ -38,4 +44,3 @@ export const StarRatingGame = ({ rating }) => {
 
   return <div className="flex pr-2">{stars}</div>;
 };
-

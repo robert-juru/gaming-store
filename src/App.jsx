@@ -4,6 +4,7 @@ import { fetchData } from "./Api";
 import GameStore from "./GameStore";
 import ShoppingCartPage from "./ShoppingCartPage";
 import { Route, Routes } from "react-router-dom";
+import GamePage from "./GamePage";
 
 const App = () => {
   const useMultiplePagesQuery = (endpoint, pageSize, limit) => {
@@ -31,6 +32,16 @@ const App = () => {
     <Routes>
       <Route
         path="/"
+        element={
+          <GamePage
+            fetchedGames={gamesQuery.data}
+            cartGames={cartGames}
+            removeFromCart={removeFromCart}
+          />
+        }
+      />
+      <Route
+        path="/store"
         element={
           <GameStore
             gamesQuery={gamesQuery}

@@ -28,7 +28,7 @@ const GameCard = ({ game, handleCart, cartGames }) => {
           </span>
         </span>
         <span className="flex items-center text-sm">
-          <StarRatingGame rating={game.rating} /> {game.rating} (
+          <StarRatingGame rating={game.rating} size={12} /> {game.rating} (
           {game.ratings_count})
         </span>
         <p className="text-xs">
