@@ -10,11 +10,24 @@ import {
   FaItchIo,
   FaGooglePlay,
 } from "react-icons/fa";
-import { StarRatingGame } from "./StarRating";
 import ReactPlayer from "react-player";
 import GameReviews from "./GameReviews";
+import { useQuery } from "@tanstack/react-query";
+import { fetchGamePageData } from "./Api";
 
 const GamePage = ({ cartGames, removeFromCart, fetchedGames }) => {
+  let gameId = 3498;
+  const gamePageQuery = useQuery({
+    queryKey: ["gamePage"],
+    queryFn: () => fetchGamePageData(gameId),
+  });
+  if (gamePageQuery.isLoading)
+    return <h1 className="text-4xl text-white">Loading....</h1>;
+  if (gamePageQuery.isError)
+    return <h1 className="text-4xl text-white">Error loading data!!!</h1>;
+  console.log(gamePageQuery.data);
+  let gamePageData=gamePageQuery.data;
+
   let description = `<p>Rockstar Games went bigger, since their previous installment of the series. You get the complicated and realistic world-building from Liberty City of GTA4 in the setting of lively and diverse Los Santos, 
         from an old fan favorite GTA San Andreas. 561 different vehicles (including every transport you can operate) and the amount is rising with every update. <br />\nSimultaneous storytelling from three unique perspectives: <br />\nFollow Michael, ex-criminal living his life of leisure away from the past, Franklin, a kid that seeks the better future, and Trevor, the exact past Michael is trying to run away from. <br />\nGTA Online will provide a lot of additional challenge even for the experienced players, coming fresh from the story mode. Now you will have other players around that can help you just as likely as ruin your mission. Every GTA mechanic up to date can be experienced by players through the unique customizable character, and community content paired with the leveling system tends to keep everyone busy and engaged.`;
   let minRequirements =
@@ -144,12 +157,12 @@ const GamePage = ({ cartGames, removeFromCart, fetchedGames }) => {
             </span>
           </section>
         </div>
-        <section className="xl:px-48 lg:px-24">
+        <section className="lg:px-24 xl:px-48">
           <h3 className="text-xl font-bold tracking-wide">ABOUT THIS GAME </h3>
           <hr className="my-2 border-slate-800" />
           <div dangerouslySetInnerHTML={{ __html: description }} />
         </section>
-        <div className="my-8 xl:px-64 lg:px-24">
+        <div className="my-8 lg:px-24 xl:px-48">
           <ReactPlayer
             controls={true}
             width="100%"
@@ -158,10 +171,10 @@ const GamePage = ({ cartGames, removeFromCart, fetchedGames }) => {
             alt="GTA V video presentation"
           ></ReactPlayer>
         </div>
-        <section className="xl:px-48 lg:px-24">
-          <GameReviews/>
+        <section className="lg:px-24 xl:px-48">
+          <GameReviews />
         </section>
-        <section className="xl:px-48 lg:px-24">
+        <section className="lg:px-24 xl:px-48">
           <h3 className="mt-4 text-xl font-bold tracking-wide">
             SYSTEM REQUIREMENTS
           </h3>

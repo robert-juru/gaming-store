@@ -1,19 +1,19 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { fetchData } from "./Api";
+import { fetchStoreData } from "./Api";
 import GameStore from "./GameStore";
 import ShoppingCartPage from "./ShoppingCartPage";
 import { Route, Routes } from "react-router-dom";
 import GamePage from "./GamePage";
 
 const App = () => {
-  const useMultiplePagesQuery = (endpoint, pageSize, limit) => {
+  const gamesDataQuery = (endpoint, pageSize, limit) => {
     return useQuery({
       queryKey: [endpoint],
       queryFn: async () => {
         const allResults = [];
         for (let page = 1; page <= limit; page++) {
-          const results = await fetchData(endpoint, page, pageSize);
+          const results = await fetchStoreData(endpoint, page, pageSize);
           allResults.push(...results);
         }
         return allResults;
@@ -21,7 +21,10 @@ const App = () => {
     });
   };
 
-  const gamesQuery = useMultiplePagesQuery("games", 40, 5);
+  const gamesQuery = gamesDataQuery("games", 40, 5);
+  // if (gamesQuery.isLoading) return <h1 className="text-4xl text-white">Loading....</h1>;
+  // if (gamesQuery.isError) return <h1 className="text-4xl text-white">Error loading data!!!</h1>;
+
   const [cartGames, setCartGames] = useState([]);
   const removeFromCart = (gameIdToRemove) => {
     const updatedCart = cartGames.filter((game) => game.id !== gameIdToRemove);
