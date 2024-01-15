@@ -12,7 +12,7 @@ import {
 } from "react-icons/fa";
 import { StarRatingGame } from "./StarRating";
 import ReactPlayer from "react-player";
-import { IoMdStar } from "react-icons/io";
+import GameReviews from "./GameReviews";
 
 const GamePage = ({ cartGames, removeFromCart, fetchedGames }) => {
   let description = `<p>Rockstar Games went bigger, since their previous installment of the series. You get the complicated and realistic world-building from Liberty City of GTA4 in the setting of lively and diverse Los Santos, 
@@ -144,12 +144,12 @@ const GamePage = ({ cartGames, removeFromCart, fetchedGames }) => {
             </span>
           </section>
         </div>
-        <section className="lg:px-64">
-          <h3 className="text-lg font-bold tracking-wide">ABOUT THIS GAME </h3>
+        <section className="xl:px-48 lg:px-24">
+          <h3 className="text-xl font-bold tracking-wide">ABOUT THIS GAME </h3>
           <hr className="my-2 border-slate-800" />
           <div dangerouslySetInnerHTML={{ __html: description }} />
         </section>
-        <div className="my-8 lg:px-64">
+        <div className="my-8 xl:px-64 lg:px-24">
           <ReactPlayer
             controls={true}
             width="100%"
@@ -158,9 +158,11 @@ const GamePage = ({ cartGames, removeFromCart, fetchedGames }) => {
             alt="GTA V video presentation"
           ></ReactPlayer>
         </div>
-      
-        <section className="lg:px-64">
-          <h3 className="mt-4 text-lg font-bold tracking-wide">
+        <section className="xl:px-48 lg:px-24">
+          <GameReviews/>
+        </section>
+        <section className="xl:px-48 lg:px-24">
+          <h3 className="mt-4 text-xl font-bold tracking-wide">
             SYSTEM REQUIREMENTS
           </h3>
           <hr className="my-2 border-slate-800" />
