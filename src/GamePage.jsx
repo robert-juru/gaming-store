@@ -1,19 +1,13 @@
 import Header from "./Header";
 import { Link } from "react-router-dom";
 import ImageSlider from "./ImageSlider";
-import {
-  FaWindows,
-  FaApple,
-  FaXbox,
-  FaPlaystation,
-  FaSteam,
-  FaItchIo,
-  FaGooglePlay,
-} from "react-icons/fa";
+import PlatformIcons from "./PlatformIcons";
 import ReactPlayer from "react-player";
 import GameReviews from "./GameReviews";
 import { useQuery } from "@tanstack/react-query";
 import { fetchGamePageData } from "./Api";
+import { format, parseISO } from "date-fns";
+import DOMPurify from "dompurify";
 
 const GamePage = ({ cartGames, removeFromCart, fetchedGames }) => {
   let gameId = 3498;
@@ -21,28 +15,43 @@ const GamePage = ({ cartGames, removeFromCart, fetchedGames }) => {
     queryKey: ["gamePage"],
     queryFn: () => fetchGamePageData(gameId),
   });
+
   if (gamePageQuery.isLoading)
     return <h1 className="text-4xl text-white">Loading....</h1>;
   if (gamePageQuery.isError)
     return <h1 className="text-4xl text-white">Error loading data!!!</h1>;
+
   console.log(gamePageQuery.data);
-  let gamePageData=gamePageQuery.data;
+  let gamePageData = gamePageQuery.data;
+  let releaseDate = format(
+    parseISO(gamePageData.details.released),
+    "dd MMMM yyyy",
+  );
+  let metascore = gamePageData.details.metacritic;
+  let gameDescription = gamePageData.details.description;
+  const sanitizedGameDescription = DOMPurify.sanitize(gameDescription);
+  const images = gamePageData.screenshots.results.map(
+    (screenshot) => screenshot.image,
+  );
+  const pcPlatform = gamePageData.details.platforms.find(
+    (platformObj) => platformObj.platform.name === "PC",
+  );
+  const createRequirementsList = (requirements) =>
+    requirements &&
+    requirements
+      .split("\n")
+      .map((requirement, index) => <p key={index}>{requirement}</p>);
 
-  let description = `<p>Rockstar Games went bigger, since their previous installment of the series. You get the complicated and realistic world-building from Liberty City of GTA4 in the setting of lively and diverse Los Santos, 
-        from an old fan favorite GTA San Andreas. 561 different vehicles (including every transport you can operate) and the amount is rising with every update. <br />\nSimultaneous storytelling from three unique perspectives: <br />\nFollow Michael, ex-criminal living his life of leisure away from the past, Franklin, a kid that seeks the better future, and Trevor, the exact past Michael is trying to run away from. <br />\nGTA Online will provide a lot of additional challenge even for the experienced players, coming fresh from the story mode. Now you will have other players around that can help you just as likely as ruin your mission. Every GTA mechanic up to date can be experienced by players through the unique customizable character, and community content paired with the leveling system tends to keep everyone busy and engaged.`;
-  let minRequirements =
-    "Minimum:\nOS: Windows 7/Vista/XP PC (32 or 64 bit)\nProcessor: Dual Core 2.0GHz or equivalent processor\nMemory: 2GB System RAM\nHard Disk Space: 6GB free HDD Space\nVideo Card: Direct X 9.0c compliant video card with 512 MB of RAM\nSound: DirectX compatible sound card\n";
+  let minRequirements;
+  let recommendedRequirements;
 
-  const minRequirementsArray = minRequirements.split("\n");
-  let minRequirementsDisplay = minRequirementsArray.map((line, index) => (
-    <p key={index}>{line}</p>
-  ));
-  let recommendedRequirements =
-    "Recommended:\nProcessor: Quad-core Intel or AMD CPU\nMemory: 4GB System RAM\nVideo Card: DirectX 9.0c compatible NVIDIA or AMD ATI video card with 1GB of RAM (Nvidia GeForce GTX 260 or higher; ATI Radeon 4890 or higher)\n";
-  const recommReqArr = recommendedRequirements.split("\n");
-  let recommReqDisplay = recommReqArr.map((line, index) => (
-    <p key={index}>{line}</p>
-  ));
+  if (pcPlatform) {
+    minRequirements = createRequirementsList(pcPlatform.requirements.minimum);
+    recommendedRequirements = createRequirementsList(
+      pcPlatform.requirements.recommended,
+    );
+  }
+
   return (
     <div className="m-0 p-4">
       <Header
@@ -64,89 +73,110 @@ const GamePage = ({ cartGames, removeFromCart, fetchedGames }) => {
             <span>&gt;</span>
             <Link className="hover:text-white" to="/game">
               {" "}
-              GTA V
+              {gamePageData.details.name}
             </Link>
           </span>
-          <h1 className="pb-8 pt-2 text-4xl font-bold">Grand Theft Auto V</h1>
+          <h1 className="pb-8 pt-2 text-4xl font-bold">
+            {gamePageData.details.name}
+          </h1>
         </div>
         <div className="mb-16 gap-16 lg:grid lg:grid-cols-[minmax(0,2.5fr)_minmax(0,1fr)]">
           <section className="">
-            <ImageSlider />
+            <ImageSlider images={images} name={gamePageData.details.name} />
           </section>
           <section className="flex flex-col justify-between">
             <div>
-              <img
-                className="hidden rounded-md pb-4 lg:block"
-                src="https://media.rawg.io/media/games/20a/20aa03a10cda45239fe22d035c0ebe64.jpg"
-                alt="GTA V icon"
-              ></img>
+              {gamePageData.details.background_image && (
+                <img
+                  className="hidden rounded-md pb-4 lg:block"
+                  src={gamePageData.details.background_image}
+                  alt="GTA V icon"
+                ></img>
+              )}
               <div>
                 <p>
                   <span className="tracking-wide ">TITLE: </span>{" "}
                   <span className="font-bold text-white">
-                    Grand Theft Auto V
+                    {gamePageData.details.name}
                   </span>
                 </p>
-                <p>
-                  <span className="tracking-wide ">GENRE: </span>{" "}
-                  <span className="font-bold text-white">
-                    Action, Adventure
-                  </span>
-                </p>
-                <p>
-                  <span className="tracking-wide ">RELEASE DATE: </span>{" "}
-                  <span className="font-bold text-white">17 Sep. 2013</span>
-                </p>
+                {gamePageData.details.genres.length > 0 && (
+                  <p>
+                    <span className="tracking-wide ">GENRE: </span>{" "}
+                    <span className="font-bold text-white">
+                      {gamePageData.details.genres
+                        .map((genre) => genre.name)
+                        .join(", ")}
+                    </span>
+                  </p>
+                )}
+                {releaseDate && (
+                  <p>
+                    <span className="tracking-wide ">RELEASE DATE: </span>
+                    <span className="font-bold text-white">{releaseDate}</span>
+                  </p>
+                )}
                 <p>
                   <span className="tracking-wide">DEVELOPER: </span>
                   <span className="font-bold text-white">
-                    Rockstar Games, Rockstar North
+                    {gamePageData.details.developers &&
+                      gamePageData.details.developers
+                        .map((developer) => developer.name)
+                        .join(", ")}
                   </span>
                 </p>
-                <p>
-                  <span className="tracking-wide">PUBLISHER: </span>
-                  <span className="font-bold text-white">Rockstar Games</span>
-                </p>
-                <p>
-                  <span className="tracking-wide">WEBSITE: </span>
-                  <a
-                    href="http://www.rockstargames.com/V/"
-                    className="font-bold text-white"
-                  >
-                    http://www.rockstargames.com/V/
-                  </a>
-                </p>
+                {gamePageData.details.publishers.length > 0 && (
+                  <p>
+                    <span className="tracking-wide">PUBLISHER: </span>
+                    <span className="font-bold text-white">
+                      {gamePageData.details.publishers
+                        .map((publisher) => publisher.name)
+                        .join(", ")}
+                    </span>
+                  </p>
+                )}
+                {gamePageData.details.website && (
+                  <p>
+                    <span className="tracking-wide">WEBSITE: </span>
+                    <a
+                      href={gamePageData.details.website}
+                      className="font-bold text-white"
+                    >
+                      {gamePageData.details.website}
+                    </a>
+                  </p>
+                )}
                 <p className="flex items-center gap-2 py-2">
                   <span className="tracking-wide">PLATFORMS: </span>
-                  <span className="flex size-9 items-center justify-center rounded-md bg-slate-950 transition duration-300 hover:bg-white  hover:text-black">
-                    <FaWindows className="size-6" />
-                  </span>
-                  <span className="flex size-9 items-center justify-center rounded-md bg-slate-950 transition duration-300 hover:bg-white  hover:text-black">
-                    <FaPlaystation className="size-6" />
-                  </span>
-                  <span className="flex size-9 items-center justify-center rounded-md bg-slate-950 transition duration-300 hover:bg-white  hover:text-black">
-                    <FaXbox className="size-6" />
-                  </span>
+                  <PlatformIcons
+                    platforms={gamePageData.details.parent_platforms}
+                  />
                 </p>
               </div>
             </div>
-            <span className="my-8 flex items-center gap-4 rounded-md bg-black">
-              <span className="flex h-full items-center bg-green-500 p-2 text-3xl font-bold text-white">
-                87
-              </span>
-              <div className="flex flex-col items-center justify-center">
-                <img
-                  className="h-14 w-64"
-                  src="/game-icons/metacritic-logo.png"
-                ></img>
-                <a
-                  href="https://www.metacritic.com/game/pc/grand-theft-auto-v"
-                  className="-mt-4 text-sm hover:text-white hover:underline"
+            {metascore && (
+              <span className="my-8 flex items-center gap-4 rounded-md bg-black">
+                <span
+                  className={`${metascore < 60 && "bg-red-500"} ${
+                    metascore < 80 && "bg-yellow-500"
+                  } flex h-full items-center bg-green-500 p-2 text-3xl font-bold text-white`}
                 >
-                  Read Critic Reviews
-                </a>
-              </div>
-            </span>
+                  {metascore}
+                </span>
+                <div className="flex flex-col items-center justify-center">
+                  <img
+                    className="h-14 w-64"
+                    src="/game-icons/metacritic-logo.png"
+                  ></img>
+                  <a
+                    href={gamePageData.details.metacritic_url}
+                    className="-mt-4 text-sm hover:text-white hover:underline"
+                  >
+                    Read Critic Reviews
+                  </a>
+                </div>
+              </span>
+            )}
             <span className="flex gap-4">
               <span className="p-2 text-center text-4xl font-bold text-white">
                 $35.99
@@ -157,33 +187,57 @@ const GamePage = ({ cartGames, removeFromCart, fetchedGames }) => {
             </span>
           </section>
         </div>
-        <section className="lg:px-24 xl:px-48">
+        <section className="mb-8 lg:px-24 xl:px-48">
           <h3 className="text-xl font-bold tracking-wide">ABOUT THIS GAME </h3>
           <hr className="my-2 border-slate-800" />
-          <div dangerouslySetInnerHTML={{ __html: description }} />
+          <div dangerouslySetInnerHTML={{ __html: sanitizedGameDescription }} />
         </section>
-        <div className="my-8 lg:px-24 xl:px-48">
-          <ReactPlayer
-            controls={true}
-            width="100%"
-            height="100%"
-            url="https://steamcdn-a.akamaihd.net/steam/apps/256693661/movie480.mp4"
-            alt="GTA V video presentation"
-          ></ReactPlayer>
-        </div>
-        <section className="lg:px-24 xl:px-48">
-          <GameReviews />
-        </section>
-        <section className="lg:px-24 xl:px-48">
-          <h3 className="mt-4 text-xl font-bold tracking-wide">
-            SYSTEM REQUIREMENTS
-          </h3>
-          <hr className="my-2 border-slate-800" />
-          <div className="grid grid-cols-2 gap-4">
-            <div>{minRequirementsDisplay}</div>
-            <div>{recommReqDisplay}</div>
+        {gamePageData.movies.results[0] && (
+          <div className="mb-8 lg:px-24 xl:px-48">
+            <ReactPlayer
+              controls={true}
+              width="100%"
+              height="100%"
+              light={
+                <img
+                  src={gamePageData.movies.results[0].preview}
+                  width="100%"
+                  height="100%"
+                />
+              }
+              url={
+                gamePageData.movies.results[0].data.max ||
+                gamePageData.movies.results[0].data.max480
+              }
+              alt="GTA V video presentation"
+            ></ReactPlayer>
           </div>
-        </section>
+        )}
+        {gamePageData.details.ratings.length > 0 && (
+          <section className="lg:px-24 xl:px-48">
+            <GameReviews
+              reviews={gamePageData.details.ratings}
+              rating={gamePageData.details.rating}
+              reviewsCount={gamePageData.details.ratings_count}
+            />
+          </section>
+        )}
+        {pcPlatform && (
+          <section className="lg:px-24 xl:px-48">
+            <h3 className="mt-4 text-xl font-bold tracking-wide">
+              SYSTEM REQUIREMENTS
+            </h3>
+            <hr className="my-2 border-slate-800" />
+            <div
+              className={`grid ${
+                recommendedRequirements && "grid-cols-2"
+              } gap-4`}
+            >
+              <div>{minRequirements}</div>
+              {recommendedRequirements && <div>{recommendedRequirements}</div>}
+            </div>
+          </section>
+        )}
       </div>
     </div>
   );

@@ -25,6 +25,7 @@ const App = () => {
   // if (gamesQuery.isLoading) return <h1 className="text-4xl text-white">Loading....</h1>;
   // if (gamesQuery.isError) return <h1 className="text-4xl text-white">Error loading data!!!</h1>;
 
+  
   const [cartGames, setCartGames] = useState([]);
   const removeFromCart = (gameIdToRemove) => {
     const updatedCart = cartGames.filter((game) => game.id !== gameIdToRemove);

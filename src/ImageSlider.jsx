@@ -3,11 +3,11 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-const ImageSlider = () => {
+const ImageSlider = ({images, name}) => {
   const [nav1, setNav1] = useState();
   const [nav2, setNav2] = useState();
 
-  const images = [
+  const imagess = [
     {
       type: "image",
       url: "https://media.rawg.io/media/screenshots/a7c/a7c43871a54bed6573a6a429451564ef.jpg",
@@ -26,13 +26,14 @@ const ImageSlider = () => {
     },
   ];
 
+
   let gameMediaDisplay = images.map((image, index) => {
     return (
-      <div className="p-2">
+      <div key={index} className="p-2">
         <img
           className=" w-full cursor-pointer rounded-md"
-          src={image.url}
-          alt={`Image ${index + 1}`}
+          src={image}
+          alt={`${name} image ${index + 1}`}
         />
       </div>
     );

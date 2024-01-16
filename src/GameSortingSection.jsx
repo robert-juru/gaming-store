@@ -6,10 +6,11 @@ import {
   FaSteam,
   FaItchIo,
   FaGooglePlay,
+  FaLinux,
 } from "react-icons/fa";
 import { IoLogoAndroid } from "react-icons/io";
 import { IoLogoAppleAppstore } from "react-icons/io5";
-import { SiEpicgames, SiGogdotcom, SiNintendoswitch } from "react-icons/si";
+import { SiEpicgames, SiGogdotcom, SiNintendoswitch, SiMacos } from "react-icons/si";
 
 const GameSortingSection = ({
   handleLauncherSelection,
@@ -24,34 +25,33 @@ const GameSortingSection = ({
   sortGamesByPriceDesc,
   sortingOption,
   setSortingOption,
-  displayedGames
+  displayedGames,
 }) => {
-  
   const handleSortChange = (selectedValue) => {
     switch (selectedValue) {
       case "popularity":
         sortGamesByPopularity(displayedGames);
-        setSortingOption(selectedValue)
+        setSortingOption(selectedValue);
         break;
       case "latest":
         sortGamesByLatest();
-        setSortingOption(selectedValue)
+        setSortingOption(selectedValue);
         break;
       case "rating-asc":
         sortGamesByRatingAsc();
-        setSortingOption(selectedValue)
+        setSortingOption(selectedValue);
         break;
       case "rating-desc":
         sortGamesByRatingDesc();
-        setSortingOption(selectedValue)
+        setSortingOption(selectedValue);
         break;
       case "price-asc":
         sortGamesByPriceAsc();
-        setSortingOption(selectedValue)
+        setSortingOption(selectedValue);
         break;
       case "price-desc":
         sortGamesByPriceDesc();
-        setSortingOption(selectedValue)
+        setSortingOption(selectedValue);
         break;
     }
   };
@@ -107,6 +107,22 @@ const GameSortingSection = ({
             } mr-2 flex size-9 items-center justify-center rounded-md bg-slate-950 transition duration-300 hover:bg-white  hover:text-black`}
           >
             <SiNintendoswitch className="size-7" />
+          </li>
+          <li
+            onClick={() => handlePlatformSelection("Linux")}
+            className={`${
+              platformSelected === "Linux" && "bg-white text-black"
+            } mr-2 flex size-9 items-center justify-center rounded-md bg-slate-950 transition duration-300 hover:bg-white  hover:text-black`}
+          >
+            <FaLinux className="size-6" />
+          </li>
+          <li
+            onClick={() => handlePlatformSelection("Apple Macintosh")}
+            className={`${
+              platformSelected === "Apple Macintosh" && "bg-white text-black"
+            } mr-2 flex size-9 items-center justify-center rounded-md bg-slate-950 transition duration-300 hover:bg-white  hover:text-black`}
+          >
+            <SiMacos className="size-6" />
           </li>
         </ul>
         <ul className="flex flex-row items-center gap-2">

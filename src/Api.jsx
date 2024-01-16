@@ -11,12 +11,32 @@ export const fetchStoreData = async (endpoint, page = 1, pageSize = 40) => {
 };
 
 export const fetchGamePageData = async (gameId) => {
-  const [detailsResponse, moviesResponse] = await Promise.all([
-    axios.get(`${url}games/${gameId}?key=${key}`),
-    axios.get(`${url}games/${gameId}/movies?key=${key}`),
-  ]);
+  // Record the start time for each fetch
+  const startDetails = new Date();
+  const detailsResponse = await axios.get(`${url}games/${gameId}?key=${key}`);
+  const endDetails = new Date();
+
+  const startMovies = new Date();
+  const moviesResponse = await axios.get(`${url}games/${gameId}/movies?key=${key}`);
+  const endMovies = new Date();
+
+  const startScreenshots = new Date();
+  const screenshotsResponse = await axios.get(`${url}games/${gameId}/screenshots?key=${key}`);
+  const endScreenshots = new Date();
+
+  // Calculate the time taken for each fetch
+  const detailsTime = endDetails - startDetails;
+  const moviesTime = endMovies - startMovies;
+  const screenshotsTime = endScreenshots - startScreenshots;
+
+  console.log(`Details fetch time: ${detailsTime} milliseconds`);
+  console.log(`Movies fetch time: ${moviesTime} milliseconds`);
+  console.log(`Screenshots fetch time: ${screenshotsTime} milliseconds`);
+
   return {
     details: detailsResponse.data,
     movies: moviesResponse.data,
+    screenshots: screenshotsResponse.data,
   };
 };
+
