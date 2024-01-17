@@ -52,15 +52,19 @@ const ShoppingCartPage = ({ cartGames, removeFromCart, fetchedGames }) => {
                     className="mb-4 flex h-36 w-full items-center justify-between gap-8 rounded-md bg-gray-900 p-8 py-1 text-sm text-white"
                   >
                     <div className="flex gap-8">
+                    <Link to={`/game/${matchedGame.id}`}>
                     <img
                       src={matchedGame.background_image}
                       alt={matchedGame.name}
                       className="w-32 h-24"
                     />
+                    </Link>
                     <div>
+                    <Link to={`/game/${matchedGame.id}`}>
                       <p className="text-lg font-bold ">{matchedGame.name}</p>
+                      </Link>
                       <span className="flex items-center text-sm">
-                        <StarRatingGame rating={matchedGame.rating} />{" "}
+                        <StarRatingGame rating={matchedGame.rating} size={12} />{" "}
                         {matchedGame.rating} ({matchedGame.ratings_count})
                       </span>
                       <p className="text-md">

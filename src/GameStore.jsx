@@ -196,7 +196,7 @@ export default function GameStore({ cartGames, setCartGames, gamesQuery }) {
         releaseYearSelected={releaseYearSelected}
         minimumRatingSelected={minimumRatingSelected}
       />
-      <div className="grid-row-[50px] grid gap-8">
+      <div className="grid-rows-[64px] grid gap-8">
         <GameSortingSection
           handleLauncherSelection={handleLauncherSelection}
           handlePlatformSelection={handlePlatformSelection}

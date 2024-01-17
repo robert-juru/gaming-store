@@ -9,15 +9,13 @@ import { fetchGamePageData } from "./Api";
 import { format, parseISO } from "date-fns";
 import DOMPurify from "dompurify";
 
-const GamePage = ({ cartGames, removeFromCart, fetchedGames }) => {
-  let gameId = 3498;
+const GamePage = ({ cartGames, removeFromCart, fetchedGames, gameId }) => {
   const gamePageQuery = useQuery({
-    queryKey: ["gamePage"],
+    queryKey: ["gamePage", gameId],
     queryFn: () => fetchGamePageData(gameId),
   });
-
   if (gamePageQuery.isLoading)
-    return <h1 className="text-4xl text-white">Loading....</h1>;
+    return <h1 className="text-4xl text-white">Loading...</h1>;
   if (gamePageQuery.isError)
     return <h1 className="text-4xl text-white">Error loading data!!!</h1>;
 
@@ -62,7 +60,7 @@ const GamePage = ({ cartGames, removeFromCart, fetchedGames }) => {
       <div className="px-16 py-8 text-gray-300">
         <div>
           <span>
-            <Link className="hover:text-white" to="/store">
+            <Link className="hover:text-white" to="/">
               All Games{" "}
             </Link>
             <span>&gt;</span>
@@ -73,11 +71,11 @@ const GamePage = ({ cartGames, removeFromCart, fetchedGames }) => {
             <span>&gt;</span>
             <Link className="hover:text-white" to="/game">
               {" "}
-              {gamePageData.details.name}
+              {gamePageData.details.name || ""}
             </Link>
           </span>
           <h1 className="pb-8 pt-2 text-4xl font-bold">
-            {gamePageData.details.name}
+            {gamePageData.details.name || ""}
           </h1>
         </div>
         <div className="mb-16 gap-16 lg:grid lg:grid-cols-[minmax(0,2.5fr)_minmax(0,1fr)]">
@@ -222,7 +220,7 @@ const GamePage = ({ cartGames, removeFromCart, fetchedGames }) => {
             />
           </section>
         )}
-        {pcPlatform && (
+        {minRequirements && (
           <section className="lg:px-24 xl:px-48">
             <h3 className="mt-4 text-xl font-bold tracking-wide">
               SYSTEM REQUIREMENTS

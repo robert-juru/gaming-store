@@ -65,12 +65,16 @@ const Cart = ({ cartGames, fetchedGames, removeFromCart }) => {
                       key={matchedGame.id}
                       className="flex w-96 items-center justify-between gap-2 py-1 pl-2 pr-4 text-sm text-white"
                     >
+                     <Link to={`/game/${matchedGame.id}`}>
                       <img
                         src={matchedGame.background_image}
                         alt={matchedGame.name}
                         className="size-14"
                       />
-                      <span className="w-[26ch]">{matchedGame.name}</span>
+                      </Link>
+                      <Link className="w-[26ch]" to={`/game/${matchedGame.id}`}>
+                      <span >{matchedGame.name}</span>
+                      </Link>
                       <span>${price}</span>
                       <IconContext.Provider
                         value={{

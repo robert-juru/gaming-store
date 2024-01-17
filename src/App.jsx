@@ -22,30 +22,33 @@ const App = () => {
   };
 
   const gamesQuery = gamesDataQuery("games", 40, 5);
-  // if (gamesQuery.isLoading) return <h1 className="text-4xl text-white">Loading....</h1>;
-  // if (gamesQuery.isError) return <h1 className="text-4xl text-white">Error loading data!!!</h1>;
-
-  
   const [cartGames, setCartGames] = useState([]);
   const removeFromCart = (gameIdToRemove) => {
     const updatedCart = cartGames.filter((game) => game.id !== gameIdToRemove);
     setCartGames(updatedCart);
   };
 
+  if (gamesQuery.isLoading) return <h1 className="text-4xl text-white">Loading....</h1>;
+  if (gamesQuery.isError) return <h1 className="text-4xl text-white">Error loading data!!!</h1>;
+
   return (
     <Routes>
+      {gamesQuery.data.map((game) => (
+        <Route
+          key={game.id}
+          path={`game/${game.id}`}
+          element={
+            <GamePage
+              gameId={game.id}
+              fetchedGames={gamesQuery.data}
+              cartGames={cartGames}
+              removeFromCart={removeFromCart}
+            />
+          }
+        />
+      ))}
       <Route
         path="/"
-        element={
-          <GamePage
-            fetchedGames={gamesQuery.data}
-            cartGames={cartGames}
-            removeFromCart={removeFromCart}
-          />
-        }
-      />
-      <Route
-        path="/store"
         element={
           <GameStore
             gamesQuery={gamesQuery}

@@ -26,7 +26,7 @@ const Header = ({ cartGames, fetchedGames, removeFromCart }) => {
           id="search"
           placeholder="Search store"
         />
-        <div className="pointer-events-none absolute inset-y-0 left-0 flex  items-center pl-2">
+        <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-2">
           <IconContext.Provider
             value={{ color: "white", size: "18px", title: "search" }}
           >

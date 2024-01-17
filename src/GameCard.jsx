@@ -2,7 +2,9 @@ import { StarRatingGame } from "./StarRating";
 import { FaCartShopping } from "react-icons/fa6";
 import { IconContext } from "react-icons";
 import { generatePrice } from "./PriceGenerator";
-const GameCard = ({ game, handleCart, cartGames }) => {
+import { Link } from "react-router-dom";
+
+const GameCard = ({ game, handleCart, cartGames, selectedGame }) => {
   const isInCart = (gameId) => {
     return cartGames.some((cartGame) => cartGame.id === gameId);
   };
@@ -14,15 +16,19 @@ const GameCard = ({ game, handleCart, cartGames }) => {
 
   return (
     <div className="relative transition duration-300 hover:scale-105">
-      <img
-        className="block w-full rounded-lg border-2 border-solid border-black lg:h-72"
-        src={game.background_image}
-        alt={game.name + "background image"}
-      />
+      <Link to={`/game/${game.id}`}>
+        <img
+          className="block w-full rounded-lg border-2 border-solid border-black lg:h-72"
+          src={game.background_image}
+          alt={game.name + "background image"}
+        />
+      </Link>
       <div className="absolute h-[110px] w-full -translate-y-full bg-gradient-to-r from-gray-700 via-gray-900 to-black  opacity-95"></div>
       <div className="absolute mt-[2px] w-full -translate-y-full p-2 text-white ">
         <span className="flex items-center justify-between ">
-          <h1 className="inline text-lg font-bold">{game.name}</h1>
+          <Link to={`/game/${game.id}`}>
+            <h1 className="inline text-lg font-bold">{game.name}</h1>
+          </Link>
           <span className=" inline-block h-8 w-8 rounded-full border-[3px] border-solid border-green-600 text-center font-bold">
             {game.metacritic}
           </span>
