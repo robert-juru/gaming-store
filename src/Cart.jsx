@@ -10,7 +10,7 @@ const Cart = ({ cartGames, fetchedGames, removeFromCart }) => {
     .reduce((acc, game) => acc + game.price, 0)
     .toFixed(2);
   return (
-    <div className="flexitems-center gap-1">
+    <div className="flex items-center gap-1">
       <div className="group  relative flex items-center">
         <span className="absolute -left-2  -top-2 box-content w-4 cursor-pointer rounded-full border-2 border-green-600 bg-green-700 text-center text-xs font-bold text-white">
           {cartGames.length}
@@ -65,15 +65,15 @@ const Cart = ({ cartGames, fetchedGames, removeFromCart }) => {
                       key={matchedGame.id}
                       className="flex w-96 items-center justify-between gap-2 py-1 pl-2 pr-4 text-sm text-white"
                     >
-                     <Link to={`/game/${matchedGame.id}`}>
-                      <img
-                        src={matchedGame.background_image}
-                        alt={matchedGame.name}
-                        className="size-14"
-                      />
+                      <Link to={`/game/${matchedGame.id}`}>
+                        <img
+                          src={matchedGame.background_image}
+                          alt={matchedGame.name}
+                          className="size-14"
+                        />
                       </Link>
                       <Link className="w-[26ch]" to={`/game/${matchedGame.id}`}>
-                      <span >{matchedGame.name}</span>
+                        <span>{matchedGame.name}</span>
                       </Link>
                       <span>${price}</span>
                       <IconContext.Provider
@@ -104,23 +104,23 @@ const Cart = ({ cartGames, fetchedGames, removeFromCart }) => {
               </div>
             )}
             <Link to="/shopping-cart" className="self-center">
-            <button
-              className={`m-2 mr-2 flex items-center gap-1 rounded-md 
+              <button
+                className={`m-2 mr-2 flex items-center gap-1 rounded-md 
              bg-gray-100
              px-2 py-1 text-lg font-bold hover:bg-gray-300`}
-            >
-              <IconContext.Provider
-                value={{
-                  color: "black",
-                  size: "32px",
-                  title: "shopping cart",
-                  className: "mr-2",
-                }}
               >
-                <FaCartShopping />
-              </IconContext.Provider>
-              Go to Cart
-            </button>
+                <IconContext.Provider
+                  value={{
+                    color: "black",
+                    size: "32px",
+                    title: "shopping cart",
+                    className: "mr-2",
+                  }}
+                >
+                  <FaCartShopping />
+                </IconContext.Provider>
+                Go to Cart
+              </button>
             </Link>
           </div>
         </div>

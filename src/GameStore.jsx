@@ -5,7 +5,7 @@ import GameSortingSection from "./GameSortingSection";
 import { useState, useEffect } from "react";
 import { generatePrice } from "./PriceGenerator";
 
-export default function GameStore({ cartGames, setCartGames, gamesQuery }) {
+export default function GameStore({ cartGames, handleCart, gamesQuery, removeFromCart, isInCart, gamesWithPrices }) {
   const [displayedGames, setDisplayedGames] = useState([]);
 
   useEffect(() => {
@@ -14,18 +14,6 @@ export default function GameStore({ cartGames, setCartGames, gamesQuery }) {
       sortGamesByPopularity(limitedGames);
     }
   }, [gamesQuery.isSuccess, gamesQuery.data]);
-
-  const handleCart = (gameId) => {
-    if (!cartGames.includes(gameId)) {
-      setCartGames([...cartGames, gameId]);
-    }
-    console.log(cartGames);
-  };
-
-  const removeFromCart = (gameIdToRemove) => {
-    const updatedCart = cartGames.filter((game) => game.id !== gameIdToRemove);
-    setCartGames(updatedCart);
-  };
 
   const filterGamesByGenre = (gameGenre) => {
     const filteredGames = gamesQuery.data.filter((game) =>
@@ -155,14 +143,7 @@ export default function GameStore({ cartGames, setCartGames, gamesQuery }) {
     setDisplayedGames(gamesByLatest);
   };
 
-  const gamesWithPrices = displayedGames.map((game) => {
-    const price = generatePrice(
-      new Date(game.released).getFullYear(),
-      game.ratings_count,
-      game.rating,
-    );
-    return { ...game, price };
-  });
+ 
 
   const sortGamesByPriceAsc = () => {
     const gamesByPriceAsc = [...gamesWithPrices].sort(
@@ -219,6 +200,7 @@ export default function GameStore({ cartGames, setCartGames, gamesQuery }) {
               key={game.id}
               game={game}
               handleCart={() => handleCart(game)}
+              isInCart={isInCart}
             />
           ))}
         </main>

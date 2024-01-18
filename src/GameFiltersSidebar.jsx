@@ -100,8 +100,6 @@ const GameFiltersSidebar = ({
     },
   ];
 
-  console.log("isReleaseYearSelected" + releaseYearSelected);
-
   return (
     <aside className="hidden md:block">
       <nav className="rounded-md bg-gray-900 px-2 py-4  text-slate-200">

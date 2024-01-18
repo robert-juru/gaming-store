@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const key = `d5bef9762ffc48b79c8cc04fd7723bdb`;
+const key = `404c51bcb45d448e87440b1483ccd155`;
 const url = `https://api.rawg.io/api/`;
 
 export const fetchStoreData = async (endpoint, page = 1, pageSize = 40) => {
@@ -11,27 +11,12 @@ export const fetchStoreData = async (endpoint, page = 1, pageSize = 40) => {
 };
 
 export const fetchGamePageData = async (gameId) => {
-  // Record the start time for each fetch
-  const startDetails = new Date();
-  const detailsResponse = await axios.get(`${url}games/${gameId}?key=${key}`);
-  const endDetails = new Date();
-
-  const startMovies = new Date();
-  const moviesResponse = await axios.get(`${url}games/${gameId}/movies?key=${key}`);
-  const endMovies = new Date();
-
-  const startScreenshots = new Date();
-  const screenshotsResponse = await axios.get(`${url}games/${gameId}/screenshots?key=${key}`);
-  const endScreenshots = new Date();
-
-  // Calculate the time taken for each fetch
-  const detailsTime = endDetails - startDetails;
-  const moviesTime = endMovies - startMovies;
-  const screenshotsTime = endScreenshots - startScreenshots;
-
-  console.log(`Details fetch time: ${detailsTime} milliseconds`);
-  console.log(`Movies fetch time: ${moviesTime} milliseconds`);
-  console.log(`Screenshots fetch time: ${screenshotsTime} milliseconds`);
+  const [detailsResponse, moviesResponse, screenshotsResponse] =
+    await Promise.all([
+      axios.get(`${url}games/${gameId}?key=${key}`),
+      axios.get(`${url}games/${gameId}/movies?key=${key}`),
+      axios.get(`${url}games/${gameId}/screenshots?key=${key}`),
+    ]);
 
   return {
     details: detailsResponse.data,
@@ -39,4 +24,3 @@ export const fetchGamePageData = async (gameId) => {
     screenshots: screenshotsResponse.data,
   };
 };
-

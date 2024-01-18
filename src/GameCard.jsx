@@ -4,10 +4,8 @@ import { IconContext } from "react-icons";
 import { generatePrice } from "./PriceGenerator";
 import { Link } from "react-router-dom";
 
-const GameCard = ({ game, handleCart, cartGames, selectedGame }) => {
-  const isInCart = (gameId) => {
-    return cartGames.some((cartGame) => cartGame.id === gameId);
-  };
+const GameCard = ({ game, handleCart, isInCart }) => {
+  
   const price = generatePrice(
     new Date(game.released).getFullYear(),
     game.ratings_count,

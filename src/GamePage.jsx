@@ -9,14 +9,28 @@ import { fetchGamePageData } from "./Api";
 import { format, parseISO } from "date-fns";
 import DOMPurify from "dompurify";
 import LoadingPage from "./LoadingPage";
+import { generatePrice } from "./PriceGenerator";
 
-const GamePage = ({ cartGames, removeFromCart, fetchedGames, gameId }) => {
+const GamePage = ({
+  cartGames,
+  removeFromCart,
+  fetchedGames,
+  gameId,
+  isInCart,
+  handleCart,
+}) => {
   const gamePageQuery = useQuery({
     queryKey: ["gamePage", gameId],
     queryFn: () => fetchGamePageData(gameId),
   });
   if (gamePageQuery.isLoading)
-    return <LoadingPage removeFromCart={removeFromCart} cartGames={cartGames} fetchedGames={fetchedGames}/>
+    return (
+      <LoadingPage
+        removeFromCart={removeFromCart}
+        cartGames={cartGames}
+        fetchedGames={fetchedGames}
+      />
+    );
   if (gamePageQuery.isError)
     return <h1 className="text-4xl text-white">Error loading data!!!</h1>;
 
@@ -50,6 +64,12 @@ const GamePage = ({ cartGames, removeFromCart, fetchedGames, gameId }) => {
       pcPlatform.requirements.recommended,
     );
   }
+
+  const price = generatePrice(
+    new Date(gamePageData.details.released).getFullYear(),
+    gamePageData.details.ratings_count,
+    gamePageData.details.rating,
+  );
 
   return (
     <div className="m-0 p-4">
@@ -178,10 +198,16 @@ const GamePage = ({ cartGames, removeFromCart, fetchedGames, gameId }) => {
             )}
             <span className="flex gap-4">
               <span className="p-2 text-center text-4xl font-bold text-white">
-                $35.99
+                ${price}
               </span>
-              <button className="w-full self-center rounded-md bg-blue-600  p-4 text-center text-lg font-bold text-white  hover:bg-blue-500">
-                ADD TO CART
+              <button
+                onClick={handleCart}
+                disabled={isInCart(gameId)}
+                className={`${
+                  isInCart(gameId) ? "bg-blue-800" : ""
+                } w-full self-center rounded-md bg-blue-500 p-4 text-center text-lg text-white  hover:bg-blue-800`}
+              >
+                {isInCart(gameId) ? "In Cart" : "Add to cart"}
               </button>
             </span>
           </section>
