@@ -5,6 +5,7 @@ import GameStore from "./GameStore";
 import ShoppingCartPage from "./ShoppingCartPage";
 import { Route, Routes } from "react-router-dom";
 import GamePage from "./GamePage";
+import LoadingPage from "./LoadingPage";
 
 const App = () => {
   const gamesDataQuery = (endpoint, pageSize, limit) => {
@@ -28,7 +29,7 @@ const App = () => {
     setCartGames(updatedCart);
   };
 
-  if (gamesQuery.isLoading) return <h1 className="text-4xl text-white">Loading....</h1>;
+  if (gamesQuery.isLoading) return <LoadingPage fetchedGames={gamesQuery.data} removeFromCart={removeFromCart} cartGames={cartGames} />;
   if (gamesQuery.isError) return <h1 className="text-4xl text-white">Error loading data!!!</h1>;
 
   return (

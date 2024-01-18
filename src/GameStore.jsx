@@ -178,8 +178,8 @@ export default function GameStore({ cartGames, setCartGames, gamesQuery }) {
     setDisplayedGames(gamesByPriceDesc);
   };
 
-  if (gamesQuery.isLoading) return <h1>Loading....</h1>;
-  if (gamesQuery.isError) return <h1>Error loading data!!!</h1>;
+  // if (gamesQuery.isLoading) return <LoadingPage fetchedGames={fetchedGames} removeFromCart={removeFromCart} cartGames={cartGames} />;
+  // if (gamesQuery.isError) return <h1>Error loading data!!!</h1>;
 
   return (
     <div className="m-0 grid grid-cols-1 gap-4 p-4 md:grid-cols-[200px_1fr]">

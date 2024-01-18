@@ -8,6 +8,7 @@ import { useQuery } from "@tanstack/react-query";
 import { fetchGamePageData } from "./Api";
 import { format, parseISO } from "date-fns";
 import DOMPurify from "dompurify";
+import LoadingPage from "./LoadingPage";
 
 const GamePage = ({ cartGames, removeFromCart, fetchedGames, gameId }) => {
   const gamePageQuery = useQuery({
@@ -15,7 +16,7 @@ const GamePage = ({ cartGames, removeFromCart, fetchedGames, gameId }) => {
     queryFn: () => fetchGamePageData(gameId),
   });
   if (gamePageQuery.isLoading)
-    return <h1 className="text-4xl text-white">Loading...</h1>;
+    return <LoadingPage removeFromCart={removeFromCart} cartGames={cartGames} fetchedGames={fetchedGames}/>
   if (gamePageQuery.isError)
     return <h1 className="text-4xl text-white">Error loading data!!!</h1>;
 
