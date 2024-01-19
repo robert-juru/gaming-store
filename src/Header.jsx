@@ -2,22 +2,12 @@ import { CiSearch } from "react-icons/ci";
 import { IconContext } from "react-icons";
 import Cart from "./Cart";
 import { Link } from "react-router-dom";
+import GameverseLogo from "./GameverseLogo";
 
 const Header = ({ cartGames, fetchedGames, removeFromCart }) => {
   return (
     <header className="col-span-2 flex items-center justify-between gap-8">
-      <Link to="/">
-        <div className="flex cursor-pointer items-center transition-all hover:scale-105">
-          <img
-            className="h-16"
-            src="/gameverse-logo-no-text.png"
-            alt="gameverse logo"
-          />
-          <h1 className="hidden text-lg font-bold tracking-widest text-white md:block">
-            GAMEVERSE
-          </h1>
-        </div>
-      </Link>
+      <GameverseLogo />
       <div className="relative flex flex-1">
         <input
           className="flex-1 rounded-md border-0 bg-slate-800 p-2 pl-8 text-sm text-gray-300 placeholder:text-gray-300 focus:bg-slate-700 focus:outline-none"

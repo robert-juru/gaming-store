@@ -5,8 +5,7 @@ import GameSortingSection from "./GameSortingSection";
 import { useState, useEffect } from "react";
 import { generatePrice } from "./PriceGenerator";
 
-export default function GameStore({ cartGames, handleCart, gamesQuery, removeFromCart, isInCart, gamesWithPrices }) {
-  const [displayedGames, setDisplayedGames] = useState([]);
+export default function GameStore({ cartGames, handleCart, gamesQuery, removeFromCart, isInCart, gamesWithPrices, displayedGames, setDisplayedGames }) {
 
   useEffect(() => {
     if (gamesQuery.isSuccess) {

@@ -25,7 +25,7 @@ const App = () => {
 
   const gamesQuery = gamesDataQuery("games", 40, 5);
   const [cartGames, setCartGames] = useState([]);
-
+  const [displayedGames, setDisplayedGames] = useState([]);
 
   const isInCart = (gameId) => {
     return cartGames.some((cartGame) => cartGame.id === gameId);
@@ -43,10 +43,18 @@ const App = () => {
     setCartGames(updatedCart);
   };
 
-  if (gamesQuery.isLoading) return <LoadingPage fetchedGames={gamesQuery.data} removeFromCart={removeFromCart} cartGames={cartGames} />;
-  if (gamesQuery.isError) return <h1 className="text-4xl text-white">Error loading data!!!</h1>;
+  if (gamesQuery.isLoading)
+    return (
+      <LoadingPage
+        fetchedGames={gamesQuery.data}
+        removeFromCart={removeFromCart}
+        cartGames={cartGames}
+      />
+    );
+  if (gamesQuery.isError)
+    return <h1 className="text-4xl text-white">Error loading data!!!</h1>;
 
-  const gamesWithPrices = gamesQuery.data.map((game) => {
+  const gamesWithPrices = displayedGames.map((game) => {
     const price = generatePrice(
       new Date(game.released).getFullYear(),
       game.ratings_count,
@@ -79,6 +87,8 @@ const App = () => {
         element={
           <GameStore
             gamesQuery={gamesQuery}
+            displayedGames={displayedGames}
+            setDisplayedGames={setDisplayedGames}
             cartGames={cartGames}
             gamesWithPrices={gamesWithPrices}
             setCartGames={setCartGames}

@@ -25,7 +25,7 @@ const Cart = ({ cartGames, fetchedGames, removeFromCart }) => {
         >
           <FaCartShopping />
         </IconContext.Provider>
-        <Link to="shopping-cart" className="cursor-pointer text-lg text-white ">
+        <Link to="/shopping-cart" className="cursor-pointer text-lg text-white ">
           Cart
         </Link>
         <IconContext.Provider
