@@ -5,14 +5,23 @@ import GameSortingSection from "./GameSortingSection";
 import { useState, useEffect } from "react";
 import { generatePrice } from "./PriceGenerator";
 
-export default function GameStore({ cartGames, handleCart, gamesQuery, removeFromCart, isInCart, gamesWithPrices, displayedGames, setDisplayedGames }) {
+export default function GameStore({
+  cartGames,
+  handleCart,
+  gamesQuery,
+  removeFromCart,
+  isInCart,
+  gamesWithPrices,
+  displayedGames,
+  setDisplayedGames,
+}) {
 
   useEffect(() => {
-    if (gamesQuery.isSuccess) {
+    if (displayedGames.length === 0) {
       const limitedGames = gamesQuery.data.slice(0, 100); // maximum display of 100
       sortGamesByPopularity(limitedGames);
     }
-  }, [gamesQuery.isSuccess, gamesQuery.data]);
+  }, []);
 
   const filterGamesByGenre = (gameGenre) => {
     const filteredGames = gamesQuery.data.filter((game) =>
@@ -142,8 +151,6 @@ export default function GameStore({ cartGames, handleCart, gamesQuery, removeFro
     setDisplayedGames(gamesByLatest);
   };
 
- 
-
   const sortGamesByPriceAsc = () => {
     const gamesByPriceAsc = [...gamesWithPrices].sort(
       (a, b) => a.price - b.price,
@@ -176,7 +183,7 @@ export default function GameStore({ cartGames, handleCart, gamesQuery, removeFro
         releaseYearSelected={releaseYearSelected}
         minimumRatingSelected={minimumRatingSelected}
       />
-      <div className="grid-rows-[64px] grid gap-8">
+      <div className="grid grid-rows-[64px] gap-8">
         <GameSortingSection
           handleLauncherSelection={handleLauncherSelection}
           handlePlatformSelection={handlePlatformSelection}
