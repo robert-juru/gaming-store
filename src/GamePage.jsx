@@ -1,6 +1,6 @@
 import Header from "./Header";
 import { Link } from "react-router-dom";
-import ImageSlider from "./ImageSlider";
+import {GamePagePhotoSlider} from "./ImageSlider";
 import PlatformIcons from "./PlatformIcons";
 import ReactPlayer from "react-player";
 import GameReviews from "./GameReviews";
@@ -101,7 +101,7 @@ const GamePage = ({
         </div>
         <div className="mb-16 gap-16 lg:grid lg:grid-cols-[minmax(0,2.5fr)_minmax(0,1fr)]">
           <section className="">
-            <ImageSlider images={images} name={gamePageData.details.name} />
+            <GamePagePhotoSlider images={images} name={gamePageData.details.name} />
           </section>
           <section className="flex flex-col justify-between">
             <div>

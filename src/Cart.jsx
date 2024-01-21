@@ -15,28 +15,33 @@ const Cart = ({ cartGames, fetchedGames, removeFromCart }) => {
         <span className="absolute -left-2  -top-2 box-content w-4 cursor-pointer rounded-full border-2 border-green-600 bg-green-700 text-center text-xs font-bold text-white">
           {cartGames.length}
         </span>
-        <IconContext.Provider
-          value={{
-            color: "white",
-            size: "24px",
-            title: "shopping cart",
-            className: "mr-2 cursor-pointer",
-          }}
+        <Link
+          to="/shopping-cart"
+          className="cursor-pointer text-lg text-white "
         >
-          <FaCartShopping />
-        </IconContext.Provider>
-        <Link to="/shopping-cart" className="cursor-pointer text-lg text-white ">
-          Cart
+          <div className="flex items-center">
+            <IconContext.Provider
+              value={{
+                color: "white",
+                size: "24px",
+                title: "shopping cart",
+                className: "mr-2",
+              }}
+            >
+              <FaCartShopping />
+            </IconContext.Provider>
+            Cart
+            <IconContext.Provider
+              value={{
+                color: "white",
+                size: "18px",
+                title: "expand more",
+              }}
+            >
+              <MdOutlineExpandMore />
+            </IconContext.Provider>
+          </div>
         </Link>
-        <IconContext.Provider
-          value={{
-            color: "white",
-            size: "18px",
-            title: "expand more cursor-pointer",
-          }}
-        >
-          <MdOutlineExpandMore />
-        </IconContext.Provider>
         <div className="relative">
           <div
             id="cart"

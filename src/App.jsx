@@ -5,6 +5,7 @@ import GameStore from "./GameStore";
 import ShoppingCartPage from "./ShoppingCartPage";
 import { Route, Routes } from "react-router-dom";
 import GamePage from "./GamePage";
+import HomePage from "./HomePage";
 import LoadingPage from "./LoadingPage";
 import { generatePrice } from "./PriceGenerator";
 
@@ -65,6 +66,16 @@ const App = () => {
 
   return (
     <Routes>
+       <Route
+        path="/home"
+        element={
+          <HomePage
+            fetchedGames={gamesQuery.data}
+            cartGames={cartGames}
+            removeFromCart={removeFromCart}
+          />
+        }
+      />
       {gamesWithPrices.map((game) => (
         <Route
           key={game.id}
