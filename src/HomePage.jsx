@@ -5,7 +5,10 @@ import {
   HomePageTopSellersSlider,
   HomePageNewReleasesSlider,
   HomePageMostPlayedSlider,
+  HomePageRecentlyUpdatedSlider,
+  HomePageTopRatedSlider,
 } from "./ImageSlider";
+import HomePageTopUpcomingSection from "./HomePageTopUpcomingSection";
 
 const HomePage = ({ fetchedGames, cartGames, removeFromCart }) => {
   return (
@@ -20,14 +23,21 @@ const HomePage = ({ fetchedGames, cartGames, removeFromCart }) => {
       <section className="">
         <HomePageMainSlider />
       </section>
-      <section className="pt-16 sm:px-4 md:px-16 lg:px-32">
+      <section className="md:px-18 px-8 pt-16 sm:px-12 lg:px-24 xl:px-48">
         <HomePageTopSellersSlider />
       </section>
-      <section className="pt-16 sm:px-4 md:px-16 lg:px-32">
+      <section className="md:px-18 px-8 pt-16 sm:px-12 lg:px-24 xl:px-48">
         <HomePageNewReleasesSlider />
       </section>
-      <section className="pt-16 sm:px-4 md:px-16 lg:px-32">
+      <section className="md:px-18 px-8 pt-16 sm:px-12 lg:px-24 xl:px-48">
         <HomePageMostPlayedSlider />
+      </section>
+      <HomePageTopUpcomingSection />
+      <section className="md:px-18 px-8 pt-16 sm:px-12 lg:px-24 xl:px-48">
+        <HomePageRecentlyUpdatedSlider />
+      </section>
+      <section className="md:px-18 px-8 pt-16 sm:px-12 lg:px-24 xl:px-48">
+        <HomePageTopRatedSlider />
       </section>
     </div>
   );

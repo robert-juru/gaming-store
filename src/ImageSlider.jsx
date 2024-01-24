@@ -193,7 +193,6 @@ export const HomePageTopSellersSlider = () => {
   const settings = {
     dots: true,
     infinite: true,
-    // fade:true,
     speed: 500,
     slidesToShow: 3,
     slidesToScroll: 3,
@@ -209,7 +208,7 @@ export const HomePageTopSellersSlider = () => {
         <div className="justify-items m-4 flex h-96 items-center bg-blue-400 text-center text-5xl text-white">
           <h3>2</h3>
         </div>
-        <div className="box-border flex h-96 flex-1 m-4 flex-col">
+        <div className="m-4 box-border flex h-96 flex-1 flex-col">
           <div className="justify-items flex h-48 items-center bg-blue-400 text-center text-5xl text-white">
             <h3>3</h3>
           </div>
@@ -223,7 +222,7 @@ export const HomePageTopSellersSlider = () => {
         <div className="justify-items m-4 flex h-96 items-center bg-blue-400 text-center text-5xl text-white">
           <h3>6</h3>
         </div>
-        <div className="box-border flex h-96 flex-1 m-4 flex-col">
+        <div className="m-4 box-border flex h-96 flex-1 flex-col">
           <div className="justify-items flex h-48 items-center bg-blue-400 text-center text-5xl text-white">
             <h3>7</h3>
           </div>
@@ -235,3 +234,89 @@ export const HomePageTopSellersSlider = () => {
     </div>
   );
 };
+
+export const HomePageRecentlyUpdatedSlider = () => {
+  const settings = {
+    className: "center",
+    centerMode: true,
+    infinite: true,
+    centerPadding: "60px",
+    slidesToShow: 3,
+    speed: 500,
+  };
+  
+  return (
+    <div>
+      <h2 className="mb-4 text-3xl text-white">Recently Updated</h2>
+      <Slider {...settings}>
+      <div className="justify-items m-4 flex h-48 items-center bg-blue-400 text-center text-5xl text-white">
+          <h3>1</h3>
+        </div>
+        <div className="justify-items m-4 flex h-48 items-center bg-blue-400 text-center text-5xl text-white">
+          <h3>2</h3>
+        </div>
+        <div className="justify-items m-4 flex h-48 items-center bg-blue-400 text-center text-5xl text-white">
+          <h3>3</h3>
+        </div>
+        <div className="justify-items m-4 flex h-48 items-center bg-blue-400 text-center text-5xl text-white">
+          <h3>4</h3>
+        </div>
+        <div className="justify-items m-4 flex h-48 items-center bg-blue-400 text-center text-5xl text-white">
+          <h3>5</h3>
+        </div>
+        <div className="justify-items m-4 flex h-48 items-center bg-blue-400 text-center text-5xl text-white">
+          <h3>6</h3>
+        </div>
+        <div className="justify-items m-4 flex h-48 items-center bg-blue-400 text-center text-5xl text-white">
+          <h3>7</h3>
+        </div>
+        <div className="justify-items m-4 flex h-48 items-center bg-blue-400 text-center text-5xl text-white">
+          <h3>8</h3>
+        </div>
+      </Slider>
+    </div>
+  );
+};
+export const HomePageTopRatedSlider = () => {
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1
+  };
+  return (
+    <div>
+      <h2 className="mb-4 text-3xl text-white">Top Rated by Gamers</h2>
+      <Slider {...settings}>
+      <div className="justify-items m-4 flex h-64 items-center bg-blue-400 text-center text-5xl text-white">
+          <h3>1</h3>
+        </div>
+        <div className="justify-items m-4 flex h-64 items-center bg-blue-400 text-center text-5xl text-white">
+          <h3>2</h3>
+        </div>
+        <div className="justify-items m-4 flex h-64 items-center bg-blue-400 text-center text-5xl text-white">
+          <h3>3</h3>
+        </div>
+        <div className="justify-items m-4 flex h-64 items-center bg-blue-400 text-center text-5xl text-white">
+          <h3>4</h3>
+        </div>
+        <div className="justify-items m-4 flex h-64 items-center bg-blue-400 text-center text-5xl text-white">
+          <h3>5</h3>
+        </div>
+        <div className="justify-items m-4 flex h-64 items-center bg-blue-400 text-center text-5xl text-white">
+          <h3>6</h3>
+        </div>
+        <div className="justify-items m-4 flex h-64 items-center bg-blue-400 text-center text-5xl text-white">
+          <h3>7</h3>
+        </div>
+        <div className="justify-items m-4 flex h-64 items-center bg-blue-400 text-center text-5xl text-white">
+          <h3>8</h3>
+        </div>
+       
+      </Slider>
+    </div>
+  );
+};
+
+
