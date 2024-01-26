@@ -34,7 +34,6 @@ const GamePage = ({
   if (gamePageQuery.isError)
     return <h1 className="text-4xl text-white">Error loading data!!!</h1>;
 
-  console.log(gamePageQuery.data);
   let gamePageData = gamePageQuery.data;
   let releaseDate = format(
     parseISO(gamePageData.details.released),

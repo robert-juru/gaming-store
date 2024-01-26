@@ -4,7 +4,7 @@ import { IconContext } from "react-icons";
 import { generatePrice } from "./PriceGenerator";
 import { Link } from "react-router-dom";
 
-const GameCard = ({ game, handleCart, isInCart }) => {
+const GameCard = ({ game, handleCart, isInCart, cardHeight }) => {
   
   const price = generatePrice(
     new Date(game.released).getFullYear(),
@@ -16,7 +16,7 @@ const GameCard = ({ game, handleCart, isInCart }) => {
     <div className="relative transition duration-300 hover:scale-105">
       <Link to={`/game/${game.id}`}>
         <img
-          className="block w-full rounded-lg border-2 border-solid border-black lg:h-72"
+          className={`block w-full rounded-lg border-2 border-solid border-black h-${cardHeight}`}
           src={game.background_image}
           alt={game.name + "background image"}
         />

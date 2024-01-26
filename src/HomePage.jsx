@@ -4,13 +4,40 @@ import {
   HomePageMainSlider,
   HomePageTopSellersSlider,
   HomePageNewReleasesSlider,
-  HomePageMostPlayedSlider,
+  HomePageTopRatedByGamersSlider,
   HomePageRecentlyUpdatedSlider,
-  HomePageTopRatedSlider,
+  HomePageTopRatedByCriticsSlider,
 } from "./ImageSlider";
 import HomePageTopUpcomingSection from "./HomePageTopUpcomingSection";
+import LoadingPage from "./LoadingPage";
+import { useQuery } from "@tanstack/react-query";
+import { fetchHomePageData } from "./Api";
 
-const HomePage = ({ fetchedGames, cartGames, removeFromCart }) => {
+const HomePage = ({
+  fetchedGames,
+  cartGames,
+  removeFromCart,
+  handleCart,
+  isInCart,
+}) => {
+  const homePageQuery = useQuery({
+    queryKey: ["homePage"],
+    queryFn: () => fetchHomePageData(),
+  });
+  if (homePageQuery.isLoading)
+    return (
+      <LoadingPage
+        removeFromCart={removeFromCart}
+        cartGames={cartGames}
+        fetchedGames={fetchedGames}
+      />
+    );
+  if (homePageQuery.isError)
+    return <h1 className="text-4xl text-white">Error loading data!!!</h1>;
+
+  console.log(homePageQuery.data);
+  let homePageData = homePageQuery.data;
+
   return (
     <div className="m-0">
       <header className="p-4">
@@ -21,23 +48,47 @@ const HomePage = ({ fetchedGames, cartGames, removeFromCart }) => {
         />
       </header>
       <section className="">
-        <HomePageMainSlider />
+        <HomePageMainSlider
+          mainGames={homePageData.mostPopular.results}
+          handleCart={handleCart}
+          isInCart={isInCart}
+        />
       </section>
       <section className="md:px-18 px-8 pt-16 sm:px-12 lg:px-24 xl:px-48">
-        <HomePageTopSellersSlider />
+        <HomePageTopSellersSlider
+          topSellers={homePageData.topSellers.results}
+          handleCart={handleCart}
+          isInCart={isInCart}
+        />
       </section>
       <section className="md:px-18 px-8 pt-16 sm:px-12 lg:px-24 xl:px-48">
-        <HomePageNewReleasesSlider />
+        <HomePageNewReleasesSlider
+          newReleases={homePageData.newReleases.results}
+          handleCart={handleCart}
+          isInCart={isInCart}
+        />
       </section>
       <section className="md:px-18 px-8 pt-16 sm:px-12 lg:px-24 xl:px-48">
-        <HomePageMostPlayedSlider />
+        <HomePageTopRatedByGamersSlider topRatedByGamers={homePageData.topRatedByGamers.results} handleCart={handleCart} isInCart={isInCart}/>
       </section>
-      <HomePageTopUpcomingSection />
+      <HomePageTopUpcomingSection
+        topUpcoming={homePageData.topUpcoming.results}
+        handleCart={handleCart}
+        isInCart={isInCart}
+      />
       <section className="md:px-18 px-8 pt-16 sm:px-12 lg:px-24 xl:px-48">
-        <HomePageRecentlyUpdatedSlider />
+        <HomePageRecentlyUpdatedSlider
+          recentlyUpdated={homePageData.recentlyUpdated.results}
+          handleCart={handleCart}
+          isInCart={isInCart}
+        />
       </section>
       <section className="md:px-18 px-8 pt-16 sm:px-12 lg:px-24 xl:px-48">
-        <HomePageTopRatedSlider />
+        <HomePageTopRatedByCriticsSlider
+          topRatedByCritics={homePageData.topRatedByCritics.results}
+          handleCart={handleCart}
+          isInCart={isInCart}
+        />
       </section>
     </div>
   );

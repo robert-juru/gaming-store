@@ -73,6 +73,8 @@ const App = () => {
             fetchedGames={gamesQuery.data}
             cartGames={cartGames}
             removeFromCart={removeFromCart}
+            isInCart={isInCart}
+            handleCart={handleCart}
           />
         }
       />

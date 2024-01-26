@@ -202,11 +202,10 @@ export default function GameStore({
         <main className=" grid grid-cols-[repeat(auto-fit,minmax(375px,1fr))] gap-x-8 gap-y-6">
           {gamesWithPrices.map((game) => (
             <GameCard
-              cartGames={cartGames}
-              key={game.id}
               game={game}
               handleCart={() => handleCart(game)}
               isInCart={isInCart}
+              cardHeight={72}
             />
           ))}
         </main>
