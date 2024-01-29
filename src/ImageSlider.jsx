@@ -55,7 +55,7 @@ export const HomePageMainSlider = ({
     infinite: true,
     autoplay: true,
     autoplaySpeed: 5000,
-    arrows: false,
+    arrows: true,
     slidesToShow: 1,
     slidesToScroll: 1,
   };
@@ -66,14 +66,16 @@ export const HomePageMainSlider = ({
     <div>
       <Slider {...settings}>
         {mainGames.map((game) => (
-          <GameCard
-            cartGames={cartGames}
-            game={game}
-            key={game.id}
-            handleCart={() => handleCart(game)}
-            isInCart={isInCart}
-            cardHeight={96}
-          />
+          <div className="" key={game.id}>
+            <GameCard
+              cartGames={cartGames}
+              game={game}
+              handleCart={() => handleCart(game)}
+              isInCart={isInCart}
+              cardHeight={"h-96"}
+              overlayHeight={"h-[110px]"}
+            />
+          </div>
         ))}
       </Slider>
     </div>
@@ -119,16 +121,17 @@ export const HomePageTopRatedByCriticsSlider = ({
   };
   return (
     <>
-      <h2 className="mb-4 text-3xl text-white"> Top Rated By Gamers </h2>
+      <h2 className="mb-4 text-3xl text-white"> Top Rated By Critics </h2>
       <Slider {...settings}>
-        {topRatedByCritics.map((game) => (
+        {topRatedByCritics.slice(0, 16).map((game) => (
           <div key={game.id} className="p-4">
             <GameCard
               cartGames={cartGames}
               game={game}
               handleCart={() => handleCart(game)}
               isInCart={isInCart}
-              cardHeight={96}
+              cardHeight={"h-72"}
+              overlayHeight={"h-[110px]"}
             />
           </div>
         ))}
@@ -155,14 +158,15 @@ export const HomePageNewReleasesSlider = ({
     <div>
       <h2 className="mb-4 text-3xl text-white">New Releases</h2>
       <Slider {...settings}>
-        {newReleases.map((game) => (
+        {newReleases.slice(0, 8).map((game) => (
           <div key={game.id} className="p-4">
             <GameCard
               cartGames={cartGames}
               game={game}
               handleCart={() => handleCart(game)}
               isInCart={isInCart}
-              cardHeight={48}
+              cardHeight={"h-48"}
+              overlayHeight={"h-[110px]"}
             />
           </div>
         ))}
@@ -211,7 +215,8 @@ export const HomePageTopSellersSlider = ({
               game={game}
               handleCart={() => handleCart(game)}
               isInCart={isInCart}
-              cardHeight={64}
+              cardHeight={"h-64"}
+              overlayHeight={"h-[110px]"}
             />
           </div>
         ))}
@@ -230,22 +235,14 @@ export const HomePageRecentlyUpdatedSlider = ({
     className: "center",
     centerMode: true,
     infinite: true,
-    centerPadding: "60px",
+    centerPadding: "0px",
     slidesToShow: 3,
     speed: 500,
     responsive: [
       {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-        },
-      },
-      {
         breakpoint: 640,
         settings: {
           slidesToShow: 1,
-          slidesToScroll: 1,
         },
       },
     ],
@@ -262,7 +259,8 @@ export const HomePageRecentlyUpdatedSlider = ({
               game={game}
               handleCart={() => handleCart(game)}
               isInCart={isInCart}
-              cardHeight={96}
+              cardHeight={"h-64"}
+              overlayHeight={"h-[110px]"}
             />
           </div>
         ))}
@@ -290,14 +288,17 @@ export const HomePageTopRatedByGamersSlider = ({
         {topRatedByGamers
           .filter((game) => game.ratings_count > 100)
           .map((game) => (
-            <GameCard
-              cartGames={cartGames}
-              game={game}
-              key={game.id}
-              handleCart={() => handleCart(game)}
-              isInCart={isInCart}
-              cardHeight={64}
-            />
+            <div key={game.id} className="p-4">
+              <GameCard
+                cartGames={cartGames}
+                game={game}
+                key={game.id}
+                handleCart={() => handleCart(game)}
+                isInCart={isInCart}
+                cardHeight={"h-64"}
+                overlayHeight={"h-[110px]"}
+              />
+            </div>
           ))}
       </Slider>
     </div>

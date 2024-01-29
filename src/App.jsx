@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { fetchStoreData } from "./Api";
+import { fetchStoreData, fetchHomePageData } from "./Api";
 import GameStore from "./GameStore";
 import ShoppingCartPage from "./ShoppingCartPage";
 import { Route, Routes } from "react-router-dom";
@@ -10,21 +10,23 @@ import LoadingPage from "./LoadingPage";
 import { generatePrice } from "./PriceGenerator";
 
 const App = () => {
-  const gamesDataQuery = (endpoint, pageSize, limit) => {
-    return useQuery({
-      queryKey: [endpoint],
-      queryFn: async () => {
-        const allResults = [];
-        for (let page = 1; page <= limit; page++) {
-          const results = await fetchStoreData(endpoint, page, pageSize);
-          allResults.push(...results);
-        }
-        return allResults;
-      },
-    });
-  };
+  const storeGamesQuery = useQuery({
+    queryKey: ["games"],
+    queryFn: async () => {
+      const allResults = [];
+      for (let page = 1; page <= 5; page++) {
+        const results = await fetchStoreData("games", page, 40);
+        allResults.push(...results);
+      }
+      return allResults;
+    },
+  });
 
-  const gamesQuery = gamesDataQuery("games", 40, 5);
+  const homePageQuery = useQuery({
+    queryKey: ["homePage"],
+    queryFn: fetchHomePageData,
+  });
+
   const [cartGames, setCartGames] = useState([]);
   const [displayedGames, setDisplayedGames] = useState([]);
 
@@ -44,18 +46,40 @@ const App = () => {
     setCartGames(updatedCart);
   };
 
-  if (gamesQuery.isLoading)
+  if (storeGamesQuery.isLoading || homePageQuery.isLoading)
     return (
       <LoadingPage
-        fetchedGames={gamesQuery.data}
+        fetchedGames={storeGamesQuery.data}
         removeFromCart={removeFromCart}
         cartGames={cartGames}
       />
     );
-  if (gamesQuery.isError)
+
+  if (storeGamesQuery.isError || homePageQuery.isError)
     return <h1 className="text-4xl text-white">Error loading data!!!</h1>;
 
-  const gamesWithPrices = displayedGames.map((game) => {
+  const storeGamesWithPrices = displayedGames.map((game) => {
+    const price = generatePrice(
+      new Date(game.released).getFullYear(),
+      game.ratings_count,
+      game.rating,
+    );
+    return { ...game, price };
+  });
+
+  let homePageData = homePageQuery.data;
+  const homePageGames = [
+    ...homePageData.mostPopular.results,
+    ...homePageData.topSellers.results,
+    ...homePageData.newReleases.results,
+    ...homePageData.topUpcoming.results,
+    ...homePageData.recentlyUpdated.results,
+    ...homePageData.topRatedByCritics.results,
+    ...homePageData.topRatedByGamers.results,
+  ];
+
+  const allGames = [...new Set([...storeGamesQuery.data, ...homePageGames])];
+  const allGamesWithPrices = allGames.map((game) => {
     const price = generatePrice(
       new Date(game.released).getFullYear(),
       game.ratings_count,
@@ -66,26 +90,27 @@ const App = () => {
 
   return (
     <Routes>
-       <Route
+      <Route
         path="/home"
         element={
           <HomePage
-            fetchedGames={gamesQuery.data}
+            fetchedGames={storeGamesQuery.data}
             cartGames={cartGames}
             removeFromCart={removeFromCart}
             isInCart={isInCart}
             handleCart={handleCart}
+            homePageData={homePageData}
           />
         }
       />
-      {gamesWithPrices.map((game) => (
+      {allGamesWithPrices.map((game) => (
         <Route
           key={game.id}
           path={`game/${game.id}`}
           element={
             <GamePage
               gameId={game.id}
-              fetchedGames={gamesQuery.data}
+              fetchedGames={storeGamesQuery.data}
               cartGames={cartGames}
               setCartGames={setCartGames}
               removeFromCart={removeFromCart}
@@ -99,11 +124,11 @@ const App = () => {
         path="/"
         element={
           <GameStore
-            gamesQuery={gamesQuery}
+            gamesQuery={storeGamesQuery}
             displayedGames={displayedGames}
             setDisplayedGames={setDisplayedGames}
             cartGames={cartGames}
-            gamesWithPrices={gamesWithPrices}
+            gamesWithPrices={storeGamesWithPrices}
             setCartGames={setCartGames}
             removeFromCart={removeFromCart}
             handleCart={handleCart}
@@ -115,7 +140,7 @@ const App = () => {
         path="/shopping-cart"
         element={
           <ShoppingCartPage
-            fetchedGames={gamesQuery.data}
+            fetchedGames={storeGamesQuery.data}
             cartGames={cartGames}
             removeFromCart={removeFromCart}
           />

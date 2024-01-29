@@ -19,24 +19,9 @@ const HomePage = ({
   removeFromCart,
   handleCart,
   isInCart,
+  homePageData
 }) => {
-  const homePageQuery = useQuery({
-    queryKey: ["homePage"],
-    queryFn: () => fetchHomePageData(),
-  });
-  if (homePageQuery.isLoading)
-    return (
-      <LoadingPage
-        removeFromCart={removeFromCart}
-        cartGames={cartGames}
-        fetchedGames={fetchedGames}
-      />
-    );
-  if (homePageQuery.isError)
-    return <h1 className="text-4xl text-white">Error loading data!!!</h1>;
-
-  console.log(homePageQuery.data);
-  let homePageData = homePageQuery.data;
+  
 
   return (
     <div className="m-0">

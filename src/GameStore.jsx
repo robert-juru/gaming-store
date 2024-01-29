@@ -205,7 +205,8 @@ export default function GameStore({
               game={game}
               handleCart={() => handleCart(game)}
               isInCart={isInCart}
-              cardHeight={72}
+              cardHeight={"h-64"}
+              overlayHeight={"h-[110px]"}
             />
           ))}
         </main>

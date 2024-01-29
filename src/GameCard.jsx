@@ -4,8 +4,7 @@ import { IconContext } from "react-icons";
 import { generatePrice } from "./PriceGenerator";
 import { Link } from "react-router-dom";
 
-const GameCard = ({ game, handleCart, isInCart, cardHeight }) => {
-  
+const GameCard = ({ game, handleCart, isInCart, cardHeight, overlayHeight }) => {
   const price = generatePrice(
     new Date(game.released).getFullYear(),
     game.ratings_count,
@@ -13,23 +12,25 @@ const GameCard = ({ game, handleCart, isInCart, cardHeight }) => {
   );
 
   return (
-    <div className="relative transition duration-300 hover:scale-105">
-      <Link to={`/game/${game.id}`}>
+    <div className={`relative transition duration-300 hover:scale-105 `}>
+      <Link to={`/game/${game.id}`} >
         <img
-          className={`block w-full rounded-lg border-2 border-solid border-black h-${cardHeight}`}
+          className={`block w-full rounded-lg border-2 border-solid border-black ${cardHeight}`}
           src={game.background_image}
           alt={game.name + "background image"}
         />
       </Link>
-      <div className="absolute h-[110px] w-full -translate-y-full bg-gradient-to-r from-gray-700 via-gray-900 to-black  opacity-95"></div>
+      <div className={`absolute ${overlayHeight} w-full -translate-y-full bg-gradient-to-r from-gray-700 via-gray-900 to-black opacity-95`}></div>
       <div className="absolute mt-[2px] w-full -translate-y-full p-2 text-white ">
         <span className="flex items-center justify-between ">
           <Link to={`/game/${game.id}`}>
             <h1 className="inline text-lg font-bold">{game.name}</h1>
           </Link>
-          <span className=" inline-block h-8 w-8 rounded-full border-[3px] border-solid border-green-600 text-center font-bold">
-            {game.metacritic}
-          </span>
+          {game.metacritic && (
+            <span className=" inline-block h-8 w-8 rounded-full border-[3px] border-solid border-green-600 text-center font-bold">
+              {game.metacritic}
+            </span>
+          )}
         </span>
         <span className="flex items-center text-sm">
           <StarRatingGame rating={game.rating} size={12} /> {game.rating} (
