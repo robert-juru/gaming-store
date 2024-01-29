@@ -22,15 +22,15 @@ const RatingSection = ({ reviews }) => (
   <>
     <RatingBar
       rating={5}
-      percentage={reviews[0].percent}
+      percentage={reviews[0]?.percent ?? 0}
       color="bg-green-600"
-      reviewCount={reviews[0].count}
+      reviewCount={reviews[0]?.percent ?? 0}
     />
     <RatingBar
       rating={4}
-      percentage={reviews[1].percent}
+      percentage={reviews[1]?.percent ?? 0}
       color="bg-lime-400"
-      reviewCount={reviews[1].count}
+      reviewCount={reviews[1]?.percent ?? 0}
     />
     <RatingBar
       rating={3}
@@ -40,15 +40,15 @@ const RatingSection = ({ reviews }) => (
     />
     <RatingBar
       rating={2}
-      percentage={reviews[2].percent}
+      percentage={reviews[2]?.percent ?? 0}
       color="bg-orange-400"
-      reviewCount={reviews[2].count}
+      reviewCount={reviews[2]?.percent ?? 0}
     />
     <RatingBar
       rating={1}
-      percentage={reviews[3].percent}
+      percentage={reviews[3]?.percent ?? 0}
       color="bg-red-600"
-      reviewCount={reviews[3].count}
+      reviewCount={reviews[3]?.percent ?? 0}
     />
   </>
 );
