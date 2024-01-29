@@ -3,6 +3,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import GameCard from "./GameCard";
+import { generatePrice } from "./PriceGenerator";
 
 export const GamePagePhotoSlider = ({ images, name }) => {
   const [nav1, setNav1] = useState();
@@ -33,7 +34,7 @@ export const GamePagePhotoSlider = ({ images, name }) => {
       <Slider
         asNavFor={nav1}
         ref={(slider2) => setNav2(slider2)}
-        slidesToShow={3}
+        slidesToShow={4}
         swipeToSlide={true}
         focusOnSelect={true}
       >
@@ -60,12 +61,19 @@ export const HomePageMainSlider = ({
     slidesToScroll: 1,
   };
 
-  console.log(mainGames);
+  const mainGamesWithPrices = mainGames.map((game) => {
+    const price = generatePrice(
+      new Date(game.released).getFullYear(),
+      game.ratings_count,
+      game.rating,
+    );
+    return { ...game, price };
+  });
 
   return (
     <div>
       <Slider {...settings}>
-        {mainGames.map((game) => (
+        {mainGamesWithPrices.map((game) => (
           <div className="" key={game.id}>
             <GameCard
               cartGames={cartGames}
@@ -119,11 +127,19 @@ export const HomePageTopRatedByCriticsSlider = ({
       },
     ],
   };
+  const topRatedByCriticsWithPrices = topRatedByCritics.map((game) => {
+    const price = generatePrice(
+      new Date(game.released).getFullYear(),
+      game.ratings_count,
+      game.rating,
+    );
+    return { ...game, price };
+  });
   return (
     <>
       <h2 className="mb-4 text-3xl text-white"> Top Rated By Critics </h2>
       <Slider {...settings}>
-        {topRatedByCritics.slice(0, 16).map((game) => (
+        {topRatedByCriticsWithPrices.slice(0, 16).map((game) => (
           <div key={game.id} className="p-4">
             <GameCard
               cartGames={cartGames}
@@ -154,11 +170,19 @@ export const HomePageNewReleasesSlider = ({
     verticalSwiping: true,
     swipeToSlide: true,
   };
+  const newReleasesWithPrices = newReleases.map((game) => {
+    const price = generatePrice(
+      new Date(game.released).getFullYear(),
+      game.ratings_count,
+      game.rating,
+    );
+    return { ...game, price };
+  });
   return (
     <div>
       <h2 className="mb-4 text-3xl text-white">New Releases</h2>
       <Slider {...settings}>
-        {newReleases.slice(0, 8).map((game) => (
+        {newReleasesWithPrices.slice(0, 8).map((game) => (
           <div key={game.id} className="p-4">
             <GameCard
               cartGames={cartGames}
@@ -204,11 +228,19 @@ export const HomePageTopSellersSlider = ({
       {},
     ],
   };
+  const topSellersWithPrices = topSellers.map((game) => {
+    const price = generatePrice(
+      new Date(game.released).getFullYear(),
+      game.ratings_count,
+      game.rating,
+    );
+    return { ...game, price };
+  });
   return (
     <div>
       <h2 className="mb-4 text-3xl text-white"> Top Sellers </h2>
       <Slider {...settings}>
-        {topSellers.map((game) => (
+        {topSellersWithPrices.map((game) => (
           <div key={game.id} className="p-4">
             <GameCard
               cartGames={cartGames}
@@ -247,12 +279,19 @@ export const HomePageRecentlyUpdatedSlider = ({
       },
     ],
   };
-
+  const recentlyUpdatedWithPrices = recentlyUpdated.map((game) => {
+    const price = generatePrice(
+      new Date(game.released).getFullYear(),
+      game.ratings_count,
+      game.rating,
+    );
+    return { ...game, price };
+  });
   return (
     <div>
       <h2 className="mb-4 text-3xl text-white">Recently Updated</h2>
       <Slider {...settings}>
-        {recentlyUpdated.map((game) => (
+        {recentlyUpdatedWithPrices.map((game) => (
           <div key={game.id} className="p-4">
             <GameCard
               cartGames={cartGames}
@@ -281,11 +320,19 @@ export const HomePageTopRatedByGamersSlider = ({
     slidesToShow: 1,
     slidesToScroll: 1,
   };
+  const topRatedByGamersWithPrices = topRatedByGamers.map((game) => {
+    const price = generatePrice(
+      new Date(game.released).getFullYear(),
+      game.ratings_count,
+      game.rating,
+    );
+    return { ...game, price };
+  });
   return (
     <div>
       <h2 className="mb-4 text-3xl text-white">Top Rated by Gamers</h2>
       <Slider {...settings}>
-        {topRatedByGamers
+        {topRatedByGamersWithPrices
           .filter((game) => game.ratings_count > 100)
           .map((game) => (
             <div key={game.id} className="p-4">

@@ -9,6 +9,8 @@ const Cart = ({ cartGames, fetchedGames, removeFromCart }) => {
   let totalPrice = cartGames
     .reduce((acc, game) => acc + game.price, 0)
     .toFixed(2);
+
+    console.log(cartGames)
   return (
     <div className="flex items-center gap-1">
       <div className="group  relative flex items-center">
@@ -59,11 +61,11 @@ const Cart = ({ cartGames, fetchedGames, removeFromCart }) => {
                 (fetchedGame) => fetchedGame.id === cartGame.id,
               );
               if (matchedGame) {
-                const price = generatePrice(
-                  new Date(matchedGame.released).getFullYear(),
-                  matchedGame.ratings_count,
-                  matchedGame.rating,
-                );
+                // const price = generatePrice(
+                //   new Date(matchedGame.released).getFullYear(),
+                //   matchedGame.ratings_count,
+                //   matchedGame.rating,
+                // );
                 return (
                   <>
                     <li
@@ -80,7 +82,7 @@ const Cart = ({ cartGames, fetchedGames, removeFromCart }) => {
                       <Link className="w-[26ch]" to={`/game/${matchedGame.id}`}>
                         <span>{matchedGame.name}</span>
                       </Link>
-                      <span>${price}</span>
+                      <span>${matchedGame.price}</span>
                       <IconContext.Provider
                         value={{
                           size: "24px",

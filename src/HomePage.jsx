@@ -1,4 +1,3 @@
-import GameverseLogo from "./GameverseLogo";
 import Header from "./Header";
 import {
   HomePageMainSlider,
@@ -10,8 +9,6 @@ import {
 } from "./ImageSlider";
 import HomePageTopUpcomingSection from "./HomePageTopUpcomingSection";
 import LoadingPage from "./LoadingPage";
-import { useQuery } from "@tanstack/react-query";
-import { fetchHomePageData } from "./Api";
 
 const HomePage = ({
   fetchedGames,
@@ -19,10 +16,8 @@ const HomePage = ({
   removeFromCart,
   handleCart,
   isInCart,
-  homePageData
+  homePageData,
 }) => {
-  
-
   return (
     <div className="m-0">
       <header className="p-4">
@@ -54,7 +49,11 @@ const HomePage = ({
         />
       </section>
       <section className="md:px-18 px-8 pt-16 sm:px-12 lg:px-24 xl:px-48">
-        <HomePageTopRatedByGamersSlider topRatedByGamers={homePageData.topRatedByGamers.results} handleCart={handleCart} isInCart={isInCart}/>
+        <HomePageTopRatedByGamersSlider
+          topRatedByGamers={homePageData.topRatedByGamers.results}
+          handleCart={handleCart}
+          isInCart={isInCart}
+        />
       </section>
       <HomePageTopUpcomingSection
         topUpcoming={homePageData.topUpcoming.results}

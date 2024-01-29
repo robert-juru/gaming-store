@@ -84,12 +84,7 @@ const GamePage = ({
               All Games{" "}
             </Link>
             <span>&gt;</span>
-            <Link className="hover:text-white" to="/action">
-              {" "}
-              Action Games{" "}
-            </Link>
-            <span>&gt;</span>
-            <Link className="hover:text-white" to="/game">
+            <Link className="hover:text-white" to={`/game/${gameId}`}>
               {" "}
               {gamePageData.details.name || ""}
             </Link>
@@ -237,7 +232,6 @@ const GamePage = ({
             ></ReactPlayer>
           </div>
         )}
-        {gamePageData.details.ratings.length > 0 && (
           <section className="lg:px-24 xl:px-48">
             <GameReviews
               reviews={gamePageData.details.ratings}
@@ -245,7 +239,6 @@ const GamePage = ({
               reviewsCount={gamePageData.details.ratings_count}
             />
           </section>
-        )}
         {minRequirements && (
           <section className="lg:px-24 xl:px-48">
             <h3 className="mt-4 text-xl font-bold tracking-wide">

@@ -94,7 +94,7 @@ const App = () => {
         path="/home"
         element={
           <HomePage
-            fetchedGames={storeGamesQuery.data}
+            fetchedGames={allGamesWithPrices}
             cartGames={cartGames}
             removeFromCart={removeFromCart}
             isInCart={isInCart}
@@ -110,7 +110,7 @@ const App = () => {
           element={
             <GamePage
               gameId={game.id}
-              fetchedGames={storeGamesQuery.data}
+              fetchedGames={allGamesWithPrices}
               cartGames={cartGames}
               setCartGames={setCartGames}
               removeFromCart={removeFromCart}
@@ -129,6 +129,7 @@ const App = () => {
             setDisplayedGames={setDisplayedGames}
             cartGames={cartGames}
             gamesWithPrices={storeGamesWithPrices}
+            allGames={allGamesWithPrices}
             setCartGames={setCartGames}
             removeFromCart={removeFromCart}
             handleCart={handleCart}
@@ -140,7 +141,7 @@ const App = () => {
         path="/shopping-cart"
         element={
           <ShoppingCartPage
-            fetchedGames={storeGamesQuery.data}
+            fetchedGames={allGamesWithPrices}
             cartGames={cartGames}
             removeFromCart={removeFromCart}
           />

@@ -24,13 +24,13 @@ const RatingSection = ({ reviews }) => (
       rating={5}
       percentage={reviews[0]?.percent ?? 0}
       color="bg-green-600"
-      reviewCount={reviews[0]?.percent ?? 0}
+      reviewCount={reviews[0]?.count ?? 0}
     />
     <RatingBar
       rating={4}
       percentage={reviews[1]?.percent ?? 0}
       color="bg-lime-400"
-      reviewCount={reviews[1]?.percent ?? 0}
+      reviewCount={reviews[1]?.count ?? 0}
     />
     <RatingBar
       rating={3}
@@ -42,13 +42,13 @@ const RatingSection = ({ reviews }) => (
       rating={2}
       percentage={reviews[2]?.percent ?? 0}
       color="bg-orange-400"
-      reviewCount={reviews[2]?.percent ?? 0}
+      reviewCount={reviews[2]?.count ?? 0}
     />
     <RatingBar
       rating={1}
       percentage={reviews[3]?.percent ?? 0}
       color="bg-red-600"
-      reviewCount={reviews[3]?.percent ?? 0}
+      reviewCount={reviews[3]?.count ?? 0}
     />
   </>
 );
@@ -59,7 +59,7 @@ const GameReviews = ({ reviews, rating, reviewsCount }) => {
       <div>
         <span className="flex items-center">
           <h3 className="pr-2 text-xl font-bold tracking-wide">REVIEWS</h3>
-          <StarRatingGame rating={4.67} size={24} />
+          <StarRatingGame rating={rating} size={24} />
           <span className="text-xl font-bold">{rating}</span>
           <span className="ml-2 min-w-6 text-center rounded-md bg-green-500 p-[3px] text-xs font-bold  text-white">
             {reviewsCount}

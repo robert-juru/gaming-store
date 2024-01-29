@@ -41,11 +41,11 @@ const ShoppingCartPage = ({ cartGames, removeFromCart, fetchedGames }) => {
                 (fetchedGame) => fetchedGame.id === cartGame.id,
               );
               if (matchedGame) {
-                const price = generatePrice(
-                  new Date(matchedGame.released).getFullYear(),
-                  matchedGame.ratings_count,
-                  matchedGame.rating,
-                );
+                // const price = generatePrice(
+                //   new Date(matchedGame.released).getFullYear(),
+                //   matchedGame.ratings_count,
+                //   matchedGame.rating,
+                // );
                 return (
                   <article
                     key={matchedGame.id}
@@ -75,7 +75,7 @@ const ShoppingCartPage = ({ cartGames, removeFromCart, fetchedGames }) => {
                     </div>
                     </div>
                     <div className="flex flex-col text-lg">
-                    <span className="font-bold">${price}</span>
+                    <span className="font-bold">${matchedGame.price}</span>
                     <button
                       className="text-gray-300 hover:text-white hover:underline"
                       onClick={() => removeFromCart(matchedGame.id)}
