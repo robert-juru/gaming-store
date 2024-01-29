@@ -1,6 +1,6 @@
 import Header from "./Header";
 import { Link } from "react-router-dom";
-import {GamePagePhotoSlider} from "./ImageSlider";
+import { GamePagePhotoSlider } from "./ImageSlider";
 import PlatformIcons from "./PlatformIcons";
 import ReactPlayer from "react-player";
 import GameReviews from "./GameReviews";
@@ -35,10 +35,13 @@ const GamePage = ({
     return <h1 className="text-4xl text-white">Error loading data!!!</h1>;
 
   let gamePageData = gamePageQuery.data;
-  let releaseDate = format(
-    parseISO(gamePageData.details.released),
-    "dd MMMM yyyy",
-  );
+  let releaseDate;
+  gamePageData.details.released
+    ? (releaseDate = format(
+        parseISO(gamePageData.details.released),
+        "dd MMMM yyyy",
+      ))
+    : (releaseDate = "TBD");
   let metascore = gamePageData.details.metacritic;
   let gameDescription = gamePageData.details.description;
   const sanitizedGameDescription = DOMPurify.sanitize(gameDescription);
@@ -95,7 +98,10 @@ const GamePage = ({
         </div>
         <div className="mb-16 gap-16 lg:grid lg:grid-cols-[minmax(0,2.5fr)_minmax(0,1fr)]">
           <section className="">
-            <GamePagePhotoSlider images={images} name={gamePageData.details.name} />
+            <GamePagePhotoSlider
+              images={images}
+              name={gamePageData.details.name}
+            />
           </section>
           <section className="flex flex-col justify-between">
             <div>
@@ -232,13 +238,13 @@ const GamePage = ({
             ></ReactPlayer>
           </div>
         )}
-          <section className="lg:px-24 xl:px-48">
-            <GameReviews
-              reviews={gamePageData.details.ratings}
-              rating={gamePageData.details.rating}
-              reviewsCount={gamePageData.details.ratings_count}
-            />
-          </section>
+        <section className="lg:px-24 xl:px-48">
+          <GameReviews
+            reviews={gamePageData.details.ratings}
+            rating={gamePageData.details.rating}
+            reviewsCount={gamePageData.details.ratings_count}
+          />
+        </section>
         {minRequirements && (
           <section className="lg:px-24 xl:px-48">
             <h3 className="mt-4 text-xl font-bold tracking-wide">
