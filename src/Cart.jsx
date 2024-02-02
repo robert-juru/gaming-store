@@ -9,8 +9,6 @@ const Cart = ({ cartGames, fetchedGames, removeFromCart }) => {
   let totalPrice = cartGames
     .reduce((acc, game) => acc + game.price, 0)
     .toFixed(2);
-
-    console.log(cartGames)
   return (
     <div className="flex items-center gap-1">
       <div className="group  relative flex items-center">

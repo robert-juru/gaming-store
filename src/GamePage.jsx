@@ -159,6 +159,8 @@ const GamePage = ({
                     <span className="tracking-wide">WEBSITE: </span>
                     <a
                       href={gamePageData.details.website}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="font-bold text-white"
                     >
                       {gamePageData.details.website}
@@ -189,6 +191,8 @@ const GamePage = ({
                   ></img>
                   <a
                     href={gamePageData.details.metacritic_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="-mt-4 text-sm hover:text-white hover:underline"
                   >
                     Read Critic Reviews

@@ -14,7 +14,7 @@ export default function GameStore({
   gamesWithPrices,
   displayedGames,
   setDisplayedGames,
-  allGames
+  allGames,
 }) {
 
   useEffect(() => {
@@ -175,6 +175,8 @@ export default function GameStore({
         removeFromCart={removeFromCart}
         cartGames={cartGames}
         fetchedGames={allGames}
+        // query={query}
+        // setQuery={setQuery}
       />
       <GameFiltersSidebar
         handleGenreSelection={handleGenreSelection}

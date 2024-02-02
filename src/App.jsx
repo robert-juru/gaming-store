@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { fetchStoreData, fetchHomePageData } from "./Api";
+import { fetchStoreData, fetchHomePageData, fetchSearchData } from "./Api";
 import GameStore from "./GameStore";
 import ShoppingCartPage from "./ShoppingCartPage";
 import { Route, Routes } from "react-router-dom";
@@ -27,6 +27,14 @@ const App = () => {
     queryFn: fetchHomePageData,
   });
 
+  // const [query, setQuery] = useState("");
+
+  // const searchQuery = useQuery({
+  //   queryKey: ["search"],
+  //   queryFn: () => (query ? fetchSearchData(query) : []),
+  // });
+  
+
   const [cartGames, setCartGames] = useState([]);
   const [displayedGames, setDisplayedGames] = useState([]);
 
@@ -46,7 +54,10 @@ const App = () => {
     setCartGames(updatedCart);
   };
 
-  if (storeGamesQuery.isLoading || homePageQuery.isLoading)
+  if (
+    storeGamesQuery.isLoading ||
+    homePageQuery.isLoading 
+  )
     return (
       <LoadingPage
         fetchedGames={storeGamesQuery.data}
@@ -58,6 +69,7 @@ const App = () => {
   if (storeGamesQuery.isError || homePageQuery.isError)
     return <h1 className="text-4xl text-white">Error loading data!!!</h1>;
 
+ 
   const storeGamesWithPrices = displayedGames.map((game) => {
     const price = generatePrice(
       new Date(game.released).getFullYear(),
@@ -134,6 +146,8 @@ const App = () => {
             removeFromCart={removeFromCart}
             handleCart={handleCart}
             isInCart={isInCart}
+            // query={query}
+            // setQuery={setQuery}
           />
         }
       />

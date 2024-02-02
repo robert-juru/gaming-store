@@ -15,7 +15,7 @@ const GameCard = ({ game, handleCart, isInCart, cardHeight, overlayHeight }) => 
     <div className={`relative transition duration-300 hover:scale-105 `}>
       <Link to={`/game/${game.id}`} >
         <img
-          className={`block w-full rounded-lg border-2 border-solid border-black ${cardHeight}`}
+          className={`block w-full rounded-lg border-2 border-solid border-black ${cardHeight} w-full`}
           src={game.background_image}
           alt={game.name + "background image"}
         />
