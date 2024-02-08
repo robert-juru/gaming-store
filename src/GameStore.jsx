@@ -16,7 +16,6 @@ export default function GameStore({
   setDisplayedGames,
   allGames,
 }) {
-
   useEffect(() => {
     if (displayedGames.length === 0) {
       const limitedGames = gamesQuery.data.slice(0, 100); // maximum display of 100
@@ -175,8 +174,8 @@ export default function GameStore({
         removeFromCart={removeFromCart}
         cartGames={cartGames}
         fetchedGames={allGames}
-        // query={query}
-        // setQuery={setQuery}
+        displayedGames={displayedGames}
+        setDisplayedGames={setDisplayedGames}
       />
       <GameFiltersSidebar
         handleGenreSelection={handleGenreSelection}
@@ -203,7 +202,7 @@ export default function GameStore({
           displayedGames={displayedGames}
         />
         <main className=" grid grid-cols-[repeat(auto-fit,minmax(375px,1fr))] gap-x-8 gap-y-6">
-          {gamesWithPrices.map((game) => (
+          {displayedGames.map((game) => (
             <GameCard
               game={game}
               handleCart={() => handleCart(game)}

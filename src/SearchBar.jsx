@@ -2,17 +2,29 @@ import { useState, useEffect, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import debounce from "lodash.debounce";
 import { fetchSearchData } from "./Api";
+import { useNavigate  } from "react-router-dom";
 
 const SearchBar = ({displayedGames, setDisplayedGames}) => {
   const [query, setQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [shouldFetch, setShouldFetch] = useState(false);
+  const navigate = useNavigate();
 
   const searchQuery = useQuery({
     queryKey: ["search"],
     queryFn: () => (query ? fetchSearchData(query) : []),
     enabled: shouldFetch && !!query,
   });
+
+  const handleEnterKey = (event) => {
+    if (event.key === "Enter") {
+        navigate("/");
+        
+        setTimeout(() => {
+          setDisplayedGames(searchQuery.data);
+        }, 1000);
+      }
+  };
 
   const debouncedSetQuery = useMemo(
     () =>
@@ -43,6 +55,7 @@ const SearchBar = ({displayedGames, setDisplayedGames}) => {
       type="search"
       value={query}
       onChange={handleChange}
+      onKeyDown={handleEnterKey}
       name="search"
       id="search"
       placeholder="Search store"

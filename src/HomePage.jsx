@@ -17,6 +17,8 @@ const HomePage = ({
   handleCart,
   isInCart,
   homePageData,
+  displayedGames,
+  setDisplayedGames
 }) => {
   return (
     <div className="m-0">
@@ -25,6 +27,8 @@ const HomePage = ({
           fetchedGames={fetchedGames}
           cartGames={cartGames}
           removeFromCart={removeFromCart}
+          displayedGames={displayedGames}
+          setDisplayedGames={setDisplayedGames}
         />
       </header>
       <section className="">

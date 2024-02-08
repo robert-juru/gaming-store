@@ -13,7 +13,7 @@ const Header = ({ cartGames, fetchedGames, removeFromCart, displayedGames, setDi
         STORE
       </Link>
       <div className="relative flex flex-1">
-        <SearchBar />
+        <SearchBar displayedGames={displayedGames} setDisplayedGames={setDisplayedGames}/>
         <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-2">
           <IconContext.Provider
             value={{ color: "white", size: "18px", title: "search" }}
