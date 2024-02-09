@@ -5,23 +5,45 @@ import { Link } from "react-router-dom";
 import GameverseLogo from "./GameverseLogo";
 import SearchBar from "./SearchBar";
 
-const Header = ({ cartGames, fetchedGames, removeFromCart, displayedGames, setDisplayedGames }) => {
+const Header = ({
+  cartGames,
+  fetchedGames,
+  removeFromCart,
+  displayedGames,
+  setDisplayedGames,
+}) => {
   return (
     <header className="col-span-2 flex items-center justify-between gap-8">
       <GameverseLogo />
-      <Link className="text-lg tracking-wide text-gray-300 lg:px-24" to="/">
-        STORE
-      </Link>
-      <div className="relative flex flex-1">
-        <SearchBar displayedGames={displayedGames} setDisplayedGames={setDisplayedGames}/>
-        <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-2">
-          <IconContext.Provider
-            value={{ color: "white", size: "18px", title: "search" }}
+      {location.pathname !== "/" && (
+        <div className="flex-0 m-0 flex items-center justify-center gap-24 p-0">
+          <Link
+            className="hover:text-white text-lg font-bold tracking-wide text-gray-300 "
+            to="/"
           >
-            <CiSearch />
-          </IconContext.Provider>
+            Store
+          </Link>
+          <Link
+            className="hover:text-white text-lg font-bold tracking-wide text-gray-300 "
+            to="/faq"
+          >
+            FAQ
+          </Link>
+          <Link
+            className="hover:text-white text-lg font-bold tracking-wide text-gray-300 "
+            to="/"
+          >
+            About us
+          </Link>
         </div>
-      </div>
+      )}
+
+      {location.pathname === "/" && (
+        <SearchBar
+          displayedGames={displayedGames}
+          setDisplayedGames={setDisplayedGames}
+        />
+      )}
       <Cart
         cartGames={cartGames}
         fetchedGames={fetchedGames}

@@ -169,7 +169,7 @@ export default function GameStore({
   // if (gamesQuery.isError) return <h1>Error loading data!!!</h1>;
 
   return (
-    <div className="m-0 grid grid-cols-1 gap-4 p-4 md:grid-cols-[200px_1fr]">
+    <div className="m-0 grid grid-cols-1 gap-4 p-4 md:grid-cols-[200px_1fr] md:px-16">
       <Header
         removeFromCart={removeFromCart}
         cartGames={cartGames}
@@ -202,7 +202,7 @@ export default function GameStore({
           displayedGames={displayedGames}
         />
         <main className=" grid grid-cols-[repeat(auto-fit,minmax(375px,1fr))] gap-x-8 gap-y-6">
-          {displayedGames.map((game) => (
+          {gamesWithPrices.map((game) => (
             <GameCard
               game={game}
               handleCart={() => handleCart(game)}

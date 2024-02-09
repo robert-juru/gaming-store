@@ -5,7 +5,7 @@ const GameverseLogo = () => {
     <Link to="/home">
       <div className="flex cursor-pointer items-center transition-all hover:scale-105">
         <img
-          className="h-16"
+          className="w-16 min-w-16"
           src="/gameverse-logo-no-text.png"
           alt="gameverse logo"
         />

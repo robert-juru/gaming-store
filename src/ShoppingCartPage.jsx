@@ -9,7 +9,7 @@ const ShoppingCartPage = ({ cartGames, removeFromCart, fetchedGames }) => {
     .reduce((acc, game) => acc + game.price, 0)
     .toFixed(2);
   return (
-    <div className="m-0 p-4">
+    <div className="m-0 px-16 py-4">
       <Header
         cartGames={cartGames}
         removeFromCart={removeFromCart}

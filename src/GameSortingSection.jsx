@@ -57,7 +57,7 @@ const GameSortingSection = ({
   };
   return (
     <section className="col-span-full flex items-center  justify-between  rounded-md bg-gray-900 p-4 text-slate-200">
-      <div className="flex flex-row gap-8">
+      <div className="flex  flex-col md:flex-row gap-8">
         <ul className="flex items-center justify-center gap-2">
           <h3 className=" pr-4 text-xs font-bold tracking-wide">PLATFORM</h3>
           <li

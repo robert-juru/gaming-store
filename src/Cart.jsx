@@ -45,7 +45,7 @@ const Cart = ({ cartGames, fetchedGames, removeFromCart }) => {
         <div className="relative">
           <div
             id="cart"
-            className=" invisible absolute right-0 top-8 z-10 flex max-h-96 translate-y-10 transform flex-col
+            className=" scrollbar-thumb-slate-300 scrollbar-thin scrollbar-track-transparent invisible absolute right-0 top-8 z-10 flex max-h-96 translate-y-10 transform flex-col
             overflow-y-auto overflow-x-hidden rounded-md bg-gray-600 p-2
           opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100 lg:group-hover:visible  "
           >

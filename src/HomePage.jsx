@@ -21,8 +21,8 @@ const HomePage = ({
   setDisplayedGames
 }) => {
   return (
-    <div className="m-0">
-      <header className="p-4">
+    <div className="m-0 ">
+      <header className="px-16 py-4">
         <Header
           fetchedGames={fetchedGames}
           cartGames={cartGames}
