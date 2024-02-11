@@ -105,7 +105,7 @@ const SearchBar = ({
                 >
                   <img
                     className="h-16 w-24 rounded-md"
-                    src={game.background_image}
+                    src={game.background_image || '/no-image-available.jpg'}
                     alt={`${game.background_image} image`}
                   />
                   <p>{game.name}</p>

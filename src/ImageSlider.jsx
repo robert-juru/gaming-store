@@ -14,7 +14,7 @@ export const GamePagePhotoSlider = ({ images, name }) => {
       <div key={index} className="p-2">
         <img
           className="h-auto max-h-[480px] w-full cursor-pointer rounded-md"
-          src={image}
+          src={image || '/no-image-available.jpg'}
           alt={`${name} image ${index + 1}`}
         />
       </div>

@@ -46,8 +46,11 @@ const GamePage = ({
   let gameDescription = gamePageData.details.description;
   const sanitizedGameDescription = DOMPurify.sanitize(gameDescription);
   const images = gamePageData.screenshots.results.map(
-    (screenshot) => screenshot.image,
+    (screenshot) => screenshot.image || "/no-image-available.jpg",
   );
+  if (images.length === 0) {
+    images.push("/no-image-available.jpg");
+  }
   const pcPlatform = gamePageData.details.platforms.find(
     (platformObj) => platformObj.platform.name === "PC",
   );
