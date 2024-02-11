@@ -15,6 +15,8 @@ export default function GameStore({
   displayedGames,
   setDisplayedGames,
   allGames,
+  searchQueryData,
+  setSearchQueryData
 }) {
   useEffect(() => {
     if (displayedGames.length === 0) {
@@ -176,6 +178,8 @@ export default function GameStore({
         fetchedGames={allGames}
         displayedGames={displayedGames}
         setDisplayedGames={setDisplayedGames}
+        searchQueryData={searchQueryData}
+        setSearchQueryData={setSearchQueryData}
       />
       <GameFiltersSidebar
         handleGenreSelection={handleGenreSelection}
@@ -204,6 +208,7 @@ export default function GameStore({
         <main className=" grid grid-cols-[repeat(auto-fit,minmax(375px,1fr))] gap-x-8 gap-y-6">
           {gamesWithPrices.map((game) => (
             <GameCard
+            key={game.id}
               game={game}
               handleCart={() => handleCart(game)}
               isInCart={isInCart}

@@ -11,6 +11,8 @@ const Header = ({
   removeFromCart,
   displayedGames,
   setDisplayedGames,
+  searchQueryData,
+  setSearchQueryData
 }) => {
   return (
     <header className="col-span-2 flex items-center justify-between gap-8">
@@ -42,6 +44,8 @@ const Header = ({
         <SearchBar
           displayedGames={displayedGames}
           setDisplayedGames={setDisplayedGames}
+          searchQueryData={searchQueryData}
+          setSearchQueryData={setSearchQueryData}
         />
       )}
       <Cart

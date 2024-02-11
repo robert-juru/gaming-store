@@ -10,6 +10,7 @@ import LoadingPage from "./LoadingPage";
 import { generatePrice } from "./PriceGenerator";
 
 const App = () => {
+  const [searchQueryData, setSearchQueryData] = useState([]);
   const storeGamesQuery = useQuery({
     queryKey: ["games"],
     queryFn: async () => {
@@ -26,14 +27,6 @@ const App = () => {
     queryKey: ["homePage"],
     queryFn: fetchHomePageData,
   });
-
-  // const [query, setQuery] = useState("");
-
-  // const searchQuery = useQuery({
-  //   queryKey: ["search"],
-  //   queryFn: () => (query ? fetchSearchData(query) : []),
-  // });
-  
 
   const [cartGames, setCartGames] = useState([]);
   const [displayedGames, setDisplayedGames] = useState([]);
@@ -90,7 +83,8 @@ const App = () => {
     ...homePageData.topRatedByGamers.results,
   ];
 
-  const allGames = [...new Set([...storeGamesQuery.data, ...homePageGames])];
+  const allGames = [...new Set([...storeGamesQuery.data, ...homePageGames, ...searchQueryData])];
+  console.log(allGames)
   const allGamesWithPrices = allGames.map((game) => {
     const price = generatePrice(
       new Date(game.released).getFullYear(),
@@ -146,6 +140,8 @@ const App = () => {
             removeFromCart={removeFromCart}
             handleCart={handleCart}
             isInCart={isInCart}
+            searchQueryData={searchQueryData}
+            setSearchQueryData={setSearchQueryData}
             // query={query}
             // setQuery={setQuery}
           />

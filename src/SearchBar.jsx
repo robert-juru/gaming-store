@@ -2,16 +2,18 @@ import { useState, useEffect, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import debounce from "lodash.debounce";
 import { fetchSearchData } from "./Api";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { IconContext } from "react-icons";
 import { CiSearch } from "react-icons/ci";
 
-const SearchBar = ({ displayedGames, setDisplayedGames }) => {
+const SearchBar = ({ displayedGames, setDisplayedGames, searchQueryData, setSearchQueryData }) => {
   const [query, setQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
+  const [searchedResultsHistory, setSearchedResultsHistory] = useState([]);
   const [shouldFetch, setShouldFetch] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const searchQuery = useQuery({
     queryKey: ["search"],
@@ -26,6 +28,8 @@ const SearchBar = ({ displayedGames, setDisplayedGames }) => {
       setTimeout(() => {
         setDisplayedGames(searchQuery.data);
       }, 500);
+      
+
     }
   };
 
@@ -47,8 +51,17 @@ const SearchBar = ({ displayedGames, setDisplayedGames }) => {
       setSearchResults(searchQuery.data);
       console.log(searchQuery.data);
       setShouldFetch(false);
+      setSearchQueryData((prevHistory) => {
+        const newGames = searchQuery.data.filter(game => !prevHistory.some(prevGame => prevGame.id === game.id));
+        return [...prevHistory, ...newGames];
+      });
+      console.log(searchQueryData)
     }
-  }, [searchQuery.data, searchQuery.isSuccess]);
+  }, [searchQuery.data, searchQuery.isSuccess, setSearchQueryData]);
+
+  useEffect(() => {
+    setSearchResults([]);
+  }, [location.pathname]);
 
   let searchedGames = searchQuery.data;
 
@@ -66,6 +79,7 @@ const SearchBar = ({ displayedGames, setDisplayedGames }) => {
           name="search"
           id="search"
           placeholder="Search store"
+          autocomplete="off"
         />
         <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-2">
           <IconContext.Provider
@@ -76,10 +90,10 @@ const SearchBar = ({ displayedGames, setDisplayedGames }) => {
         </div>
       </div>
       {searchQuery.data && isFocused && (
-        <div className="absolute left-0 top-full z-50 max-h-60 w-full overflow-y-scroll rounded-md bg-slate-700">
+        <div className=" scrollbar-thumb-slate-300 scrollbar-thin scrollbar-track-transparent absolute left-0 top-full z-50 max-h-60 w-full overflow-y-scroll rounded-md bg-slate-700">
           {searchQuery.data.slice(0, 8).map((game) => (
             <div
-              className="flex items-center gap-4 p-2 hover:bg-slate-600 hover:text-white text-slate-300"
+              className="flex items-center gap-4 p-2 text-slate-300 hover:bg-slate-600 hover:text-white"
               key={game.id}
             >
               <img

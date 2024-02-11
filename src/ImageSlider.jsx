@@ -13,7 +13,7 @@ export const GamePagePhotoSlider = ({ images, name }) => {
     return (
       <div key={index} className="p-2">
         <img
-          className=" w-full cursor-pointer rounded-md"
+          className="h-auto max-h-[480px] w-full cursor-pointer rounded-md"
           src={image}
           alt={`${name} image ${index + 1}`}
         />
