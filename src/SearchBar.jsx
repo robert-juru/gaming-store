@@ -13,11 +13,9 @@ const SearchBar = ({
   setSearchQueryData,
 }) => {
   const [query, setQuery] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
-  const [searchedResultsHistory, setSearchedResultsHistory] = useState([]);
+  const [searchedGames, setSearchedGames] = useState([]);
   const [shouldFetch, setShouldFetch] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
-  const navigate = useNavigate();
   const location = useLocation();
 
   const searchQuery = useQuery({
@@ -32,7 +30,7 @@ const SearchBar = ({
       setIsFocused(false);
       setTimeout(() => {
         setDisplayedGames(searchQuery.data);
-      }, 500);
+      }, 0);
     }
   };
 
@@ -40,7 +38,7 @@ const SearchBar = ({
     () =>
       debounce(() => {
         setShouldFetch(true);
-      }, 1000),
+      }, 300),
     [],
   );
 
@@ -51,7 +49,7 @@ const SearchBar = ({
 
   useEffect(() => {
     if (searchQuery.isSuccess) {
-      setSearchResults(searchQuery.data);
+      setSearchedGames(searchQuery.data);
       console.log(searchQuery.data);
       setShouldFetch(false);
       setSearchQueryData((prevHistory) => {
@@ -65,10 +63,9 @@ const SearchBar = ({
   }, [searchQuery.data, searchQuery.isSuccess, setSearchQueryData]);
 
   useEffect(() => {
-    setSearchResults([]);
+    setSearchedGames([]);
+    setShouldFetch(false); // Disable fetching
   }, [location.pathname]);
-
-  let searchedGames = searchQuery.data;
 
   return (
     <div className="relative flex flex-1 flex-col gap-4">
@@ -84,7 +81,8 @@ const SearchBar = ({
           name="search"
           id="search"
           placeholder="Search store"
-          autocomplete="off"
+          autoComplete="off"
+          required={true}
         />
         <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-2">
           <IconContext.Provider
@@ -96,16 +94,16 @@ const SearchBar = ({
       </div>
       {searchQuery.data && isFocused && (
         <div className=" absolute left-0 top-full z-50 max-h-60 w-full overflow-y-scroll rounded-md bg-slate-700 scrollbar-thin scrollbar-track-transparent scrollbar-thumb-slate-300">
-          {searchQuery.data.slice(0, 8).map((game) => (
+          {searchedGames.slice(0, 8).map((game) => (
             <div key={game.id} onClick={(e) => e.stopPropagation()}>
               <Link to={`/game/${game.id}`}>
                 <div
-                  className="border-1 flex items-center gap-4 border border-red-500 p-2 text-slate-300 hover:bg-slate-600 hover:text-white"
+                  className=" flex items-center gap-4  p-2 text-slate-300 hover:bg-slate-600 hover:text-white"
                   onMouseDown={(e) => e.preventDefault()}
                 >
                   <img
                     className="h-16 w-24 rounded-md"
-                    src={game.background_image || '/no-image-available.jpg'}
+                    src={game.background_image || "/no-image-available.jpg"}
                     alt={`${game.background_image} image`}
                   />
                   <p>{game.name}</p>

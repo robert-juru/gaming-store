@@ -3,7 +3,6 @@ import Header from "./Header";
 import GameFiltersSidebar from "./GameFiltersSidebar";
 import GameSortingSection from "./GameSortingSection";
 import { useState, useEffect } from "react";
-import { generatePrice } from "./PriceGenerator";
 
 export default function GameStore({
   cartGames,
@@ -16,7 +15,7 @@ export default function GameStore({
   setDisplayedGames,
   allGames,
   searchQueryData,
-  setSearchQueryData
+  setSearchQueryData,
 }) {
   useEffect(() => {
     if (displayedGames.length === 0) {
@@ -208,7 +207,7 @@ export default function GameStore({
         <main className=" grid grid-cols-[repeat(auto-fit,minmax(375px,1fr))] gap-x-8 gap-y-6">
           {gamesWithPrices.map((game) => (
             <GameCard
-            key={game.id}
+              key={game.id}
               game={game}
               handleCart={() => handleCart(game)}
               isInCart={isInCart}

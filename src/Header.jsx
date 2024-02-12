@@ -12,7 +12,7 @@ const Header = ({
   displayedGames,
   setDisplayedGames,
   searchQueryData,
-  setSearchQueryData
+  setSearchQueryData,
 }) => {
   return (
     <header className="col-span-2 flex items-center justify-between gap-8">
@@ -20,19 +20,19 @@ const Header = ({
       {location.pathname !== "/" && (
         <div className="flex-0 m-0 flex items-center justify-center gap-24 p-0">
           <Link
-            className="hover:text-white text-lg font-bold tracking-wide text-gray-300 "
+            className="text-lg font-bold tracking-wide text-gray-300 hover:text-white "
             to="/"
           >
             Store
           </Link>
           <Link
-            className="hover:text-white text-lg font-bold tracking-wide text-gray-300 "
+            className="text-lg font-bold tracking-wide text-gray-300 hover:text-white "
             to="/faq"
           >
             FAQ
           </Link>
           <Link
-            className="hover:text-white text-lg font-bold tracking-wide text-gray-300 "
+            className="text-lg font-bold tracking-wide text-gray-300 hover:text-white "
             to="/"
           >
             About us
