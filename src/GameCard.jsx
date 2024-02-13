@@ -4,7 +4,14 @@ import { IconContext } from "react-icons";
 import { generatePrice } from "./PriceGenerator";
 import { Link } from "react-router-dom";
 
-const GameCard = ({ game, handleCart, isInCart, cardHeight, overlayHeight }) => {
+const GameCard = ({
+  game,
+  handleCart,
+  isInCart,
+  cardHeight,
+  overlayHeight,
+  hoverScale
+}) => {
   const price = generatePrice(
     new Date(game.released).getFullYear(),
     game.ratings_count,
@@ -12,46 +19,56 @@ const GameCard = ({ game, handleCart, isInCart, cardHeight, overlayHeight }) => 
   );
 
   return (
-    <div className={`relative transition duration-300 hover:scale-105`}>
-      <Link to={`/game/${game.id}`} >
+    <div className={`relative transition duration-300 hover:${hoverScale}`}>
+      <Link to={`/game/${game.id}`}>
         <img
           className={`block w-full rounded-lg border-2 border-solid border-black ${cardHeight} w-full`}
-          src={game.background_image}
+          src={game.background_image || "/no-image-available.jpg"}
           alt={game.name + "background image"}
         />
       </Link>
-      <div className={`absolute ${overlayHeight} w-full -translate-y-full bg-gradient-to-r from-gray-700 via-gray-900 to-black opacity-95`}></div>
-      <div className="absolute mt-[2px] w-full -translate-y-full p-2 text-white ">
-        <span className="flex items-center justify-between ">
+      <div
+        className={`absolute ${overlayHeight} w-full -translate-y-full bg-gradient-to-r from-gray-700 via-gray-900 to-black opacity-95`}
+      ></div>
+      <div className="absolute w-full -translate-y-full p-2 text-white ">
+        <span className="flex items-center justify-between">
           <Link to={`/game/${game.id}`}>
-            <h1 className="inline text-lg font-bold">{game.name}</h1>
+            <h1 className="text-md inline font-bold">{game.name}</h1>
           </Link>
           {game.metacritic && (
-            <span className=" inline-block h-8 w-8 rounded-full border-[3px] border-solid border-green-600 text-center font-bold">
+            <span
+              className={`inline-block min-h-8 min-w-8 rounded-full border-[3px] border-solid text-center font-bold ${
+                game.metacritic < 60
+                  ? "border-red-500"
+                  : game.metacritic < 80
+                    ? "border-yellow-500"
+                    : "border-green-500"
+              }`}
+            >
               {game.metacritic}
             </span>
           )}
         </span>
-        <span className="flex items-center text-sm">
-          <StarRatingGame rating={game.rating} size={12} /> {game.rating} (
+        <span className="flex items-center text-xs">
+          <StarRatingGame rating={game.rating} size={8} /> {game.rating} (
           {game.ratings_count})
         </span>
         <p className="text-xs">
           {game.genres.map((genre) => genre.name).join(", ")}
         </p>
         <div className="flex items-center justify-between">
-          <p className="text-md font-bold">${price}</p>
+          <p className="text-sm font-bold">${price}</p>
           <button
             onClick={handleCart}
             className={`mr-2 flex items-center gap-1 self-start rounded-md ${
               isInCart(game.id) ? "bg-white" : "bg-gray-700 hover:bg-gray-500"
-            } px-2 py-1 text-sm `}
+            } px-2 py-1 text-xs `}
             disabled={isInCart(game.id)}
           >
             <IconContext.Provider
               value={{
                 color: `${isInCart(game.id) ? "black" : "white"}`,
-                size: "20px",
+                size: "16px",
                 title: "shopping cart",
                 className: "mr-2",
               }}
@@ -66,7 +83,7 @@ const GameCard = ({ game, handleCart, isInCart, cardHeight, overlayHeight }) => 
           </button>
         </div>
       </div>
-    </div>
+      </div>
   );
 };
 export default GameCard;

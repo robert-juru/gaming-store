@@ -22,7 +22,7 @@ const HomePage = ({
 }) => {
   return (
     <div className="m-0 ">
-      <header className="px-16 py-4">
+      <header className="md:px-16 px-4 py-4">
         <Header
           fetchedGames={fetchedGames}
           cartGames={cartGames}
@@ -52,13 +52,13 @@ const HomePage = ({
           isInCart={isInCart}
         />
       </section>
-      <section className="md:px-18 px-8 pt-16 sm:px-12 lg:px-24 xl:px-48">
+      {/* <section className="md:px-18 px-8 pt-16 sm:px-12 lg:px-24 xl:px-48"> */}
         <HomePageTopRatedByGamersSlider
           topRatedByGamers={homePageData.topRatedByGamers.results}
           handleCart={handleCart}
           isInCart={isInCart}
         />
-      </section>
+      {/* </section> */}
       <HomePageTopUpcomingSection
         topUpcoming={homePageData.topUpcoming.results}
         handleCart={handleCart}

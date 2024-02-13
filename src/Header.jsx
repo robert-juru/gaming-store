@@ -18,21 +18,21 @@ const Header = ({
     <header className="col-span-2 flex items-center justify-between gap-8">
       <GameverseLogo />
       {location.pathname !== "/" && (
-        <div className="flex-0 m-0 flex items-center justify-center gap-24 p-0">
+        <div className="flex-0 m-0 flex items-center justify-center lg:gap-24 gap-8 text-xs p-0">
           <Link
-            className="text-lg font-bold tracking-wide text-gray-300 hover:text-white "
+            className="md:text-lg font-bold tracking-wide text-gray-300 hover:text-white "
             to="/"
           >
             Store
           </Link>
           <Link
-            className="text-lg font-bold tracking-wide text-gray-300 hover:text-white "
+            className="md:text-lg font-bold tracking-wide text-gray-300 hover:text-white "
             to="/faq"
           >
             FAQ
           </Link>
           <Link
-            className="text-lg font-bold tracking-wide text-gray-300 hover:text-white "
+            className="md:text-lg font-bold tracking-wide text-gray-300 hover:text-white "
             to="/"
           >
             About us

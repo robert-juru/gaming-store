@@ -29,6 +29,7 @@ const HomePageTopUpcomingSection = ({
               isInCart={isInCart}
               cardHeight={"h-96"}
               overlayHeight={"h-[110px]"}
+              hoverScale={"scale-105"}
             />
           </div>
         ))}
@@ -44,6 +45,7 @@ const HomePageTopUpcomingSection = ({
               isInCart={isInCart}
               cardHeight={"h-80"}
               overlayHeight={"h-[110px]"}
+              hoverScale={"scale-105"}
             />
           </div>
         ))}
@@ -59,6 +61,7 @@ const HomePageTopUpcomingSection = ({
               isInCart={isInCart}
               cardHeight={"h-64"}
               overlayHeight={"h-[110px]"}
+              hoverScale={"scale-105"}
             />
           </div>
         ))}
@@ -72,8 +75,9 @@ const HomePageTopUpcomingSection = ({
               game={game}
               handleCart={() => handleCart(game)}
               isInCart={isInCart}
-              cardHeight={"h-48"}
+              cardHeight={"h-64"}
               overlayHeight={"h-[110px]"}
+              hoverScale={"scale-105"}
             />
           </div>
         ))}

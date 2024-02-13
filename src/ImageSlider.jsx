@@ -14,7 +14,7 @@ export const GamePagePhotoSlider = ({ images, name }) => {
       <div key={index} className="p-2">
         <img
           className="h-auto max-h-[480px] w-full cursor-pointer rounded-md"
-          src={image || '/no-image-available.jpg'}
+          src={image || "/no-image-available.jpg"}
           alt={`${name} image ${index + 1}`}
         />
       </div>
@@ -56,7 +56,7 @@ export const HomePageMainSlider = ({
     infinite: true,
     autoplay: true,
     autoplaySpeed: 5000,
-    arrows: true,
+    arrows: false,
     slidesToShow: 1,
     slidesToScroll: 1,
   };
@@ -80,8 +80,9 @@ export const HomePageMainSlider = ({
               game={game}
               handleCart={() => handleCart(game)}
               isInCart={isInCart}
-              cardHeight={"h-96"}
+              cardHeight={"h-[460px]"}
               overlayHeight={"h-[110px]"}
+              hoverScale={"scale-100"}
             />
           </div>
         ))}
@@ -100,19 +101,12 @@ export const HomePageTopRatedByCriticsSlider = ({
     dots: true,
     infinite: false,
     speed: 500,
-    slidesToShow: 4,
-    slidesToScroll: 4,
+    slidesToShow: 3,
+    slidesToScroll: 3,
     initialSlide: 0,
     responsive: [
       {
         breakpoint: 1024,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
-        },
-      },
-      {
-        breakpoint: 768,
         settings: {
           slidesToShow: 2,
           slidesToScroll: 2,
@@ -148,6 +142,7 @@ export const HomePageTopRatedByCriticsSlider = ({
               isInCart={isInCart}
               cardHeight={"h-72"}
               overlayHeight={"h-[110px]"}
+              hoverScale={"scale-105"}
             />
           </div>
         ))}
@@ -190,7 +185,8 @@ export const HomePageNewReleasesSlider = ({
               handleCart={() => handleCart(game)}
               isInCart={isInCart}
               cardHeight={"h-48"}
-              overlayHeight={"h-[110px]"}
+              overlayHeight={"h-24"}
+              hoverScale={"scale-[102%]"}
             />
           </div>
         ))}
@@ -249,6 +245,7 @@ export const HomePageTopSellersSlider = ({
               isInCart={isInCart}
               cardHeight={"h-64"}
               overlayHeight={"h-[110px]"}
+              hoverScale={"scale-105"}
             />
           </div>
         ))}
@@ -267,14 +264,22 @@ export const HomePageRecentlyUpdatedSlider = ({
     className: "center",
     centerMode: true,
     infinite: true,
-    centerPadding: "0px",
+    centerPadding: "60px",
     slidesToShow: 3,
     speed: 500,
     responsive: [
       {
-        breakpoint: 640,
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2,
+          centerMode: false,
+        },
+      },
+      {
+        breakpoint: 768,
         settings: {
           slidesToShow: 1,
+          centerMode: false,
         },
       },
     ],
@@ -298,8 +303,9 @@ export const HomePageRecentlyUpdatedSlider = ({
               game={game}
               handleCart={() => handleCart(game)}
               isInCart={isInCart}
-              cardHeight={"h-64"}
-              overlayHeight={"h-[110px]"}
+              cardHeight={"h-72"}
+              overlayHeight={"h-[115px]"}
+              hoverScale={"scale-105"}
             />
           </div>
         ))}
@@ -329,7 +335,8 @@ export const HomePageTopRatedByGamersSlider = ({
     return { ...game, price };
   });
   return (
-    <div>
+    // <div>
+    <section className="md:px-18 px-8 pt-16 sm:px-12 lg:px-24 xl:px-48">
       <h2 className="mb-4 text-3xl text-white">Top Rated by Gamers</h2>
       <Slider {...settings}>
         {topRatedByGamersWithPrices
@@ -342,12 +349,14 @@ export const HomePageTopRatedByGamersSlider = ({
                 key={game.id}
                 handleCart={() => handleCart(game)}
                 isInCart={isInCart}
-                cardHeight={"h-64"}
-                overlayHeight={"h-[110px]"}
+                cardHeight={"h-72"}
+                overlayHeight={"h-[115px]"}
+                hoverScale={"scale-[102%]"}
               />
             </div>
           ))}
       </Slider>
-    </div>
+      {/* </div> */}
+    </section>
   );
 };

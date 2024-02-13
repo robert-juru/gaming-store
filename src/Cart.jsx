@@ -17,7 +17,7 @@ const Cart = ({ cartGames, fetchedGames, removeFromCart }) => {
         </span>
         <Link
           to="/shopping-cart"
-          className="cursor-pointer text-lg text-white "
+          className="cursor-pointer text-sm md:text-lg text-white "
         >
           <div className="flex items-center">
             <IconContext.Provider

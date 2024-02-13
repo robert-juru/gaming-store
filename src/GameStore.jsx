@@ -213,6 +213,7 @@ export default function GameStore({
               isInCart={isInCart}
               cardHeight={"h-64"}
               overlayHeight={"h-[110px]"}
+              hoverScale={"scale-[102%]"}
             />
           ))}
         </main>
