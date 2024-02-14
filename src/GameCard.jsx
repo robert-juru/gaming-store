@@ -10,13 +10,15 @@ const GameCard = ({
   isInCart,
   cardHeight,
   overlayHeight,
-  hoverScale
+  hoverScale,
 }) => {
   const price = generatePrice(
     new Date(game.released).getFullYear(),
     game.ratings_count,
     game.rating,
   );
+
+  const nameLength = game.name.length;
 
   return (
     <div className={`relative transition duration-300 hover:${hoverScale}`}>
@@ -30,10 +32,24 @@ const GameCard = ({
       <div
         className={`absolute ${overlayHeight} w-full -translate-y-full bg-gradient-to-r from-gray-700 via-gray-900 to-black opacity-95`}
       ></div>
-      <div className="absolute w-full -translate-y-full p-2 text-white ">
+      <div
+        className={`absolute w-full -translate-y-full ${
+          nameLength > 20 ? "p-2" : "p-3"
+        } text-white `}
+      >
         <span className="flex items-center justify-between">
           <Link to={`/game/${game.id}`}>
-            <h1 className="text-md inline font-bold">{game.name}</h1>
+            <h1
+              className={` ${
+                nameLength > 30
+                  ? "text-sm"
+                  : nameLength > 18
+                    ? "text-md"
+                    : "text-lg"
+              }  inline font-bold`}
+            >
+              {game.name}{" "}
+            </h1>
           </Link>
           {game.metacritic && (
             <span
@@ -83,7 +99,7 @@ const GameCard = ({
           </button>
         </div>
       </div>
-      </div>
+    </div>
   );
 };
 export default GameCard;

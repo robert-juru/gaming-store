@@ -269,7 +269,7 @@ export const HomePageRecentlyUpdatedSlider = ({
     speed: 500,
     responsive: [
       {
-        breakpoint: 1024,
+        breakpoint: 1280,
         settings: {
           slidesToShow: 2,
           centerMode: false,
@@ -335,7 +335,6 @@ export const HomePageTopRatedByGamersSlider = ({
     return { ...game, price };
   });
   return (
-    // <div>
     <section className="md:px-18 px-8 pt-16 sm:px-12 lg:px-24 xl:px-48">
       <h2 className="mb-4 text-3xl text-white">Top Rated by Gamers</h2>
       <Slider {...settings}>
@@ -350,13 +349,12 @@ export const HomePageTopRatedByGamersSlider = ({
                 handleCart={() => handleCart(game)}
                 isInCart={isInCart}
                 cardHeight={"h-72"}
-                overlayHeight={"h-[115px]"}
+                overlayHeight={"h-[110px]"}
                 hoverScale={"scale-[102%]"}
               />
             </div>
           ))}
       </Slider>
-      {/* </div> */}
     </section>
   );
 };

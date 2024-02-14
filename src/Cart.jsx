@@ -17,7 +17,7 @@ const Cart = ({ cartGames, fetchedGames, removeFromCart }) => {
         </span>
         <Link
           to="/shopping-cart"
-          className="cursor-pointer text-sm md:text-lg text-white "
+          className="cursor-pointer text-sm text-white md:text-lg "
         >
           <div className="flex items-center">
             <IconContext.Provider
@@ -30,12 +30,13 @@ const Cart = ({ cartGames, fetchedGames, removeFromCart }) => {
             >
               <FaCartShopping />
             </IconContext.Provider>
-            Cart
+            <span className="hidden md:inline-block">Cart</span>
             <IconContext.Provider
               value={{
                 color: "white",
                 size: "18px",
                 title: "expand more",
+                className: "hidden md:block",
               }}
             >
               <MdOutlineExpandMore />
@@ -45,9 +46,9 @@ const Cart = ({ cartGames, fetchedGames, removeFromCart }) => {
         <div className="relative">
           <div
             id="cart"
-            className=" scrollbar-thumb-slate-300 scrollbar-thin scrollbar-track-transparent invisible absolute right-0 top-8 z-10 flex max-h-96 translate-y-10 transform flex-col
-            overflow-y-auto overflow-x-hidden rounded-md bg-gray-600 p-2
-          opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100 lg:group-hover:visible  "
+            className=" invisible absolute right-0 top-8 z-10 flex max-h-96 translate-y-10 transform flex-col overflow-y-auto overflow-x-hidden rounded-md
+            bg-gray-600 p-2 opacity-0 transition-all duration-500
+          scrollbar-thin scrollbar-track-transparent scrollbar-thumb-slate-300 group-hover:translate-y-0 group-hover:opacity-100 lg:group-hover:visible  "
           >
             {cartGames.length == 0 && (
               <span className="flex w-96 items-center justify-center gap-2 px-2 pb-3 pt-2  text-sm text-white">
