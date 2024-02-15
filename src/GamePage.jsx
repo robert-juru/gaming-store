@@ -83,7 +83,7 @@ const GamePage = ({
         removeFromCart={removeFromCart}
         fetchedGames={fetchedGames}
       />
-      <div className="px-16 py-8 text-gray-300">
+      <div className="px-4 py-8 text-sm text-gray-300 md:px-8 md:text-base lg:px-16">
         <div>
           <span>
             <Link className="hover:text-white" to="/">
@@ -95,11 +95,11 @@ const GamePage = ({
               {gamePageData.details.name || ""}
             </Link>
           </span>
-          <h1 className="pb-8 pt-2 text-4xl font-bold">
+          <h1 className="pb-8 pt-2 text-2xl font-bold sm:text-3xl md:text-4xl">
             {gamePageData.details.name || ""}
           </h1>
         </div>
-        <div className="mb-16 gap-16 lg:grid lg:grid-cols-[minmax(0,2.5fr)_minmax(0,1fr)]">
+        <div className="mb-16 gap-16 xl:grid xl:grid-cols-[minmax(0,2.5fr)_minmax(0,1fr)]">
           <section className="">
             <GamePagePhotoSlider
               images={images}
@@ -110,7 +110,7 @@ const GamePage = ({
             <div>
               {gamePageData.details.background_image && (
                 <img
-                  className="hidden rounded-md pb-4 lg:block"
+                  className="hidden rounded-md pb-4 xl:block"
                   src={gamePageData.details.background_image}
                   alt="GTA V icon"
                 ></img>
@@ -179,7 +179,7 @@ const GamePage = ({
               </div>
             </div>
             {metascore && (
-              <span className="my-8 flex items-center gap-4 rounded-md bg-black">
+              <span className="my-8 flex items-center justify-center gap-4 rounded-md bg-black">
                 <span
                   className={`${metascore < 60 && "bg-red-500"} ${
                     metascore < 80 && "bg-yellow-500"
@@ -220,7 +220,7 @@ const GamePage = ({
           </section>
         </div>
         <section className="mb-8 lg:px-24 xl:px-48">
-          <h3 className="text-xl font-bold tracking-wide">ABOUT THIS GAME </h3>
+          <h3 className="text-lg md:text-xl font-bold tracking-wide">ABOUT THIS GAME </h3>
           <hr className="my-2 border-slate-800" />
           <div dangerouslySetInnerHTML={{ __html: sanitizedGameDescription }} />
         </section>
@@ -254,13 +254,13 @@ const GamePage = ({
         </section>
         {minRequirements && (
           <section className="lg:px-24 xl:px-48">
-            <h3 className="mt-4 text-xl font-bold tracking-wide">
+            <h3 className="mt-4 text-lg md:text-xl font-bold tracking-wide">
               SYSTEM REQUIREMENTS
             </h3>
             <hr className="my-2 border-slate-800" />
             <div
               className={`grid ${
-                recommendedRequirements && "grid-cols-2"
+                recommendedRequirements && "md:grid-cols-2"
               } gap-4`}
             >
               <div>{minRequirements}</div>

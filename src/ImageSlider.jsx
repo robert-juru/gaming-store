@@ -82,7 +82,7 @@ export const HomePageMainSlider = ({
               isInCart={isInCart}
               cardHeight={"h-[460px]"}
               overlayHeight={"h-[110px]"}
-              hoverScale={"scale-100"}
+              hoverScale={"hover:scale-100"}
             />
           </div>
         ))}
@@ -142,7 +142,7 @@ export const HomePageTopRatedByCriticsSlider = ({
               isInCart={isInCart}
               cardHeight={"h-72"}
               overlayHeight={"h-[110px]"}
-              hoverScale={"scale-105"}
+              hoverScale={"hover:scale-105"}
             />
           </div>
         ))}
@@ -185,8 +185,8 @@ export const HomePageNewReleasesSlider = ({
               handleCart={() => handleCart(game)}
               isInCart={isInCart}
               cardHeight={"h-48"}
-              overlayHeight={"h-24"}
-              hoverScale={"scale-[102%]"}
+              overlayHeight={"h-[100px]"}
+              hoverScale={"hover:scale-[102%]"}
             />
           </div>
         ))}
@@ -245,7 +245,7 @@ export const HomePageTopSellersSlider = ({
               isInCart={isInCart}
               cardHeight={"h-64"}
               overlayHeight={"h-[110px]"}
-              hoverScale={"scale-105"}
+              hoverScale={"hover:scale-105"}
             />
           </div>
         ))}
@@ -305,7 +305,7 @@ export const HomePageRecentlyUpdatedSlider = ({
               isInCart={isInCart}
               cardHeight={"h-72"}
               overlayHeight={"h-[115px]"}
-              hoverScale={"scale-105"}
+              hoverScale={"hover:scale-105"}
             />
           </div>
         ))}
@@ -350,7 +350,7 @@ export const HomePageTopRatedByGamersSlider = ({
                 isInCart={isInCart}
                 cardHeight={"h-72"}
                 overlayHeight={"h-[110px]"}
-                hoverScale={"scale-[102%]"}
+                hoverScale={"hover:scale-[102%]"}
               />
             </div>
           ))}

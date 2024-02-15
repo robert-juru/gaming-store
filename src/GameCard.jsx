@@ -21,7 +21,7 @@ const GameCard = ({
   const nameLength = game.name.length;
 
   return (
-    <div className={`relative transition duration-300 hover:${hoverScale}`}>
+    <div className={`relative transition duration-300 ${hoverScale}`}>
       <Link to={`/game/${game.id}`}>
         <img
           className={`block w-full rounded-lg border-2 border-solid border-black ${cardHeight} w-full`}
