@@ -1,13 +1,7 @@
 import { IconContext } from "react-icons";
 import { IoMdStar, IoMdStarHalf } from "react-icons/io";
-import { useState } from "react";
 
 const GameFiltersSidebar = ({
-  // filterGamesByGenre,
-  // filterGamesByReleaseYear,
-  // filterGamesByMinimumRating,
-  // setLauncherSelected,
-  // setPlatformSelected,
   handleGenreSelection,
   handleRatingSelection,
   handleReleaseYearSelection,
@@ -16,7 +10,6 @@ const GameFiltersSidebar = ({
   releaseYearSelected,
 }) => {
   
-
   const gameGenres = [
     {
       id: 0,

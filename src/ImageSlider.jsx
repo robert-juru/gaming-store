@@ -59,6 +59,14 @@ export const HomePageMainSlider = ({
     arrows: false,
     slidesToShow: 1,
     slidesToScroll: 1,
+    responsive: [
+      {
+        breakpoint: 640,
+        settings: {
+          dots: false,
+        },
+      },
+    ],
   };
 
   const mainGamesWithPrices = mainGames.map((game) => {
@@ -74,13 +82,13 @@ export const HomePageMainSlider = ({
     <div>
       <Slider {...settings}>
         {mainGamesWithPrices.map((game) => (
-          <div className="" key={game.id}>
+          <div key={game.id}>
             <GameCard
               cartGames={cartGames}
               game={game}
               handleCart={() => handleCart(game)}
               isInCart={isInCart}
-              cardHeight={"h-[460px]"}
+              cardHeight={"md:h-[460px]"}
               overlayHeight={"h-[110px]"}
               hoverScale={"hover:scale-100"}
             />
@@ -117,6 +125,7 @@ export const HomePageTopRatedByCriticsSlider = ({
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
+          dots: false,
         },
       },
     ],
@@ -140,7 +149,7 @@ export const HomePageTopRatedByCriticsSlider = ({
               game={game}
               handleCart={() => handleCart(game)}
               isInCart={isInCart}
-              cardHeight={"h-72"}
+              cardHeight={"md:h-72"}
               overlayHeight={"h-[110px]"}
               hoverScale={"hover:scale-105"}
             />
@@ -184,8 +193,8 @@ export const HomePageNewReleasesSlider = ({
               game={game}
               handleCart={() => handleCart(game)}
               isInCart={isInCart}
-              cardHeight={"h-48"}
-              overlayHeight={"h-[100px]"}
+              cardHeight={"md:h-48"}
+              overlayHeight={"h-[105px]"}
               hoverScale={"hover:scale-[102%]"}
             />
           </div>
@@ -219,6 +228,7 @@ export const HomePageTopSellersSlider = ({
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
+          dots: false,
         },
       },
       {},
@@ -243,7 +253,7 @@ export const HomePageTopSellersSlider = ({
               game={game}
               handleCart={() => handleCart(game)}
               isInCart={isInCart}
-              cardHeight={"h-64"}
+              cardHeight={"md:h-64"}
               overlayHeight={"h-[110px]"}
               hoverScale={"hover:scale-105"}
             />
@@ -303,7 +313,7 @@ export const HomePageRecentlyUpdatedSlider = ({
               game={game}
               handleCart={() => handleCart(game)}
               isInCart={isInCart}
-              cardHeight={"h-72"}
+              cardHeight={"md:h-72"}
               overlayHeight={"h-[115px]"}
               hoverScale={"hover:scale-105"}
             />
@@ -325,6 +335,14 @@ export const HomePageTopRatedByGamersSlider = ({
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
+    responsive: [
+      {
+        breakpoint: 1280,
+        settings: {
+          dots: false,
+        },
+      },
+    ],
   };
   const topRatedByGamersWithPrices = topRatedByGamers.map((game) => {
     const price = generatePrice(
@@ -335,7 +353,7 @@ export const HomePageTopRatedByGamersSlider = ({
     return { ...game, price };
   });
   return (
-    <section className="md:px-18 px-8 pt-16 sm:px-12 lg:px-24 xl:px-48">
+    <section className="md:px-18 px-8 pt-4 sm:pt-8 md:pt-16 sm:px-12 lg:px-24 xl:px-48">
       <h2 className="mb-4 text-3xl text-white">Top Rated by Gamers</h2>
       <Slider {...settings}>
         {topRatedByGamersWithPrices
@@ -348,7 +366,7 @@ export const HomePageTopRatedByGamersSlider = ({
                 key={game.id}
                 handleCart={() => handleCart(game)}
                 isInCart={isInCart}
-                cardHeight={"h-72"}
+                cardHeight={"md:h-72"}
                 overlayHeight={"h-[110px]"}
                 hoverScale={"hover:scale-[102%]"}
               />

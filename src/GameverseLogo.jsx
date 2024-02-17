@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const GameverseLogo = () => {
   return (
-    <Link to="/home">
+    <Link to="/">
       <div className="flex cursor-pointer items-center transition-all hover:scale-105">
         <img
           className="w-16 min-w-16"

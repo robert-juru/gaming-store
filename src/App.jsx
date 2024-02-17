@@ -97,7 +97,7 @@ const App = () => {
   return (
     <Routes>
       <Route
-        path="/home"
+        path="/"
         element={
           <HomePage
             fetchedGames={allGamesWithPrices}
@@ -127,7 +127,7 @@ const App = () => {
         />
       ))}
       <Route
-        path="/"
+        path="/store"
         element={
           <GameStore
             gamesQuery={storeGamesQuery}

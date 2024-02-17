@@ -2,7 +2,6 @@ import { MdOutlineExpandMore } from "react-icons/md";
 import { FaCartShopping } from "react-icons/fa6";
 import { IoIosClose } from "react-icons/io";
 import { IconContext } from "react-icons";
-import { generatePrice } from "./PriceGenerator";
 import { Link } from "react-router-dom";
 
 const Cart = ({ cartGames, fetchedGames, removeFromCart }) => {
@@ -60,11 +59,6 @@ const Cart = ({ cartGames, fetchedGames, removeFromCart }) => {
                 (fetchedGame) => fetchedGame.id === cartGame.id,
               );
               if (matchedGame) {
-                // const price = generatePrice(
-                //   new Date(matchedGame.released).getFullYear(),
-                //   matchedGame.ratings_count,
-                //   matchedGame.rating,
-                // );
                 return (
                   <>
                     <li

@@ -15,17 +15,17 @@ const ShoppingCartPage = ({ cartGames, removeFromCart, fetchedGames }) => {
       />
       <hr className="border-slate-800  pb-4 font-bold md:pb-12" />
       {cartGames.length == 0 && (
-        <div className="mx-16 flex flex-col items-center justify-center border border-solid border-slate-800 pb-12 pt-4 text-gray-300">
+        <div className="mx-4 h-full px-8 md:mx-16 flex flex-col items-center justify-center  pb-12 pt-4 text-gray-300">
           <img
             className="p-8"
             src="green-empty-cart.png"
             alt="green sad empty cart"
           ></img>
           <div className="flex flex-col items-center justify-center gap-2">
-            <h2 className="pb-2 text-3xl">
+            <h2 className="text-center pb-2 text-xl sm:text-2xl lg:text-3xl">
               Cart's feeling a bit empty. Time to fill it with gaming joy!
             </h2>
-            <Link className="text-lg hover:text-white hover:underline" to="/">
+            <Link className="text-sm sm:text-base lg:text-lg hover:text-white hover:underline" to="/">
               Shop for Games
             </Link>
           </div>

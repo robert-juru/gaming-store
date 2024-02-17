@@ -77,12 +77,14 @@ const GamePage = ({
   );
 
   return (
-    <div className="m-0 p-4">
+    <div className="md:px-16 px-2 py-4 pb-0">
       <Header
         cartGames={cartGames}
         removeFromCart={removeFromCart}
         fetchedGames={fetchedGames}
       />
+    <hr className="border-slate-800  pb-4  font-bold" />
+
       <div className="px-4 py-8 text-sm text-gray-300 md:px-8 md:text-base lg:px-16">
         <div>
           <span>
@@ -204,7 +206,7 @@ const GamePage = ({
               </span>
             )}
             <span className="flex gap-4">
-              <span className="p-2 text-center text-4xl font-bold text-white">
+              <span className="p-2 text-center text-3xl md:text-4xl font-bold text-white">
                 ${price}
               </span>
               <button
@@ -212,7 +214,7 @@ const GamePage = ({
                 disabled={isInCart(gameId)}
                 className={`${
                   isInCart(gameId) ? "bg-blue-800" : ""
-                } w-full self-center rounded-md bg-blue-500 p-4 text-center text-lg text-white  hover:bg-blue-800`}
+                } w-full self-center rounded-md bg-blue-500 p-4 text-center text-base md:text-lg text-white  hover:bg-blue-800`}
               >
                 {isInCart(gameId) ? "In Cart" : "Add to cart"}
               </button>

@@ -30,8 +30,8 @@ const HomePage = ({
           displayedGames={displayedGames}
           setDisplayedGames={setDisplayedGames}
         />
+      <hr className="border-slate-800  pb-4  font-bold" />
       </header>
-      <hr className="border-slate-800  pb-4 md:pb-12 font-bold" />
       <section >
         <HomePageMainSlider
           mainGames={homePageData.mostPopular.results}
@@ -39,40 +39,38 @@ const HomePage = ({
           isInCart={isInCart}
         />
       </section>
-      <section className="md:px-18 px-8 pt-16 sm:px-12 lg:px-24 xl:px-48">
+      <section className="md:px-18 px-8 pt-4 sm:pt-8 md:pt-16 sm:px-12 lg:px-24 xl:px-48">
         <HomePageTopSellersSlider
           topSellers={homePageData.topSellers.results}
           handleCart={handleCart}
           isInCart={isInCart}
         />
       </section>
-      <section className="md:px-18 px-8 pt-16 sm:px-12 lg:px-24 xl:px-48">
+      <section className="md:px-18 px-8 pt-4 sm:pt-8 md:pt-16 sm:px-12 lg:px-24 xl:px-48">
         <HomePageNewReleasesSlider
           newReleases={homePageData.newReleases.results}
           handleCart={handleCart}
           isInCart={isInCart}
         />
       </section>
-      {/* <section className="md:px-18 px-8 pt-16 sm:px-12 lg:px-24 xl:px-48"> */}
         <HomePageTopRatedByGamersSlider
           topRatedByGamers={homePageData.topRatedByGamers.results}
           handleCart={handleCart}
           isInCart={isInCart}
         />
-      {/* </section> */}
       <HomePageTopUpcomingSection
         topUpcoming={homePageData.topUpcoming.results}
         handleCart={handleCart}
         isInCart={isInCart}
       />
-      <section className="md:px-18 px-8 pt-16 sm:px-12 lg:px-24 xl:px-48">
+      <section className="md:px-18 px-8 pt-4 sm:pt-8 md:pt-16 sm:px-12 lg:px-24 xl:px-48">
         <HomePageRecentlyUpdatedSlider
           recentlyUpdated={homePageData.recentlyUpdated.results}
           handleCart={handleCart}
           isInCart={isInCart}
         />
       </section>
-      <section className="md:px-18 px-8 pt-16 sm:px-12 lg:px-24 xl:px-48">
+      <section className="md:px-18 px-8 pt-4 sm:pt-8 md:pt-16 sm:px-12 lg:px-24 xl:px-48">
         <HomePageTopRatedByCriticsSlider
           topRatedByCritics={homePageData.topRatedByCritics.results}
           handleCart={handleCart}

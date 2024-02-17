@@ -24,7 +24,7 @@ const GameCard = ({
     <div className={`relative transition duration-300 ${hoverScale}`}>
       <Link to={`/game/${game.id}`}>
         <img
-          className={`block w-full rounded-lg border-2 border-solid border-black ${cardHeight} w-full`}
+          className={`block w-full rounded-lg border-2 border-solid border-black h-64 ${cardHeight} w-full`}
           src={game.background_image || "/no-image-available.jpg"}
           alt={game.name + "background image"}
         />
@@ -69,7 +69,7 @@ const GameCard = ({
           <StarRatingGame rating={game.rating} size={8} /> {game.rating} (
           {game.ratings_count})
         </span>
-        <p className="text-xs">
+        <p className="text-xs pb-1">
           {game.genres.map((genre) => genre.name).join(", ")}
         </p>
         <div className="flex items-center justify-between">
