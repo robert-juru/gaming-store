@@ -93,7 +93,7 @@ const SearchBar = ({
         </div>
       </div>
       {searchQuery.data && isFocused && (
-        <div className=" absolute left-0 top-full z-50 max-h-60 w-full overflow-y-scroll rounded-md bg-slate-700 scrollbar-thin scrollbar-track-transparent scrollbar-thumb-slate-300">
+        <div className=" absolute left-0 top-full z-50 max-h-60 w-[110%] sm:w-full overflow-y-scroll rounded-md bg-slate-700 scrollbar-thin scrollbar-track-transparent scrollbar-thumb-slate-300">
           {searchedGames.slice(0, 8).map((game) => (
             <div key={game.id} onClick={(e) => e.stopPropagation()}>
               <Link to={`/game/${game.id}`}>
@@ -102,7 +102,7 @@ const SearchBar = ({
                   onMouseDown={(e) => e.preventDefault()}
                 >
                   <img
-                    className="h-16 w-24 rounded-md"
+                    className="sm:h-16 sm:w-24 h-12 w-16 rounded-md"
                     src={game.background_image || "/no-image-available.jpg"}
                     alt={`${game.background_image} image`}
                   />

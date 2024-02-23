@@ -39,7 +39,8 @@ const Header = ({
       )}
 
       {location.pathname === "/store" && (
-        <SearchBar
+        
+        <SearchBar className="hidden"
           displayedGames={displayedGames}
           setDisplayedGames={setDisplayedGames}
           searchQueryData={searchQueryData}

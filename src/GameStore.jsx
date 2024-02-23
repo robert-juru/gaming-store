@@ -2,6 +2,7 @@ import GameCard from "./GameCard";
 import Header from "./Header";
 import GameFiltersSidebar from "./GameFiltersSidebar";
 import GameSortingSection from "./GameSortingSection";
+import MobileFilterAndSortSection from "./MobileFilterAndSortSection";
 import { useState, useEffect } from "react";
 
 export default function GameStore({
@@ -170,7 +171,7 @@ export default function GameStore({
   // if (gamesQuery.isError) return <h1>Error loading data!!!</h1>;
 
   return (
-    <div className="m-0 grid grid-cols-1 gap-4 p-4 md:grid-cols-[200px_1fr] md:px-16">
+    <div className="m-0 grid grid-cols-1 gap-4 p-4 md:grid-cols-[200px_1fr] md:px-4 lg:px-8 xl:px-16">
       <Header
         removeFromCart={removeFromCart}
         cartGames={cartGames}
@@ -188,7 +189,7 @@ export default function GameStore({
         releaseYearSelected={releaseYearSelected}
         minimumRatingSelected={minimumRatingSelected}
       />
-      <div className="grid grid-rows-[64px] gap-8">
+      <div className="grid gap-8">
         <GameSortingSection
           handleLauncherSelection={handleLauncherSelection}
           handlePlatformSelection={handlePlatformSelection}
@@ -204,7 +205,22 @@ export default function GameStore({
           setSortingOption={setSortingOption}
           displayedGames={displayedGames}
         />
-        <main className=" grid grid-cols-[repeat(auto-fit,minmax(375px,1fr))] gap-x-8 gap-y-6">
+        <MobileFilterAndSortSection
+          handleLauncherSelection={handleLauncherSelection}
+          handlePlatformSelection={handlePlatformSelection}
+          platformSelected={platformSelected}
+          launcherSelected={launcherSelected}
+          sortGamesByRatingAsc={sortGamesByRatingAsc}
+          sortGamesByRatingDesc={sortGamesByRatingDesc}
+          sortGamesByPopularity={sortGamesByPopularity}
+          sortGamesByLatest={sortGamesByLatest}
+          sortGamesByPriceAsc={sortGamesByPriceAsc}
+          sortGamesByPriceDesc={sortGamesByPriceDesc}
+          sortingOption={sortingOption}
+          setSortingOption={setSortingOption}
+          displayedGames={displayedGames}
+        />
+        <main className="grid grid-cols-[repeat(auto-fit,minmax(320px,1fr))] gap-x-8 gap-y-6">
           {gamesWithPrices.map((game) => (
             <GameCard
               key={game.id}

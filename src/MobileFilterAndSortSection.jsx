@@ -1,6 +1,7 @@
-import GameFiltersLauncherPlatform from "./GameFiltersLauncherPlatform";
 import GameSorting from "./GameSorting";
-const GameSortingSection = ({
+import MobileFiltersButton from "./MobileFiltersButton";
+
+const MobileFilterAndSortSection = ({
   handleLauncherSelection,
   handlePlatformSelection,
   platformSelected,
@@ -16,13 +17,8 @@ const GameSortingSection = ({
   displayedGames,
 }) => {
   return (
-    <section className="col-span-full hidden items-center justify-between  gap-4 rounded-md bg-gray-900 p-4 text-slate-200 md:flex lg:gap-8">
-      <GameFiltersLauncherPlatform
-        handleLauncherSelection={handleLauncherSelection}
-        handlePlatformSelection={handlePlatformSelection}
-        platformSelected={platformSelected}
-        launcherSelected={launcherSelected}
-      />
+    <section className="col-span-full flex items-center justify-between  gap-4 rounded-md text-slate-200 md:hidden">
+      <MobileFiltersButton />
       <GameSorting
         sortGamesByRatingAsc={sortGamesByRatingAsc}
         sortGamesByRatingDesc={sortGamesByRatingDesc}
@@ -37,4 +33,5 @@ const GameSortingSection = ({
     </section>
   );
 };
-export default GameSortingSection;
+
+export default MobileFilterAndSortSection;
