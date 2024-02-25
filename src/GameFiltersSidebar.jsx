@@ -9,7 +9,6 @@ const GameFiltersSidebar = ({
   minimumRatingSelected,
   releaseYearSelected,
 }) => {
-  
   const gameGenres = [
     {
       id: 0,
@@ -94,9 +93,11 @@ const GameFiltersSidebar = ({
   ];
 
   return (
-    <aside className="hidden md:block">
+    <aside>
       <nav className="rounded-md bg-gray-900 px-2 py-4  text-slate-200">
         <ul>
+        <h1 className="md:hidden text-2xl text-white pb-4">Filter games</h1>
+        <hr className="border-slate-700  pb-4  font-bold md:hidden" />
           <h3 className="pb-4 pl-2 text-xs font-bold tracking-wide">GENRE</h3>
           {gameGenres.map((genre) => (
             <li
@@ -178,7 +179,11 @@ const GameFiltersSidebar = ({
             <IconContext.Provider
               value={{ color: "gold", title: "star rating", size: "24px" }}
             >
-              <IoMdStar />
+              <IoMdStar
+                className={`${
+                  minimumRatingSelected === 4 && "scale-105 bg-gray-800"
+                }`}
+              />
               <IoMdStar />
               <IoMdStar />
               <IoMdStar />
@@ -249,6 +254,7 @@ const GameFiltersSidebar = ({
               <IoMdStar />
             </IconContext.Provider>
           </li>
+          <hr className="mb-4 mt-3 border-slate-600 md:hidden" />
         </ul>
       </nav>
     </aside>

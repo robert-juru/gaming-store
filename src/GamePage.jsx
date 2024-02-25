@@ -77,7 +77,7 @@ const GamePage = ({
   );
 
   return (
-    <div className="md:px-16 px-2 py-4 pb-0">
+    <div className="md:px-16 p-4 pb-0">
       <Header
         cartGames={cartGames}
         removeFromCart={removeFromCart}
@@ -89,9 +89,9 @@ const GamePage = ({
         <div>
           <span>
             <Link className="hover:text-white" to="/">
-              All Games{" "}
+              Store 
             </Link>
-            <span>&gt;</span>
+            <span> &gt;</span>
             <Link className="hover:text-white" to={`/game/${gameId}`}>
               {" "}
               {gamePageData.details.name || ""}

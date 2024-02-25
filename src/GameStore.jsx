@@ -181,6 +181,7 @@ export default function GameStore({
         searchQueryData={searchQueryData}
         setSearchQueryData={setSearchQueryData}
       />
+      <div className="hidden md:block">
       <GameFiltersSidebar
         handleGenreSelection={handleGenreSelection}
         handleReleaseYearSelection={handleReleaseYearSelection}
@@ -189,6 +190,7 @@ export default function GameStore({
         releaseYearSelected={releaseYearSelected}
         minimumRatingSelected={minimumRatingSelected}
       />
+      </div>
       <div className="grid gap-8">
         <GameSortingSection
           handleLauncherSelection={handleLauncherSelection}
@@ -208,6 +210,12 @@ export default function GameStore({
         <MobileFilterAndSortSection
           handleLauncherSelection={handleLauncherSelection}
           handlePlatformSelection={handlePlatformSelection}
+          handleGenreSelection={handleGenreSelection}
+          handleReleaseYearSelection={handleReleaseYearSelection}
+          handleRatingSelection={handleRatingSelection}
+          genreSelected={genreSelected}
+          releaseYearSelected={releaseYearSelected}
+          minimumRatingSelected={minimumRatingSelected}
           platformSelected={platformSelected}
           launcherSelected={launcherSelected}
           sortGamesByRatingAsc={sortGamesByRatingAsc}

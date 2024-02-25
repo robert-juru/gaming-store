@@ -22,7 +22,7 @@ const HomePage = ({
 }) => {
   return (
     <div className="m-0 ">
-      <header className="md:px-16 px-2 py-4 pb-0">
+      <header className="md:px-16 p-4 pb-0">
         <Header
           fetchedGames={fetchedGames}
           cartGames={cartGames}

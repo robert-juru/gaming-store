@@ -24,8 +24,8 @@ const GameFiltersLauncherPlatform = ({
   launcherSelected,
 }) => {
   return (
-    <div className="flex  flex-col flex-wrap gap-4 lg:gap-8 xl:flex-row">
-      <ul className="flex flex-wrap items-center gap-2   lg:gap-2">
+    <div className="flex flex-col flex-wrap gap-4 px-4 md:px-0 lg:gap-8 xl:flex-row">
+      <ul className="flex flex-wrap items-center gap-2 lg:gap-2">
         <h3 className=" pr-4 text-xs font-bold tracking-wide">PLATFORM</h3>
         <div className="flex flex-wrap gap-1 lg:gap-2">
           <li
@@ -94,56 +94,58 @@ const GameFiltersLauncherPlatform = ({
           </li>
         </div>
       </ul>
-      <ul className="flex flex-row items-center gap-1 lg:gap-2">
+      <ul className="flex flex-row flex-wrap items-center gap-1 lg:gap-2">
         <h3 className="pr-4 text-xs font-bold tracking-wide">LAUNCHER</h3>
-        <li
-          onClick={() => handleLauncherSelection("Steam")}
-          className={`${
-            launcherSelected === "Steam" && "bg-white text-black"
-          } mr-1 flex size-9  items-center justify-center rounded-md bg-slate-950 transition duration-300 hover:bg-white hover:text-black  lg:mr-2`}
-        >
-          <FaSteam className="size-7" />
-        </li>
-        <li
-          onClick={() => handleLauncherSelection("itch.io")}
-          className={`${
-            launcherSelected === "itch.io" && "bg-white text-black"
-          } mr-1 flex size-9  items-center justify-center rounded-md bg-slate-950 transition duration-300 hover:bg-white hover:text-black  lg:mr-2`}
-        >
-          <FaItchIo className="size-7" />
-        </li>
-        <li
-          onClick={() => handleLauncherSelection("Epic Games")}
-          className={`${
-            launcherSelected === "Epic Games" && "bg-white text-black"
-          } mr-1 flex size-9  items-center justify-center rounded-md bg-slate-950 transition duration-300 hover:bg-white hover:text-black  lg:mr-2`}
-        >
-          <SiEpicgames className="size-6" />
-        </li>
-        <li
-          onClick={() => handleLauncherSelection("GOG")}
-          className={`${
-            launcherSelected === "GOG" && "bg-white text-black"
-          } mr-1 flex size-9  items-center justify-center rounded-md bg-slate-950 transition duration-300 hover:bg-white hover:text-black  lg:mr-2`}
-        >
-          <SiGogdotcom className="size-6" />
-        </li>
-        <li
-          onClick={() => handleLauncherSelection("Google Play")}
-          className={`${
-            launcherSelected === "Google Play" && "bg-white text-black"
-          } mr-1 flex size-9  items-center justify-center rounded-md bg-slate-950 transition duration-300 hover:bg-white hover:text-black  lg:mr-2`}
-        >
-          <FaGooglePlay className="size-6" />
-        </li>
-        <li
-          onClick={() => handleLauncherSelection("App Store")}
-          className={`${
-            launcherSelected === "App Store" && "bg-white text-black"
-          } mr-1 flex size-9  items-center justify-center rounded-md bg-slate-950 transition duration-300 hover:bg-white hover:text-black  lg:mr-2`}
-        >
-          <IoLogoAppleAppstore className="size-6" />
-        </li>
+        <div className="flex flex-wrap gap-1 lg:gap-2">
+          <li
+            onClick={() => handleLauncherSelection("Steam")}
+            className={`${
+              launcherSelected === "Steam" && "bg-white text-black"
+            } mr-1 flex size-9  items-center justify-center rounded-md bg-slate-950 transition duration-300 hover:bg-white hover:text-black  lg:mr-2`}
+          >
+            <FaSteam className="size-7" />
+          </li>
+          <li
+            onClick={() => handleLauncherSelection("itch.io")}
+            className={`${
+              launcherSelected === "itch.io" && "bg-white text-black"
+            } mr-1 flex size-9  items-center justify-center rounded-md bg-slate-950 transition duration-300 hover:bg-white hover:text-black  lg:mr-2`}
+          >
+            <FaItchIo className="size-7" />
+          </li>
+          <li
+            onClick={() => handleLauncherSelection("Epic Games")}
+            className={`${
+              launcherSelected === "Epic Games" && "bg-white text-black"
+            } mr-1 flex size-9  items-center justify-center rounded-md bg-slate-950 transition duration-300 hover:bg-white hover:text-black  lg:mr-2`}
+          >
+            <SiEpicgames className="size-6" />
+          </li>
+          <li
+            onClick={() => handleLauncherSelection("GOG")}
+            className={`${
+              launcherSelected === "GOG" && "bg-white text-black"
+            } mr-1 flex size-9  items-center justify-center rounded-md bg-slate-950 transition duration-300 hover:bg-white hover:text-black  lg:mr-2`}
+          >
+            <SiGogdotcom className="size-6" />
+          </li>
+          <li
+            onClick={() => handleLauncherSelection("Google Play")}
+            className={`${
+              launcherSelected === "Google Play" && "bg-white text-black"
+            } mr-1 flex size-9  items-center justify-center rounded-md bg-slate-950 transition duration-300 hover:bg-white hover:text-black  lg:mr-2`}
+          >
+            <FaGooglePlay className="size-6" />
+          </li>
+          <li
+            onClick={() => handleLauncherSelection("App Store")}
+            className={`${
+              launcherSelected === "App Store" && "bg-white text-black"
+            } mr-1 flex size-9  items-center justify-center rounded-md bg-slate-950 transition duration-300 hover:bg-white hover:text-black  lg:mr-2`}
+          >
+            <IoLogoAppleAppstore className="size-6" />
+          </li>
+        </div>
       </ul>
     </div>
   );

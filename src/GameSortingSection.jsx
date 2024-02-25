@@ -16,7 +16,7 @@ const GameSortingSection = ({
   displayedGames,
 }) => {
   return (
-    <section className="col-span-full hidden items-center justify-between  gap-4 rounded-md bg-gray-900 p-4 text-slate-200 md:flex lg:gap-8">
+    <section className="max-h-32 col-span-full hidden items-center justify-between  gap-4 rounded-md bg-gray-900 p-4 text-slate-200 md:flex lg:gap-8">
       <GameFiltersLauncherPlatform
         handleLauncherSelection={handleLauncherSelection}
         handlePlatformSelection={handlePlatformSelection}
