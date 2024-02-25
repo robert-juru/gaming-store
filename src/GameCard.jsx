@@ -69,7 +69,7 @@ const GameCard = ({
           <StarRatingGame rating={game.rating} size={8} /> {game.rating} (
           {game.ratings_count})
         </span>
-        <p className="text-xs pb-1">
+        <p className="text-[10px] pb-1">
           {game.genres.map((genre) => genre.name).join(", ")}
         </p>
         <div className="flex items-center justify-between">

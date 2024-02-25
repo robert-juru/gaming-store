@@ -4,6 +4,7 @@ import GameFiltersSidebar from "./GameFiltersSidebar";
 import GameSortingSection from "./GameSortingSection";
 import MobileFilterAndSortSection from "./MobileFilterAndSortSection";
 import { useState, useEffect } from "react";
+import { IoMdStar } from "react-icons/io";
 
 export default function GameStore({
   cartGames,
@@ -17,6 +18,8 @@ export default function GameStore({
   allGames,
   searchQueryData,
   setSearchQueryData,
+  activeFilter,
+  setActiveFilter
 }) {
   useEffect(() => {
     if (displayedGames.length === 0) {
@@ -71,6 +74,7 @@ export default function GameStore({
   const [platformSelected, setPlatformSelected] = useState(null);
   const handlePlatformSelection = (platformSelected) => {
     setPlatformSelected(platformSelected);
+    setActiveFilter(platformSelected);
     setLauncherSelected(null);
     setGenreSelected(null);
     setReleaseYearSelected(null);
@@ -86,12 +90,14 @@ export default function GameStore({
     setReleaseYearSelected(null);
     setMinimumRatingSelected(null);
     filterGamesByLauncher(launcherSelected);
+    setActiveFilter(launcherSelected);
     setSortingOption("popularity");
   };
   const [genreSelected, setGenreSelected] = useState(null);
   const handleGenreSelection = (genreId, genreName) => {
     setGenreSelected(genreId);
     filterGamesByGenre(genreName);
+    setActiveFilter(genreName);
     setReleaseYearSelected(null);
     setMinimumRatingSelected(null);
     setLauncherSelected(null);
@@ -106,6 +112,7 @@ export default function GameStore({
   ) => {
     setReleaseYearSelected(releaseYearId);
     filterGamesByReleaseYear(minReleaseYear, maxReleaseYear);
+    setActiveFilter(`Released in ${minReleaseYear}-${maxReleaseYear}`);
     setGenreSelected(null);
     setMinimumRatingSelected(null);
     setLauncherSelected(null);
@@ -116,6 +123,7 @@ export default function GameStore({
   const handleRatingSelection = (minimumRating) => {
     setMinimumRatingSelected(minimumRating);
     filterGamesByMinimumRating(minimumRating);
+    setActiveFilter(`Min rating: ${minimumRating} stars`);
     setReleaseYearSelected(null);
     setGenreSelected(null);
     setLauncherSelected(null);
@@ -167,9 +175,6 @@ export default function GameStore({
     setDisplayedGames(gamesByPriceDesc);
   };
 
-  // if (gamesQuery.isLoading) return <LoadingPage fetchedGames={fetchedGames} removeFromCart={removeFromCart} cartGames={cartGames} />;
-  // if (gamesQuery.isError) return <h1>Error loading data!!!</h1>;
-
   return (
     <div className="m-0 grid grid-cols-1 gap-4 p-4 md:grid-cols-[200px_1fr] md:px-4 lg:px-8 xl:px-16">
       <Header
@@ -182,16 +187,21 @@ export default function GameStore({
         setSearchQueryData={setSearchQueryData}
       />
       <div className="hidden md:block">
-      <GameFiltersSidebar
-        handleGenreSelection={handleGenreSelection}
-        handleReleaseYearSelection={handleReleaseYearSelection}
-        handleRatingSelection={handleRatingSelection}
-        genreSelected={genreSelected}
-        releaseYearSelected={releaseYearSelected}
-        minimumRatingSelected={minimumRatingSelected}
-      />
+        <GameFiltersSidebar
+          handleGenreSelection={handleGenreSelection}
+          handleReleaseYearSelection={handleReleaseYearSelection}
+          handleRatingSelection={handleRatingSelection}
+          genreSelected={genreSelected}
+          releaseYearSelected={releaseYearSelected}
+          minimumRatingSelected={minimumRatingSelected}
+        />
       </div>
-      <div className="grid gap-8">
+      <div className=" gap-8">
+        <div className="md:hidden">
+          <h2 className="px-4 text-center text-4xl font-bold  text-white md:text-6xl">
+            {activeFilter}
+          </h2>
+        </div>
         <GameSortingSection
           handleLauncherSelection={handleLauncherSelection}
           handlePlatformSelection={handlePlatformSelection}
@@ -228,6 +238,12 @@ export default function GameStore({
           setSortingOption={setSortingOption}
           displayedGames={displayedGames}
         />
+        <div className="hidden py-10 md:block">
+          <h2 className="px-4 pb-4 text-center text-5xl items-start justify-start font-bold text-white md:text-start md:text-6xl">
+          {activeFilter}
+          </h2>
+          <hr className="border-slate-700 font-bold" />
+        </div>
         <main className="grid grid-cols-[repeat(auto-fit,minmax(320px,1fr))] gap-x-8 gap-y-6">
           {gamesWithPrices.map((game) => (
             <GameCard

@@ -18,6 +18,7 @@ const GamePage = ({
   gameId,
   isInCart,
   handleCart,
+  activeFilter
 }) => {
   const gamePageQuery = useQuery({
     queryKey: ["gamePage", gameId],
@@ -88,8 +89,8 @@ const GamePage = ({
       <div className="px-4 py-8 text-sm text-gray-300 md:px-8 md:text-base lg:px-16">
         <div>
           <span>
-            <Link className="hover:text-white" to="/">
-              Store 
+            <Link className="hover:text-white" to="/store">
+              {activeFilter} 
             </Link>
             <span> &gt;</span>
             <Link className="hover:text-white" to={`/game/${gameId}`}>

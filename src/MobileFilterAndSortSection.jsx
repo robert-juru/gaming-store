@@ -39,7 +39,7 @@ const MobileFilterAndSortSection = ({
   };
 
   return (
-    <section className="col-span-full flex items-center justify-between gap-4 rounded-md text-slate-200 md:hidden">
+    <section className="col-span-full flex items-center justify-between py-8 gap-4 rounded-md text-slate-200 md:hidden">
       <MobileFiltersButton openModal={openModal} />
       {isModalOpen && (
         <div
@@ -57,7 +57,7 @@ const MobileFilterAndSortSection = ({
             >
               &times;
             </button>
-            <div className="bg-slate-900  p-4">
+            <div className="bg-gray-900  p-4">
               <GameFiltersSidebar
                 handleGenreSelection={handleGenreSelection}
                 handleReleaseYearSelection={handleReleaseYearSelection}

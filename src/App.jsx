@@ -30,6 +30,7 @@ const App = () => {
 
   const [cartGames, setCartGames] = useState([]);
   const [displayedGames, setDisplayedGames] = useState([]);
+  const [activeFilter, setActiveFilter] = useState("Most Popular");
 
   const isInCart = (gameId) => {
     return cartGames.some((cartGame) => cartGame.id === gameId);
@@ -47,10 +48,7 @@ const App = () => {
     setCartGames(updatedCart);
   };
 
-  if (
-    storeGamesQuery.isLoading ||
-    homePageQuery.isLoading 
-  )
+  if (storeGamesQuery.isLoading || homePageQuery.isLoading)
     return (
       <LoadingPage
         fetchedGames={storeGamesQuery.data}
@@ -62,7 +60,6 @@ const App = () => {
   if (storeGamesQuery.isError || homePageQuery.isError)
     return <h1 className="text-4xl text-white">Error loading data!!!</h1>;
 
- 
   const storeGamesWithPrices = displayedGames.map((game) => {
     const price = generatePrice(
       new Date(game.released).getFullYear(),
@@ -83,8 +80,10 @@ const App = () => {
     ...homePageData.topRatedByGamers.results,
   ];
 
-  const allGames = [...new Set([...storeGamesQuery.data, ...homePageGames, ...searchQueryData])];
-  console.log(allGames)
+  const allGames = [
+    ...new Set([...storeGamesQuery.data, ...homePageGames, ...searchQueryData]),
+  ];
+  console.log(allGames);
   const allGamesWithPrices = allGames.map((game) => {
     const price = generatePrice(
       new Date(game.released).getFullYear(),
@@ -122,6 +121,7 @@ const App = () => {
               removeFromCart={removeFromCart}
               handleCart={() => handleCart(game)}
               isInCart={isInCart}
+              activeFilter={activeFilter}
             />
           }
         />
@@ -142,8 +142,8 @@ const App = () => {
             isInCart={isInCart}
             searchQueryData={searchQueryData}
             setSearchQueryData={setSearchQueryData}
-            // query={query}
-            // setQuery={setQuery}
+            activeFilter={activeFilter}
+            setActiveFilter={setActiveFilter}
           />
         }
       />
