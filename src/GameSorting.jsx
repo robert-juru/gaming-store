@@ -44,7 +44,7 @@ const GameSorting = ({
         Sort by:
       </label>
       <select
-        className="bg-slate-950 dark:bg-slate-950 dark:md:bg-gray-900 md:bg-gray-900 pb-1 items-center flex justify-center  text-white font-bold"
+        className="bg-slate-950 md:bg-gray-900 pb-1 items-center flex justify-center  text-white font-bold"
         name="sort"
         id="sort-select"
         value={sortingOption}

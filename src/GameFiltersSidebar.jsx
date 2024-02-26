@@ -94,7 +94,7 @@ const GameFiltersSidebar = ({
 
   return (
     <aside>
-      <nav className="rounded-md bg-slate-700 md:bg-gray-900 px-2 py-4  text-slate-200">
+      <nav className="rounded-md bg-gray-900 px-2 py-4  text-slate-200">
         <ul>
         <h1 className="md:hidden text-2xl text-white pb-4">Filter games</h1>
         <hr className="border-slate-700  pb-4  font-bold md:hidden" />

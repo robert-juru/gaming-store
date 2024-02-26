@@ -25,7 +25,7 @@ const ShoppingCartPage = ({ cartGames, removeFromCart, fetchedGames }) => {
             <h2 className="text-center pb-2 text-xl sm:text-2xl lg:text-3xl ">
               Cart's feeling a bit empty. Time to fill it with gaming joy!
             </h2>
-            <Link className="text-sm sm:text-base lg:text-lg hover:text-white hover:underline" to="/">
+            <Link className="text-white md:text-gray-300 text-sm sm:text-base lg:text-lg hover:text-white hover:underline" to="/">
               Shop for Games
             </Link>
           </div>

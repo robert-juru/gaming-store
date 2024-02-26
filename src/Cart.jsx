@@ -54,46 +54,50 @@ const Cart = ({ cartGames, fetchedGames, removeFromCart }) => {
                 Cart's feeling a bit empty. Time to fill it with gaming joy!
               </span>
             )}
-            {cartGames.map((cartGame) => {
-              let matchedGame = fetchedGames.find(
-                (fetchedGame) => fetchedGame.id === cartGame.id,
-              );
-              if (matchedGame) {
-                return (
-                  <>
-                    <li
-                      key={matchedGame.id}
-                      className="flex w-96 items-center justify-between gap-2 py-1 pl-2 pr-4 text-sm text-white"
-                    >
-                      <Link to={`/game/${matchedGame.id}`}>
-                        <img
-                          src={matchedGame.background_image}
-                          alt={matchedGame.name}
-                          className="size-14"
-                        />
-                      </Link>
-                      <Link className="w-[26ch]" to={`/game/${matchedGame.id}`}>
-                        <span>{matchedGame.name}</span>
-                      </Link>
-                      <span>${matchedGame.price}</span>
-                      <IconContext.Provider
-                        value={{
-                          size: "24px",
-                          title: "delete game",
-                          className: "cursor-pointer",
-                        }}
-                      >
-                        <IoIosClose
-                          onClick={() => removeFromCart(matchedGame.id)}
-                        />
-                      </IconContext.Provider>
-                    </li>
-                    <hr className="mb-1 mt-1 border-gray-500" />
-                  </>
+            {fetchedGames &&
+              cartGames.map((cartGame) => {
+                let matchedGame = fetchedGames.find(
+                  (fetchedGame) => fetchedGame.id === cartGame.id,
                 );
-              }
-              return null;
-            })}
+                if (matchedGame) {
+                  return (
+                    <>
+                      <li
+                        key={matchedGame.id}
+                        className="flex w-96 items-center justify-between gap-2 py-1 pl-2 pr-4 text-sm text-white"
+                      >
+                        <Link to={`/game/${matchedGame.id}`}>
+                          <img
+                            src={matchedGame.background_image}
+                            alt={matchedGame.name}
+                            className="size-14"
+                          />
+                        </Link>
+                        <Link
+                          className="w-[26ch]"
+                          to={`/game/${matchedGame.id}`}
+                        >
+                          <span>{matchedGame.name}</span>
+                        </Link>
+                        <span>${matchedGame.price}</span>
+                        <IconContext.Provider
+                          value={{
+                            size: "24px",
+                            title: "delete game",
+                            className: "cursor-pointer",
+                          }}
+                        >
+                          <IoIosClose
+                            onClick={() => removeFromCart(matchedGame.id)}
+                          />
+                        </IconContext.Provider>
+                      </li>
+                      <hr className="mb-1 mt-1 border-gray-500" />
+                    </>
+                  );
+                }
+                return null;
+              })}
             {cartGames.length > 0 && (
               <div className="flex items-center justify-between px-4 py-4 text-lg  font-bold text-white">
                 <span className=" flex items-center justify-start ">

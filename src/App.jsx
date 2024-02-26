@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { fetchStoreData, fetchHomePageData, fetchSearchData } from "./Api";
 import GameStore from "./GameStore";
@@ -28,7 +28,14 @@ const App = () => {
     queryFn: fetchHomePageData,
   });
 
-  const [cartGames, setCartGames] = useState([]);
+  const [cartGames, setCartGames] = useState(
+    JSON.parse(localStorage.getItem("cartGames")) || [],
+  );
+
+  useEffect(() => {
+    localStorage.setItem("cartGames", JSON.stringify(cartGames));
+  }, [cartGames]);
+
   const [displayedGames, setDisplayedGames] = useState([]);
   const [activeFilter, setActiveFilter] = useState("Most Popular");
 

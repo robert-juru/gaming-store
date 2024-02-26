@@ -32,6 +32,7 @@ export const GamePagePhotoSlider = ({ images, name }) => {
         {gameMediaDisplay}
       </Slider>
       <Slider
+        arrows={false}
         asNavFor={nav1}
         ref={(slider2) => setNav2(slider2)}
         slidesToShow={4}
@@ -353,7 +354,7 @@ export const HomePageTopRatedByGamersSlider = ({
     return { ...game, price };
   });
   return (
-    <section className="md:px-18 px-8 pt-4 sm:pt-8 md:pt-16 sm:px-12 lg:px-24 xl:px-48">
+    <section className="md:px-18 px-8 pt-4 sm:px-12 sm:pt-8 md:pt-16 lg:px-24 xl:px-48">
       <h2 className="mb-4 text-3xl text-white">Top Rated by Gamers</h2>
       <Slider {...settings}>
         {topRatedByGamersWithPrices

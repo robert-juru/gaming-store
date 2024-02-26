@@ -57,7 +57,7 @@ const MobileFilterAndSortSection = ({
             >
               &times;
             </button>
-            <div className="bg-slate-700 p-4">
+            <div className="bg-gray-900 p-4">
               <GameFiltersSidebar
                 handleGenreSelection={handleGenreSelection}
                 handleReleaseYearSelection={handleReleaseYearSelection}
