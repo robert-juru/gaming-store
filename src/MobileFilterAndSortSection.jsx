@@ -29,7 +29,6 @@ const MobileFilterAndSortSection = ({
 
   const openModal = () => {
     setIsModalOpen(true);
-    console.log("modal open");
     document.body.classList.add("overflow-hidden");
   };
 

@@ -19,7 +19,7 @@ export default function GameStore({
   searchQueryData,
   setSearchQueryData,
   activeFilter,
-  setActiveFilter
+  setActiveFilter,
 }) {
   useEffect(() => {
     if (displayedGames.length === 0) {
@@ -72,26 +72,38 @@ export default function GameStore({
   };
 
   const [platformSelected, setPlatformSelected] = useState(null);
-  const handlePlatformSelection = (platformSelected) => {
-    setPlatformSelected(platformSelected);
-    setActiveFilter(platformSelected);
+  const handlePlatformSelection = (platform) => {
+    setPlatformSelected(platform);
+    setActiveFilter(platform);
     setLauncherSelected(null);
     setGenreSelected(null);
     setReleaseYearSelected(null);
     setMinimumRatingSelected(null);
-    filterGamesByPlatform(platformSelected);
+    filterGamesByPlatform(platform);
     setSortingOption("popularity");
+    if (platformSelected == platform) {
+      setPlatformSelected(null);
+      const limitedGames = gamesQuery.data.slice(0, 100); // maximum display of 100
+      sortGamesByPopularity(limitedGames);
+      setActiveFilter("Most Popular");
+    }
   };
   const [launcherSelected, setLauncherSelected] = useState(null);
-  const handleLauncherSelection = (launcherSelected) => {
-    setLauncherSelected(launcherSelected);
+  const handleLauncherSelection = (launcher) => {
+    setLauncherSelected(launcher);
     setPlatformSelected(null);
     setGenreSelected(null);
     setReleaseYearSelected(null);
     setMinimumRatingSelected(null);
-    filterGamesByLauncher(launcherSelected);
-    setActiveFilter(launcherSelected);
+    filterGamesByLauncher(launcher);
+    setActiveFilter(launcher);
     setSortingOption("popularity");
+    if (launcherSelected == launcher) {
+      setLauncherSelected(null);
+      const limitedGames = gamesQuery.data.slice(0, 100); // maximum display of 100
+      sortGamesByPopularity(limitedGames);
+      setActiveFilter("Most Popular");
+    }
   };
   const [genreSelected, setGenreSelected] = useState(null);
   const handleGenreSelection = (genreId, genreName) => {
@@ -103,6 +115,12 @@ export default function GameStore({
     setLauncherSelected(null);
     setPlatformSelected(null);
     setSortingOption("popularity");
+    if (genreSelected == genreId) {
+      setGenreSelected(null);
+      const limitedGames = gamesQuery.data.slice(0, 100); // maximum display of 100
+      sortGamesByPopularity(limitedGames);
+      setActiveFilter("Most Popular");
+    }
   };
   const [releaseYearSelected, setReleaseYearSelected] = useState(null);
   const handleReleaseYearSelection = (
@@ -118,6 +136,12 @@ export default function GameStore({
     setLauncherSelected(null);
     setPlatformSelected(null);
     setSortingOption("popularity");
+    if (releaseYearSelected == releaseYearId) {
+      setReleaseYearSelected(null);
+      const limitedGames = gamesQuery.data.slice(0, 100); // maximum display of 100
+      sortGamesByPopularity(limitedGames);
+      setActiveFilter("Most Popular");
+    }
   };
   const [minimumRatingSelected, setMinimumRatingSelected] = useState(null);
   const handleRatingSelection = (minimumRating) => {
@@ -129,6 +153,12 @@ export default function GameStore({
     setLauncherSelected(null);
     setPlatformSelected(null);
     setSortingOption("popularity");
+    if (minimumRatingSelected == minimumRating) {
+      setMinimumRatingSelected(null);
+      const limitedGames = gamesQuery.data.slice(0, 100); // maximum display of 100
+      sortGamesByPopularity(limitedGames);
+      setActiveFilter("Most Popular");
+    }
   };
 
   const [sortingOption, setSortingOption] = useState("popularity");
@@ -152,6 +182,7 @@ export default function GameStore({
       (a, b) => b.ratings_count - a.ratings_count,
     );
     setDisplayedGames(gamesByPopularity);
+    console.log(displayedGames);
   };
 
   const sortGamesByLatest = () => {
@@ -242,8 +273,8 @@ export default function GameStore({
           displayedGames={displayedGames}
         />
         <div className="hidden py-10 md:block">
-          <h2 className="px-4 pb-4 text-center text-3xl items-start justify-start font-bold text-white md:text-start md:text-4xl">
-          {activeFilter}
+          <h2 className="items-start justify-start px-4 pb-4 text-center text-3xl font-bold text-white md:text-start md:text-4xl">
+            {activeFilter}
           </h2>
           <hr className="border-slate-700 font-bold" />
         </div>
