@@ -74,7 +74,7 @@ export const fetchHomePageData = async () => {
 
 export const fetchSearchData = async (search) => {
   const response = await axios.get(
-    `${url}games?key=${key}&search=${search || ""}&search_exact=true&ordering=-added`,
+    `${url}games?key=${key}&search=${search || ""}&search_exact=true&ordering=-added&page_size=40`,
   );
   return response.data.results;
 };

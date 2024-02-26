@@ -11,6 +11,7 @@ const SearchBar = ({
   setDisplayedGames,
   searchQueryData,
   setSearchQueryData,
+  setActiveFilter
 }) => {
   const [query, setQuery] = useState("");
   const [searchedGames, setSearchedGames] = useState([]);
@@ -28,6 +29,7 @@ const SearchBar = ({
     setIsFocused(true);
     if (event.key === "Enter") {
       setIsFocused(false);
+      setActiveFilter(`Search results for: ${query} (${searchQuery.data.length} games)`)
       setTimeout(() => {
         setDisplayedGames(searchQuery.data);
       }, 0);

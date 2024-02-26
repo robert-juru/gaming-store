@@ -90,7 +90,7 @@ const GamePage = ({
         <div>
           <span>
             <Link className="hover:text-white" to="/store">
-              {activeFilter} 
+              {activeFilter.length < 30 ? activeFilter : "Store"} 
             </Link>
             <span> &gt;</span>
             <Link className="hover:text-white" to={`/game/${gameId}`}>

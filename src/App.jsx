@@ -83,7 +83,6 @@ const App = () => {
   const allGames = [
     ...new Set([...storeGamesQuery.data, ...homePageGames, ...searchQueryData]),
   ];
-  console.log(allGames);
   const allGamesWithPrices = allGames.map((game) => {
     const price = generatePrice(
       new Date(game.released).getFullYear(),
