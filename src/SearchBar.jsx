@@ -2,16 +2,16 @@ import { useState, useEffect, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import debounce from "lodash.debounce";
 import { fetchSearchData } from "./Api";
-import { useNavigate, useLocation, Link } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import { IconContext } from "react-icons";
 import { CiSearch } from "react-icons/ci";
 
 const SearchBar = ({
-  displayedGames,
-  setDisplayedGames,
   searchQueryData,
   setSearchQueryData,
-  setActiveFilter
+  setActiveFilter,
+  sortGamesByPopularity,
+  setSortingOption,
 }) => {
   const [query, setQuery] = useState("");
   const [searchedGames, setSearchedGames] = useState([]);
@@ -29,9 +29,12 @@ const SearchBar = ({
     setIsFocused(true);
     if (event.key === "Enter") {
       setIsFocused(false);
-      setActiveFilter(`Search results for: ${query} (${searchQuery.data.length} games)`)
+      setActiveFilter(
+        `Search results for: ${query} (${searchQuery.data.length} games)`,
+      );
+      setSortingOption("popularity");
       setTimeout(() => {
-        setDisplayedGames(searchQuery.data);
+        sortGamesByPopularity(searchQuery.data);
       }, 0);
     }
   };
@@ -100,11 +103,11 @@ const SearchBar = ({
             <div key={game.id} onClick={(e) => e.stopPropagation()}>
               <Link to={`/game/${game.id}`}>
                 <div
-                  className=" flex items-center gap-4  p-2 w-full text-slate-300 hover:bg-slate-600 hover:text-white"
+                  className=" flex w-full items-center  gap-4 p-2 text-slate-300 hover:bg-slate-600 hover:text-white"
                   onMouseDown={(e) => e.preventDefault()}
                 >
                   <img
-                    className="sm:h-16 sm:w-24 h-12 w-16 rounded-md"
+                    className="h-12 w-16 rounded-md sm:h-16 sm:w-24"
                     src={game.background_image || "/no-image-available.jpg"}
                     alt={`${game.background_image} image`}
                   />

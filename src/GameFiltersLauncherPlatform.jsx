@@ -95,7 +95,7 @@ const GameFiltersLauncherPlatform = ({
         </div>
       </ul>
       <ul className="flex flex-row flex-wrap items-center gap-1 lg:gap-2">
-        <h3 className="pr-4 text-xs font-bold tracking-wide">LAUNCHER</h3>
+        <h3 className="pr-4 text-xs font-bold tracking-wide pb-1">LAUNCHER</h3>
         <div className="flex flex-wrap gap-1 lg:gap-2">
           <li
             onClick={() => handleLauncherSelection("Steam")}

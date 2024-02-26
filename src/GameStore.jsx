@@ -186,6 +186,8 @@ export default function GameStore({
         searchQueryData={searchQueryData}
         setSearchQueryData={setSearchQueryData}
         setActiveFilter={setActiveFilter}
+        sortGamesByPopularity={sortGamesByPopularity}
+        setSortingOption={setSortingOption}
       />
       <div className="hidden md:block">
         <GameFiltersSidebar

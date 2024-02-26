@@ -11,7 +11,9 @@ const Header = ({
   setDisplayedGames,
   searchQueryData,
   setSearchQueryData,
-  setActiveFilter
+  setActiveFilter,
+  sortGamesByPopularity,
+  setSortingOption
 }) => {
   return (
     <header className="col-span-2 flex items-center justify-between gap-8">
@@ -26,13 +28,13 @@ const Header = ({
           </Link>
           <Link
             className="md:text-lg font-bold tracking-wide text-gray-300 hover:text-white "
-            to="/"
+            to={location.pathname}
           >
             FAQ
           </Link>
           <Link
             className="md:text-lg font-bold tracking-wide text-gray-300 hover:text-white "
-            to="/"
+            to={location.pathname}
           >
             About us
           </Link>
@@ -47,6 +49,8 @@ const Header = ({
           searchQueryData={searchQueryData}
           setSearchQueryData={setSearchQueryData}
           setActiveFilter={setActiveFilter}
+          sortGamesByPopularity={sortGamesByPopularity}
+          setSortingOption={setSortingOption}
         />
       )}
       <Cart
