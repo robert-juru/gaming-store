@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-html, body {
-  @apply bg-slate-950;
+html,
+body {
+  @apply bg-slate-950 !important;
+}
+.slick-dots {
+  @apply sm:-bottom-16 !important;
+}
+.slick-dots li.slick-active button:before,
+.slick-dots li button:before {
+  @apply text-orange-500 !important;
 }
