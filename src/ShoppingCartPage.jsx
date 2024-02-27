@@ -35,55 +35,50 @@ const ShoppingCartPage = ({ cartGames, removeFromCart, fetchedGames }) => {
         <section className="flex-1">
           {cartGames &&
             cartGames.map((cartGame) => {
-              let matchedGame = fetchedGames.find(
-                (fetchedGame) => fetchedGame.id === cartGame.id,
-              );
-              if (matchedGame) {
                 return (
                   <article
-                    key={matchedGame.id}
+                    key={cartGame.id}
                     className="mb-4 flex h-36 w-full items-center justify-between gap-8 rounded-md bg-gray-900 p-4 py-1 text-sm text-white md:p-8"
                   >
                     <div className="flex gap-4 md:gap-8">
-                      <Link to={`/game/${matchedGame.id}`}>
+                      <Link to={`/game/${cartGame.id}`}>
                         <img
-                          src={matchedGame.background_image}
-                          alt={matchedGame.name}
+                          src={cartGame.background_image}
+                          alt={cartGame.name}
                           className="h-24 w-20 min-w-20 md:w-32"
                         />
                       </Link>
                       <div>
-                        <Link to={`/game/${matchedGame.id}`}>
+                        <Link to={`/game/${cartGame.id}`}>
                           <p className="text-md font-bold md:text-lg ">
-                            {matchedGame.name}
+                            {cartGame.name}
                           </p>
                         </Link>
                         <span className="flex items-center text-xs md:text-sm">
                           <StarRatingGame
-                            rating={matchedGame.rating}
+                            rating={cartGame.rating}
                             size={12}
                           />{" "}
-                          {matchedGame.rating} ({matchedGame.ratings_count})
+                          {cartGame.rating} ({cartGame.ratings_count})
                         </span>
                         <p className="md:text-md text-xs">
-                          {matchedGame.genres
+                          {cartGame.genres
                             .map((genre) => genre.name)
                             .join(", ")}
                         </p>
                       </div>
                     </div>
                     <div className="text-md flex flex-col md:text-lg">
-                      <span className="font-bold">${matchedGame.price}</span>
+                      <span className="font-bold">${cartGame.price}</span>
                       <button
                         className="text-gray-300 hover:text-white hover:underline"
-                        onClick={() => removeFromCart(matchedGame.id)}
+                        onClick={() => removeFromCart(cartGame.id)}
                       >
                         Remove
                       </button>
                     </div>
                   </article>
                 );
-              }
             })}
         </section>
         {cartGames.length > 0 && (

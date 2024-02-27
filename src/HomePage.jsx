@@ -39,7 +39,7 @@ const HomePage = ({
           isInCart={isInCart}
         />
       </section>
-      <section className="md:px-18 px-8 pt-4 sm:pt-8 md:pt-16 sm:px-12 lg:px-24 xl:px-48">
+      <section className="md:px-18 px-8 sm:pt-8 pt-16 sm:px-12 lg:px-24 xl:px-48">
         <HomePageTopSellersSlider
           topSellers={homePageData.topSellers.results}
           handleCart={handleCart}

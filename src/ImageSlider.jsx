@@ -53,10 +53,11 @@ export const HomePageMainSlider = ({
 }) => {
   const settings = {
     dots: true,
-    fade: true,
+    // fade: true,
     infinite: true,
     autoplay: true,
     autoplaySpeed: 5000,
+    speed:1000,
     arrows: false,
     slidesToShow: 1,
     slidesToScroll: 1,
@@ -64,7 +65,7 @@ export const HomePageMainSlider = ({
       {
         breakpoint: 640,
         settings: {
-          dots: false,
+          // dots: false,
         },
       },
     ],

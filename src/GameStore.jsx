@@ -92,7 +92,7 @@ export default function GameStore({
   const handleLauncherSelection = (launcher) => {
     setLauncherSelected(launcher);
     setPlatformSelected(null);
-    setGenreSelected(null);
+    // setGenreSelected(null);
     setReleaseYearSelected(null);
     setMinimumRatingSelected(null);
     filterGamesByLauncher(launcher);
@@ -147,7 +147,7 @@ export default function GameStore({
   const handleRatingSelection = (minimumRating) => {
     setMinimumRatingSelected(minimumRating);
     filterGamesByMinimumRating(minimumRating);
-    setActiveFilter(`Min rating: ${minimumRating} stars`);
+    setActiveFilter(`Min rating: ${minimumRating} ⭐`);
     setReleaseYearSelected(null);
     setGenreSelected(null);
     setLauncherSelected(null);
@@ -182,7 +182,6 @@ export default function GameStore({
       (a, b) => b.ratings_count - a.ratings_count,
     );
     setDisplayedGames(gamesByPopularity);
-    console.log(displayedGames);
   };
 
   const sortGamesByLatest = () => {
@@ -232,7 +231,7 @@ export default function GameStore({
       </div>
       <div className=" gap-8">
         <div className="md:hidden">
-          <h2 className="px-4 text-center text-4xl font-bold  text-white md:text-6xl">
+          <h2 className="px-4 text-center text-4xl font-bold text-white md:text-6xl">
             {activeFilter}
           </h2>
         </div>
@@ -273,7 +272,7 @@ export default function GameStore({
           displayedGames={displayedGames}
         />
         <div className="hidden py-10 md:block">
-          <h2 className="items-start justify-start px-4 pb-4 text-center text-3xl font-bold text-white md:text-start md:text-4xl">
+          <h2 className="px-4 pb-4 text-3xl font-bold text-white md:text-start md:text-4xl">
             {activeFilter}
           </h2>
           <hr className="border-slate-700 font-bold" />

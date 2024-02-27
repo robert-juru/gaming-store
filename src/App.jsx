@@ -47,7 +47,6 @@ const App = () => {
     if (!cartGames.includes(gameId)) {
       setCartGames([...cartGames, gameId]);
     }
-    console.log(cartGames);
   };
 
   const removeFromCart = (gameIdToRemove) => {
@@ -88,7 +87,7 @@ const App = () => {
   ];
 
   const allGames = [
-    ...new Set([...storeGamesQuery.data, ...homePageGames, ...searchQueryData]),
+    ...new Set([...storeGamesQuery.data, ...homePageGames, ...searchQueryData, ...cartGames]),
   ];
   const allGamesWithPrices = allGames.map((game) => {
     const price = generatePrice(

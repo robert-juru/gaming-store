@@ -56,46 +56,39 @@ const Cart = ({ cartGames, fetchedGames, removeFromCart }) => {
             )}
             {fetchedGames &&
               cartGames.map((cartGame) => {
-                let matchedGame = fetchedGames.find(
-                  (fetchedGame) => fetchedGame.id === cartGame.id,
-                );
-                if (matchedGame) {
-                  return (
-                    <>
-                      <li
-                        key={matchedGame.id}
-                        className="flex w-96 items-center justify-between gap-2 py-1 pl-2 pr-4 text-sm text-white"
+                return (
+                  <>
+                    <li
+                      key={cartGame.id}
+                      className="flex w-96 items-center justify-between gap-2 py-1 pl-2 pr-4 text-sm text-white"
+                    >
+                      <Link to={`/game/${cartGame.id}`}>
+                        <img
+                          src={cartGame.background_image}
+                          alt={cartGame.name}
+                          className="size-14"
+                        />
+                      </Link>
+                      <Link className="w-[26ch]" to={`/game/${cartGame.id}`}>
+                        <span>{cartGame.name}</span>
+                      </Link>
+                      <span>${cartGame.price}</span>
+                      <IconContext.Provider
+                        value={{
+                          size: "24px",
+                          title: "delete game",
+                          className: "cursor-pointer",
+                        }}
                       >
-                        <Link to={`/game/${matchedGame.id}`}>
-                          <img
-                            src={matchedGame.background_image}
-                            alt={matchedGame.name}
-                            className="size-14"
-                          />
-                        </Link>
-                        <Link
-                          className="w-[26ch]"
-                          to={`/game/${matchedGame.id}`}
-                        >
-                          <span>{matchedGame.name}</span>
-                        </Link>
-                        <span>${matchedGame.price}</span>
-                        <IconContext.Provider
-                          value={{
-                            size: "24px",
-                            title: "delete game",
-                            className: "cursor-pointer",
-                          }}
-                        >
-                          <IoIosClose
-                            onClick={() => removeFromCart(matchedGame.id)}
-                          />
-                        </IconContext.Provider>
-                      </li>
-                      <hr className="mb-1 mt-1 border-gray-500" />
-                    </>
-                  );
-                }
+                        <IoIosClose
+                          onClick={() => removeFromCart(cartGame.id)}
+                        />
+                      </IconContext.Provider>
+                    </li>
+                    <hr className="mb-1 mt-1 border-gray-500" />
+                  </>
+                );
+                // }
                 return null;
               })}
             {cartGames.length > 0 && (

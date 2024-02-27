@@ -55,7 +55,6 @@ const SearchBar = ({
   useEffect(() => {
     if (searchQuery.isSuccess) {
       setSearchedGames(searchQuery.data);
-      console.log(searchQuery.data);
       setShouldFetch(false);
       setSearchQueryData((prevHistory) => {
         const newGames = searchQuery.data.filter(
@@ -63,13 +62,12 @@ const SearchBar = ({
         );
         return [...prevHistory, ...newGames];
       });
-      console.log(searchQueryData);
     }
   }, [searchQuery.data, searchQuery.isSuccess, setSearchQueryData]);
 
   useEffect(() => {
     setSearchedGames([]);
-    setShouldFetch(false); // Disable fetching
+    setShouldFetch(false);
   }, [location.pathname]);
 
   return (
