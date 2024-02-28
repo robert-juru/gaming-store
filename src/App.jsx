@@ -7,6 +7,7 @@ import { Route, Routes } from "react-router-dom";
 import GamePage from "./GamePage";
 import HomePage from "./HomePage";
 import LoadingPage from "./LoadingPage";
+import ErrorPage from "./ErrorPage";
 import { generatePrice } from "./PriceGenerator";
 
 const App = () => {
@@ -64,7 +65,13 @@ const App = () => {
     );
 
   if (storeGamesQuery.isError || homePageQuery.isError)
-    return <h1 className="text-4xl text-white">Error loading data!!!</h1>;
+    return (
+      <ErrorPage
+        fetchedGames={storeGamesQuery.data}
+        removeFromCart={removeFromCart}
+        cartGames={cartGames}
+      />
+    );
 
   const storeGamesWithPrices = displayedGames.map((game) => {
     const price = generatePrice(
@@ -87,7 +94,12 @@ const App = () => {
   ];
 
   const allGames = [
-    ...new Set([...storeGamesQuery.data, ...homePageGames, ...searchQueryData, ...cartGames]),
+    ...new Set([
+      ...storeGamesQuery.data,
+      ...homePageGames,
+      ...searchQueryData,
+      ...cartGames,
+    ]),
   ];
   const allGamesWithPrices = allGames.map((game) => {
     const price = generatePrice(
@@ -159,6 +171,16 @@ const App = () => {
             fetchedGames={allGamesWithPrices}
             cartGames={cartGames}
             removeFromCart={removeFromCart}
+          />
+        }
+      />
+      <Route
+        path="/*"
+        element={
+          <ErrorPage
+            cartGames={cartGames}
+            removeFromCart={removeFromCart}
+            fetchedGames={allGamesWithPrices}
           />
         }
       />

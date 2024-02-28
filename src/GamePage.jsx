@@ -9,6 +9,7 @@ import { fetchGamePageData } from "./Api";
 import { format, parseISO } from "date-fns";
 import DOMPurify from "dompurify";
 import LoadingPage from "./LoadingPage";
+import ErrorPage from "./ErrorPage";
 import { generatePrice } from "./PriceGenerator";
 
 const GamePage = ({
@@ -18,7 +19,7 @@ const GamePage = ({
   gameId,
   isInCart,
   handleCart,
-  activeFilter
+  activeFilter,
 }) => {
   const gamePageQuery = useQuery({
     queryKey: ["gamePage", gameId],
@@ -33,7 +34,13 @@ const GamePage = ({
       />
     );
   if (gamePageQuery.isError)
-    return <h1 className="text-4xl text-white">Error loading data!!!</h1>;
+    return (
+      <ErrorPage
+        fetchedGames={storeGamesQuery.data}
+        removeFromCart={removeFromCart}
+        cartGames={cartGames}
+      />
+    );
 
   let gamePageData = gamePageQuery.data;
   let releaseDate;
@@ -78,19 +85,19 @@ const GamePage = ({
   );
 
   return (
-    <div className="md:px-16 p-4 pb-0">
+    <div className="p-4 pb-0 md:px-16">
       <Header
         cartGames={cartGames}
         removeFromCart={removeFromCart}
         fetchedGames={fetchedGames}
       />
-    <hr className="border-slate-800  pb-4  font-bold" />
+      <hr className="border-slate-800  pb-4  font-bold" />
 
       <div className="px-4 py-8 text-sm text-gray-300 md:px-8 md:text-base lg:px-16">
         <div>
           <span>
             <Link className="hover:text-white" to="/store">
-              {activeFilter.length < 30 ? activeFilter : "Store"} 
+              {activeFilter.length < 30 ? activeFilter : "Store"}
             </Link>
             <span> &gt;</span>
             <Link className="hover:text-white" to={`/game/${gameId}`}>
@@ -207,7 +214,7 @@ const GamePage = ({
               </span>
             )}
             <span className="flex gap-4">
-              <span className="p-2 text-center text-3xl md:text-4xl font-bold text-white">
+              <span className="p-2 text-center text-3xl font-bold text-white md:text-4xl">
                 ${price}
               </span>
               <button
@@ -215,7 +222,7 @@ const GamePage = ({
                 disabled={isInCart(gameId)}
                 className={`${
                   isInCart(gameId) ? "bg-blue-800" : ""
-                } w-full self-center rounded-md bg-blue-500 p-4 text-center text-base md:text-lg text-white  hover:bg-blue-800`}
+                } w-full self-center rounded-md bg-blue-500 p-4 text-center text-base text-white hover:bg-blue-800  md:text-lg`}
               >
                 {isInCart(gameId) ? "In Cart" : "Add to cart"}
               </button>
@@ -223,7 +230,9 @@ const GamePage = ({
           </section>
         </div>
         <section className="mb-8 lg:px-24 xl:px-48">
-          <h3 className="text-lg md:text-xl font-bold tracking-wide">ABOUT THIS GAME </h3>
+          <h3 className="text-lg font-bold tracking-wide md:text-xl">
+            ABOUT THIS GAME{" "}
+          </h3>
           <hr className="my-2 border-slate-800" />
           <div dangerouslySetInnerHTML={{ __html: sanitizedGameDescription }} />
         </section>
@@ -257,7 +266,7 @@ const GamePage = ({
         </section>
         {minRequirements && (
           <section className="lg:px-24 xl:px-48">
-            <h3 className="mt-4 text-lg md:text-xl font-bold tracking-wide">
+            <h3 className="mt-4 text-lg font-bold tracking-wide md:text-xl">
               SYSTEM REQUIREMENTS
             </h3>
             <hr className="my-2 border-slate-800" />

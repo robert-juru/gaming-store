@@ -22,7 +22,7 @@ const ShoppingCartPage = ({ cartGames, removeFromCart, fetchedGames }) => {
             alt="green sad empty cart"
           ></img>
           <div className="flex flex-col items-center justify-center gap-2">
-            <h2 className="text-center pb-2 text-xl sm:text-2xl lg:text-3xl ">
+            <h2 className="text-white text-center pb-2 text-xl sm:text-2xl lg:text-3xl ">
               Cart's feeling a bit empty. Time to fill it with gaming joy!
             </h2>
             <Link className="text-white md:text-gray-300 text-sm sm:text-base lg:text-lg hover:text-white hover:underline" to="/">

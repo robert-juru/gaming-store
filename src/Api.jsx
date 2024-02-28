@@ -1,7 +1,7 @@
 import axios from "axios";
 import { format, sub, add } from "date-fns";
 
-const key = `d5bef9762ffc48b79c8cc04fd7723bdb`;
+const key = `404c51bcb45d448e87440b1483ccd155`;
 const url = `https://api.rawg.io/api/`;
 
 export const fetchStoreData = async (endpoint, page = 1, pageSize = 40) => {
