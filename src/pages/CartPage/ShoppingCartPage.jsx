@@ -1,6 +1,6 @@
-import Header from "./Header";
+import Header from "../../components/Header";
 import { Link } from "react-router-dom";
-import { StarRatingGame } from "./StarRating";
+import { StarRatingGame } from "../StorePage/StarRating";
 
 const ShoppingCartPage = ({ cartGames, removeFromCart, fetchedGames }) => {
   let totalPrice = cartGames

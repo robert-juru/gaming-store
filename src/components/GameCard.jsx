@@ -1,9 +1,8 @@
-import { StarRatingGame } from "./StarRating";
+import { StarRatingGame } from "../pages/StorePage/StarRating"
 import { FaCartShopping } from "react-icons/fa6";
 import { IconContext } from "react-icons";
 import { generatePrice } from "./PriceGenerator";
 import { Link } from "react-router-dom";
-import { IKImage, IKContext } from "imagekitio-react";
 
 const GameCard = ({
   game,
@@ -12,6 +11,7 @@ const GameCard = ({
   cardHeight,
   overlayHeight,
   hoverScale,
+  isMainImage
 }) => {
   const price = generatePrice(
     new Date(game.released).getFullYear(),
@@ -35,9 +35,14 @@ const GameCard = ({
   return (
     <div className={`relative transition duration-300 ${hoverScale}`}>
       <Link to={`/game/${game.id}`}>
-        <IKContext urlEndpoint="https://ik.imagekit.io/9zxrgqieu">
+        <img
+          className={`block h-64 w-full rounded-lg border-2 border-solid border-black ${cardHeight}`}
+          src={isMainImage ? game.background_image : gameCardModifiedUrl || "/no-image-available.jpg"}
+          alt={game.name + "background image"}
+        />
+        {/* <IKContext urlEndpoint="https://ik.imagekit.io/9zxrgqieu">
           <IKImage
-            className={`block w-[1920px] ${cardHeight} h-64 rounded-lg border-2 border-solid border-black `}
+            className={`block w-full ${cardHeight} h-64 rounded-lg border-2 border-solid border-black `}
             src={gameCardModifiedUrl}
             path="no-image-available.jpg"
             transformation={[
@@ -48,7 +53,7 @@ const GameCard = ({
             ]}
             lqip={{ active: true }}
           />
-        </IKContext>
+        </IKContext> */}
       </Link>
       <div
         className={`absolute ${overlayHeight} w-full -translate-y-full bg-gradient-to-r from-gray-700 via-gray-900 to-black opacity-95`}

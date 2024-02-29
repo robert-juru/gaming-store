@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { fetchStoreData, fetchHomePageData } from "./Api";
-import GameStore from "./GameStore";
-import ShoppingCartPage from "./ShoppingCartPage";
+import { fetchStoreData, fetchHomePageData } from "./api/Api";
+import GameStore from "./pages/StorePage/GameStore";
+import ShoppingCartPage from "./pages/CartPage/ShoppingCartPage";
 import { Route, Routes } from "react-router-dom";
-import GamePage from "./GamePage";
-import HomePage from "./HomePage";
-import LoadingPage from "./LoadingPage";
-import ErrorPage from "./ErrorPage";
-import { generatePrice } from "./PriceGenerator";
+import GamePage from "./pages/GamePage/GamePage";
+import HomePage from "./pages/HomePage/HomePage";
+import LoadingPage from "./components/LoadingPage";
+import ErrorPage from "./components/ErrorPage";
+import { generatePrice } from "./components/PriceGenerator";
 
 const App = () => {
   const [searchQueryData, setSearchQueryData] = useState([]);

@@ -1,5 +1,5 @@
-import GameCard from "./GameCard";
-import { generatePrice } from "./PriceGenerator";
+import GameCard from "../../components/GameCard";
+import { generatePrice } from "../../components/PriceGenerator";
 
 const HomePageTopUpcomingSection = ({
   topUpcoming,

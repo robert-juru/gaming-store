@@ -1,4 +1,4 @@
-import { StarRatingGame } from "./StarRating";
+import { StarRatingGame } from "../StorePage/StarRating";
 import { IoMdStar } from "react-icons/io";
 
 const RatingBar = ({ rating, percentage, color, reviewCount }) => {

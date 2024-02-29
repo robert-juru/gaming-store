@@ -1,16 +1,16 @@
-import Header from "./Header";
+import Header from "../../components/Header";
 import { Link } from "react-router-dom";
-import { GamePagePhotoSlider } from "./ImageSlider";
-import PlatformIcons from "./PlatformIcons";
+import { GamePagePhotoSlider } from "../HomePage/ImageSlider";
+import PlatformIcons from "../StorePage/PlatformIcons";
 import ReactPlayer from "react-player";
-import GameReviews from "./GameReviews";
+import GameReviews from "../GamePage/GameReviews";
 import { useQuery } from "@tanstack/react-query";
-import { fetchGamePageData } from "./Api";
+import { fetchGamePageData } from "../../api/Api";
 import { format, parseISO } from "date-fns";
 import DOMPurify from "dompurify";
-import LoadingPage from "./LoadingPage";
-import ErrorPage from "./ErrorPage";
-import { generatePrice } from "./PriceGenerator";
+import LoadingPage from "../../components/LoadingPage";
+import ErrorPage from "../../components/ErrorPage";
+import { generatePrice } from "../../components/PriceGenerator";
 
 const GamePage = ({
   cartGames,

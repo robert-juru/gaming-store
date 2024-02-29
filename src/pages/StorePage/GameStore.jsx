@@ -1,5 +1,5 @@
-import GameCard from "./GameCard";
-import Header from "./Header";
+import GameCard from "../../components/GameCard";
+import Header from "../../components/Header";
 import GameFiltersSidebar from "./GameFiltersSidebar";
 import GameSortingSection from "./GameSortingSection";
 import MobileFilterAndSortSection from "./MobileFilterAndSortSection";

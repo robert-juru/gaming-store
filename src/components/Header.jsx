@@ -1,7 +1,7 @@
-import Cart from "./Cart";
+import Cart from "../pages/CartPage/Cart";
 import { Link } from "react-router-dom";
 import GameverseLogo from "./GameverseLogo";
-import SearchBar from "./SearchBar";
+import SearchBar from "../pages/StorePage/SearchBar";
 
 const Header = ({
   cartGames,

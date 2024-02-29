@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import debounce from "lodash.debounce";
-import { fetchSearchData } from "./Api";
+import { fetchSearchData } from "../../api/Api";
 import { useLocation, Link } from "react-router-dom";
 import { IconContext } from "react-icons";
 import { CiSearch } from "react-icons/ci";

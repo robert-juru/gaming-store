@@ -2,8 +2,8 @@ import { useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import GameCard from "./GameCard";
-import { generatePrice } from "./PriceGenerator";
+import GameCard from "../../components/GameCard";
+import { generatePrice } from "../../components/PriceGenerator";
 
 export const GamePagePhotoSlider = ({ images, name }) => {
   const [nav1, setNav1] = useState();
@@ -84,6 +84,7 @@ export const HomePageMainSlider = ({
               cardHeight={"md:h-[460px]"}
               overlayHeight={"h-[110px]"}
               hoverScale={"hover:scale-100"}
+              isMainImage={true}
             />
           </div>
         ))}
