@@ -26,24 +26,19 @@ const GameCard = ({
       <Link to={`/game/${game.id}`}>
         <IKContext urlEndpoint="https://ik.imagekit.io/9zxrgqieu">
           <IKImage
-            className={`block w-full ${cardHeight} rounded-lg border-2 h-64 border-solid border-black `}
+            className={`block w-[1920px] ${cardHeight} h-64 rounded-lg border-2 border-solid border-black `}
             src={game.background_image}
             path="no-image-available.jpg"
             transformation={[
               {
-                height: "600px",
-                width: "600px",
+                height: "300",
+                width: "300",
               },
             ]}
             loading="lazy"
             lqip={{ active: true }}
           />
         </IKContext>
-        {/* <img
-          className={`block  rounded-lg border-2 border-solid border-black h-64 `}
-          src={game.background_image || "/no-image-available.jpg"}
-          alt={game.name + "background image"}
-        /> */}
       </Link>
       <div
         className={`absolute ${overlayHeight} w-full -translate-y-full bg-gradient-to-r from-gray-700 via-gray-900 to-black opacity-95`}

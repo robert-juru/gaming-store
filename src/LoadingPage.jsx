@@ -11,7 +11,7 @@ const LoadingPage = ({ cartGames, removeFromCart, fetchedGames }) => {
       <hr className="border-slate-800  pb-4  font-bold" />
       <div className="flex h-[calc(100vh-100px)] items-center justify-center">
         <img
-          className="flex h-[480px] w-[640px] "
+          className="flex h-[480px] w-[360px] md:h-[480px] md:w-[640px] "
           src="/loading-animation-unscreen.gif"
           alt="loading animation"
         />

@@ -7,7 +7,6 @@ import { IconContext } from "react-icons";
 import { CiSearch } from "react-icons/ci";
 
 const SearchBar = ({
-  searchQueryData,
   setSearchQueryData,
   setActiveFilter,
   sortGamesByPopularity,

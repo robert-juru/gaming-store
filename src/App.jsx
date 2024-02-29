@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { fetchStoreData, fetchHomePageData, fetchSearchData } from "./Api";
+import { fetchStoreData, fetchHomePageData } from "./Api";
 import GameStore from "./GameStore";
 import ShoppingCartPage from "./ShoppingCartPage";
 import { Route, Routes } from "react-router-dom";

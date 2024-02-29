@@ -4,7 +4,6 @@ import GameFiltersSidebar from "./GameFiltersSidebar";
 import GameSortingSection from "./GameSortingSection";
 import MobileFilterAndSortSection from "./MobileFilterAndSortSection";
 import { useState, useEffect } from "react";
-import { IoMdStar } from "react-icons/io";
 
 export default function GameStore({
   cartGames,
@@ -92,7 +91,6 @@ export default function GameStore({
   const handleLauncherSelection = (launcher) => {
     setLauncherSelected(launcher);
     setPlatformSelected(null);
-    // setGenreSelected(null);
     setReleaseYearSelected(null);
     setMinimumRatingSelected(null);
     filterGamesByLauncher(launcher);
@@ -100,7 +98,7 @@ export default function GameStore({
     setSortingOption("popularity");
     if (launcherSelected == launcher) {
       setLauncherSelected(null);
-      const limitedGames = gamesQuery.data.slice(0, 100); // maximum display of 100
+      const limitedGames = gamesQuery.data.slice(0, 100); 
       sortGamesByPopularity(limitedGames);
       setActiveFilter("Most Popular");
     }
@@ -117,7 +115,7 @@ export default function GameStore({
     setSortingOption("popularity");
     if (genreSelected == genreId) {
       setGenreSelected(null);
-      const limitedGames = gamesQuery.data.slice(0, 100); // maximum display of 100
+      const limitedGames = gamesQuery.data.slice(0, 100); 
       sortGamesByPopularity(limitedGames);
       setActiveFilter("Most Popular");
     }
@@ -138,7 +136,7 @@ export default function GameStore({
     setSortingOption("popularity");
     if (releaseYearSelected == releaseYearId) {
       setReleaseYearSelected(null);
-      const limitedGames = gamesQuery.data.slice(0, 100); // maximum display of 100
+      const limitedGames = gamesQuery.data.slice(0, 100); 
       sortGamesByPopularity(limitedGames);
       setActiveFilter("Most Popular");
     }
@@ -155,7 +153,7 @@ export default function GameStore({
     setSortingOption("popularity");
     if (minimumRatingSelected == minimumRating) {
       setMinimumRatingSelected(null);
-      const limitedGames = gamesQuery.data.slice(0, 100); // maximum display of 100
+      const limitedGames = gamesQuery.data.slice(0, 100); 
       sortGamesByPopularity(limitedGames);
       setActiveFilter("Most Popular");
     }

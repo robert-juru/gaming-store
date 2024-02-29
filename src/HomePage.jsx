@@ -8,7 +8,6 @@ import {
   HomePageTopRatedByCriticsSlider,
 } from "./ImageSlider";
 import HomePageTopUpcomingSection from "./HomePageTopUpcomingSection";
-import LoadingPage from "./LoadingPage";
 
 const HomePage = ({
   fetchedGames,
