@@ -19,7 +19,18 @@ const GameCard = ({
     game.rating,
   );
 
+  //change the resolution of the photos to make them weigh less
+  const modifyImageUrl = (imageUrl) => {
+    const urlSegments = imageUrl.split("/");
+    const gamesIndex = urlSegments.findIndex(
+      (segment) => segment === "games" || segment === "screenshots",
+    );
+    urlSegments.splice(gamesIndex, 0, "crop/600/400");
+    return urlSegments.join("/");
+  };
+
   const nameLength = game.name.length;
+  const gameCardModifiedUrl = modifyImageUrl(game.background_image);
 
   return (
     <div className={`relative transition duration-300 ${hoverScale}`}>
@@ -27,7 +38,7 @@ const GameCard = ({
         <IKContext urlEndpoint="https://ik.imagekit.io/9zxrgqieu">
           <IKImage
             className={`block w-[1920px] ${cardHeight} h-64 rounded-lg border-2 border-solid border-black `}
-            src={game.background_image}
+            src={gameCardModifiedUrl}
             path="no-image-available.jpg"
             transformation={[
               {
@@ -35,7 +46,6 @@ const GameCard = ({
                 width: "300",
               },
             ]}
-            loading="lazy"
             lqip={{ active: true }}
           />
         </IKContext>
