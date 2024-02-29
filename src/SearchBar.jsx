@@ -105,7 +105,7 @@ const SearchBar = ({
                   onMouseDown={(e) => e.preventDefault()}
                 >
                   <img
-                    className="h-12 w-16 rounded-md sm:h-16 sm:w-24"
+                    className="h-12 w-16 min-w-16 rounded-md sm:h-16 sm:w-24"
                     src={game.background_image || "/no-image-available.jpg"}
                     alt={`${game.background_image} image`}
                   />

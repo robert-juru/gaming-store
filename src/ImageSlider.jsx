@@ -53,22 +53,13 @@ export const HomePageMainSlider = ({
 }) => {
   const settings = {
     dots: true,
-    // fade: true,
     infinite: true,
+    adaptiveHeight: false,
     autoplay: true,
     autoplaySpeed: 5000,
-    speed:1000,
     arrows: false,
     slidesToShow: 1,
     slidesToScroll: 1,
-    responsive: [
-      {
-        breakpoint: 640,
-        settings: {
-          // dots: false,
-        },
-      },
-    ],
   };
 
   const mainGamesWithPrices = mainGames.map((game) => {
@@ -257,7 +248,7 @@ export const HomePageTopSellersSlider = ({
               isInCart={isInCart}
               cardHeight={"md:h-64"}
               overlayHeight={"h-[110px]"}
-              hoverScale={"hover:scale-105"}
+              hoverScale={"hover:scale-[102%]"}
             />
           </div>
         ))}

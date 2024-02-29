@@ -3,6 +3,7 @@ import { FaCartShopping } from "react-icons/fa6";
 import { IconContext } from "react-icons";
 import { generatePrice } from "./PriceGenerator";
 import { Link } from "react-router-dom";
+import { IKImage, IKContext } from "imagekitio-react";
 
 const GameCard = ({
   game,
@@ -23,11 +24,26 @@ const GameCard = ({
   return (
     <div className={`relative transition duration-300 ${hoverScale}`}>
       <Link to={`/game/${game.id}`}>
-        <img
-          className={`block w-full rounded-lg border-2 border-solid border-black h-64 ${cardHeight} w-full`}
+        <IKContext urlEndpoint="https://ik.imagekit.io/9zxrgqieu">
+          <IKImage
+            className={`block w-full ${cardHeight} rounded-lg border-2 h-64 border-solid border-black `}
+            src={game.background_image}
+            path="no-image-available.jpg"
+            transformation={[
+              {
+                height: "600px",
+                width: "600px",
+              },
+            ]}
+            loading="lazy"
+            lqip={{ active: true }}
+          />
+        </IKContext>
+        {/* <img
+          className={`block  rounded-lg border-2 border-solid border-black h-64 `}
           src={game.background_image || "/no-image-available.jpg"}
           alt={game.name + "background image"}
-        />
+        /> */}
       </Link>
       <div
         className={`absolute ${overlayHeight} w-full -translate-y-full bg-gradient-to-r from-gray-700 via-gray-900 to-black opacity-95`}
@@ -69,7 +85,7 @@ const GameCard = ({
           <StarRatingGame rating={game.rating} size={8} /> {game.rating} (
           {game.ratings_count})
         </span>
-        <p className="text-[10px] pb-1">
+        <p className="pb-1 text-[10px]">
           {game.genres.map((genre) => genre.name).join(", ")}
         </p>
         <div className="flex items-center justify-between">

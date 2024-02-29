@@ -32,7 +32,7 @@ const HomePage = ({
         />
       <hr className="border-slate-800  pb-4  font-bold" />
       </header>
-      <section >
+      <section className="" >
         <HomePageMainSlider
           mainGames={homePageData.mostPopular.results}
           handleCart={handleCart}

@@ -26,7 +26,7 @@ const HomePageTopUpcomingSection = ({
               game={game}
               handleCart={() => handleCart(game)}
               isInCart={isInCart}
-              cardHeight={"md:h-96"}
+              // cardHeight={"md:h-96"}
               overlayHeight={"h-[110px]"}
               hoverScale={"hover:scale-105"}
             />
