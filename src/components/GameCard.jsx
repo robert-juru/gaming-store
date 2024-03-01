@@ -36,29 +36,11 @@ const GameCard = ({
   return (
     <div className={`relative transition duration-300 ${hoverScale}`}>
       <Link to={`/game/${game.id}`}>
-        {/* <img
+        <img
           className={`block h-64 w-full rounded-lg border-2 border-solid border-black ${cardHeight}`}
           src={isMainImage ? game.background_image : gameCardModifiedUrl || "/no-image-available.jpg"}
           alt={game.name + "background image"}
-        /> */}
-        <IKContext urlEndpoint="https://ik.imagekit.io/9zxrgqieu">
-          <IKImage
-            className={`block w-full ${cardHeight} h-64 rounded-lg border-2 border-solid border-black `}
-            src={
-              isMainImage
-                ? game.background_image
-                : gameCardModifiedUrl || "/no-image-available.jpg"
-            }
-            path="no-image-available.jpg"
-            transformation={[
-              {
-                height: "400",
-                width: "600",
-              },
-            ]}
-            lqip={{ active: true }}
-          />
-        </IKContext>
+        />
       </Link>
       <div
         className={`absolute ${overlayHeight} w-full -translate-y-full bg-gradient-to-r from-gray-700 via-gray-900 to-black opacity-95`}
