@@ -11,8 +11,11 @@ GameVerse is a personal project I created to explore game store functionalities,
 - 	**Responsive Design**: Enjoy a seamless browsing experience across various devices, including desktops, tablets, and smartphones.
 - 	**Detailed Game Information**: Access comprehensive details about each game, including descriptions, ratings, genres, release dates, platforms, and screenshots.
 - 	**Persistent Data**: Utilize local storage to preserve cart items and user preferences across sessions, ensuring a seamless browsing experience.
-##Screenshots
+## Screenshots
 ![cv maker app preview](presentation-images/home-page-desktop.png)
+
 ![cv maker app preview](presentation-images/store-page-desktop.png)
+
 ![cv maker app preview](presentation-images/game-page-desktop.png)
+
 ![cv maker app preview](presentation-images/cart-desktop.png)
