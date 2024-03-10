@@ -3,7 +3,6 @@ import { FaCartShopping } from "react-icons/fa6";
 import { IconContext } from "react-icons";
 import { generatePrice } from "./PriceGenerator";
 import { Link } from "react-router-dom";
-import { IKContext, IKImage } from "imagekitio-react";
 
 const GameCard = ({
   game,
@@ -30,7 +29,6 @@ const GameCard = ({
       (segment) => segment === "games" || segment === "screenshots",
     );
     urlSegments.splice(gamesIndex, 0, "crop/600/400");
-    console.log(urlSegments.join("/"))
     return urlSegments.join("/");
   };
 

@@ -191,9 +191,13 @@ const GamePage = ({
             {metascore && (
               <span className="my-8 flex items-center justify-center gap-4 rounded-md bg-black">
                 <span
-                  className={`${metascore < 60 && "bg-red-500"} ${
-                    metascore < 80 && "bg-yellow-500"
-                  } flex h-full items-center bg-green-500 p-2 text-3xl font-bold text-white`}
+                  className={` ${
+                    metascore < 60
+                      ? "bg-red-500"
+                      : metascore < 80
+                        ? "bg-yellow-500"
+                        : "bg-green-500"
+                  }  flex h-full items-center p-2 text-3xl font-bold text-white`}
                 >
                   {metascore}
                 </span>

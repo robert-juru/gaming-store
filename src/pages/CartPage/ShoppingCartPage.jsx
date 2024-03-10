@@ -15,17 +15,20 @@ const ShoppingCartPage = ({ cartGames, removeFromCart, fetchedGames }) => {
       />
       <hr className="border-slate-800  pb-4 font-bold md:pb-12" />
       {cartGames.length == 0 && (
-        <div className="mx-4 h-full px-8 md:mx-16 flex flex-col items-center justify-center  pb-12 pt-4 text-gray-300">
+        <div className="mx-4 flex h-full flex-col items-center justify-center px-8 pb-12  pt-4 text-gray-300 md:mx-16">
           <img
             className="p-8"
             src="green-empty-cart.png"
             alt="green sad empty cart"
           ></img>
           <div className="flex flex-col items-center justify-center gap-2">
-            <h2 className="text-white text-center pb-2 text-xl sm:text-2xl lg:text-3xl ">
+            <h2 className="pb-2 text-center text-xl text-white sm:text-2xl lg:text-3xl ">
               Cart's feeling a bit empty. Time to fill it with gaming joy!
             </h2>
-            <Link className="text-white md:text-gray-300 text-sm sm:text-base lg:text-lg hover:text-white hover:underline" to="/">
+            <Link
+              className="text-sm text-white hover:text-white hover:underline sm:text-base md:text-gray-300 lg:text-lg"
+              to="/"
+            >
               Shop for Games
             </Link>
           </div>
@@ -35,50 +38,45 @@ const ShoppingCartPage = ({ cartGames, removeFromCart, fetchedGames }) => {
         <section className="flex-1">
           {cartGames &&
             cartGames.map((cartGame) => {
-                return (
-                  <article
-                    key={cartGame.id}
-                    className="mb-4 flex h-36 w-full items-center justify-between gap-8 rounded-md bg-gray-900 p-4 py-1 text-sm text-white md:p-8"
-                  >
-                    <div className="flex gap-4 md:gap-8">
+              return (
+                <article
+                  key={cartGame.id}
+                  className="mb-4 flex h-36 w-full items-center justify-between gap-8 rounded-md bg-gray-900 p-4 py-1 text-sm text-white md:p-8"
+                >
+                  <div className="flex gap-4 md:gap-8">
+                    <Link to={`/game/${cartGame.id}`}>
+                      <img
+                        src={cartGame.background_image}
+                        alt={cartGame.name}
+                        className="h-24 w-20 min-w-20 md:w-32"
+                      />
+                    </Link>
+                    <div>
                       <Link to={`/game/${cartGame.id}`}>
-                        <img
-                          src={cartGame.background_image}
-                          alt={cartGame.name}
-                          className="h-24 w-20 min-w-20 md:w-32"
-                        />
-                      </Link>
-                      <div>
-                        <Link to={`/game/${cartGame.id}`}>
-                          <p className="text-md font-bold md:text-lg ">
-                            {cartGame.name}
-                          </p>
-                        </Link>
-                        <span className="flex items-center text-xs md:text-sm">
-                          <StarRatingGame
-                            rating={cartGame.rating}
-                            size={12}
-                          />{" "}
-                          {cartGame.rating} ({cartGame.ratings_count})
-                        </span>
-                        <p className="md:text-md text-xs">
-                          {cartGame.genres
-                            .map((genre) => genre.name)
-                            .join(", ")}
+                        <p className="text-md font-bold md:text-lg ">
+                          {cartGame.name}
                         </p>
-                      </div>
+                      </Link>
+                      <span className="flex items-center text-xs md:text-sm">
+                        <StarRatingGame rating={cartGame.rating} size={12} />{" "}
+                        {cartGame.rating} ({cartGame.ratings_count})
+                      </span>
+                      <p className="md:text-md text-xs">
+                        {cartGame.genres.map((genre) => genre.name).join(", ")}
+                      </p>
                     </div>
-                    <div className="text-md flex flex-col md:text-lg">
-                      <span className="font-bold">${cartGame.price}</span>
-                      <button
-                        className="text-gray-300 hover:text-white hover:underline"
-                        onClick={() => removeFromCart(cartGame.id)}
-                      >
-                        Remove
-                      </button>
-                    </div>
-                  </article>
-                );
+                  </div>
+                  <div className="text-md flex flex-col md:text-lg">
+                    <span className="font-bold">${cartGame.price}</span>
+                    <button
+                      className="text-gray-300 hover:text-white hover:underline"
+                      onClick={() => removeFromCart(cartGame.id)}
+                    >
+                      Remove
+                    </button>
+                  </div>
+                </article>
+              );
             })}
         </section>
         {cartGames.length > 0 && (
