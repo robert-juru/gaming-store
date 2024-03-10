@@ -22,11 +22,15 @@ const GameCard = ({
 
   //change the resolution of the photos to make them weigh less
   const modifyImageUrl = (imageUrl) => {
+    if (!imageUrl) {
+      return null;
+    }
     const urlSegments = imageUrl.split("/");
     const gamesIndex = urlSegments.findIndex(
       (segment) => segment === "games" || segment === "screenshots",
     );
     urlSegments.splice(gamesIndex, 0, "crop/600/400");
+    console.log(urlSegments.join("/"))
     return urlSegments.join("/");
   };
 
